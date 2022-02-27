@@ -1,0 +1,166 @@
+import React from 'react'
+import './header.css'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import promo from '../../assets/svg/cover_img.svg';
+import cover_gradient from '../../assets/svg/cover_g_f.svg'
+
+import { Link  } from 'react-router-dom';
+const Header = () => {
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    swipeToSlide:true,
+    responsive: [
+      {
+        breakpoint: 1160,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          swipeToSlide:true,
+        }
+      },
+      {
+        breakpoint: 950,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          swipeToSlide:true,
+        }
+      },
+      {
+        breakpoint: 750,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        }
+      },
+      {
+        breakpoint: 550,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 470,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          variableWidth: true,
+        }
+      }
+    ]
+  };
+  return (
+    <div>
+      <div className='promo'>
+          <div className="promo-content">
+            <div className="promo-content-title">
+              <h1>Discover & trade extraordinary NFTs from African artists</h1>
+            </div>
+            <div className="promo-content-detail">
+              <p>Shujaa is the first ethnic NFT marketplace on Everscale blockchain
+               created to support local creators. Founded by the African community for the whole world</p>
+            </div>
+            <div className="promo-content-buy">
+              <button className="primary-btn">Explore now</button>
+              <button className="secondary-btn">Create</button>
+            </div>
+          </div>
+          <div className="promo-image">
+            <img src={promo} alt="promo" />
+          </div>
+      </div>
+      <div>
+        <img src={cover_gradient} alt="promo" />
+      </div>
+
+      {/*}<div className="header-slider">
+        <h1>Top Sellers</h1>
+       <Slider {...settings} className='slider'>
+            <div className='slider-card'>
+              <p className='slider-card-number'>1</p>
+              <div className="slider-img">
+                <img src={seller1} alt="" />
+                <img src={verify} className='verify' alt="" />
+              </div>
+              <Link to={`/profile/Rian`}>
+              <p className='slider-card-name'>James Bond</p>
+              </Link>
+              <p className='slider-card-price'>5.250 <span>ETH</span></p>
+            </div>
+            <div className='slider-card'>
+              <p className='slider-card-number'>2</p>
+              <div className="slider-img">
+                <img src={seller2} alt="" />
+                <img src={verify} className='verify' alt="" />
+              </div>
+              <Link to={`/profile/Rian`}>
+              <p className='slider-card-name'>Rian Leon</p>
+              </Link>
+              <p className='slider-card-price'>4.932 <span>ETH</span></p>
+            </div>
+            <div className='slider-card'>
+              <p className='slider-card-number'>3</p>
+              <div className="slider-img">
+                <img src={seller3} alt="" />
+                <img src={verify} className='verify' alt="" />
+              </div>
+              <Link to={`/profile/Rian`}>
+              <p className='slider-card-name'>Lady Young</p>
+              </Link>
+              <p className='slider-card-price'>4.620 <span>ETH</span></p>
+            </div>
+            <div className='slider-card'>
+              <p className='slider-card-number'>4</p>
+              <div className="slider-img">
+                <img src={seller4} alt="" />
+                <img src={verify} className='verify' alt="" />
+              </div>
+              <Link to={`/profile/Rian`}>
+              <p className='slider-card-name'>Black Glass</p>
+              </Link>
+              <p className='slider-card-price'>4.125 <span>ETH</span></p>
+            </div>
+            <div className='slider-card'>
+              <p className='slider-card-number'>5</p>
+              <div className="slider-img">
+                <img src={seller5} alt="" />
+                <img src={verify} className='verify' alt="" />
+              </div>
+              <Link to={`/profile/Rian`}>
+              <p className='slider-card-name'>Budhiman</p>
+              </Link>
+              <p className='slider-card-price'>3.921 <span>ETH</span></p>
+            </div>
+            <div className='slider-card'>
+              <p className='slider-card-number'>6</p>
+              <div className="slider-img">
+                <img src={seller6} alt="" />
+                <img src={verify} className='verify' alt="" />
+              </div>
+              <Link to={`/profile/Rian`}>
+              <p className='slider-card-name'>Alex</p>
+              </Link>
+              <p className='slider-card-price'>3.548 <span>ETH</span></p>
+            </div>
+        </Slider>
+      </div>*/}
+    </div>
+  )
+}
+
+export default Header
