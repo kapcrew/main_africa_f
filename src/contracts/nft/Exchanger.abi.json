@@ -1,0 +1,192 @@
+{
+	"ABI version": 2,
+	"version": "2.1",
+	"header": ["pubkey", "time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+				{"name":"_name","type":"bytes"},
+				{"name":"_commission","type":"uint128"},
+				{"name":"_highest_commission","type":"uint128"},
+				{"name":"_pair_code","type":"cell"},
+				{"name":"_auction_code","type":"cell"},
+				{"name":"_time_limit","type":"uint64"},
+				{"name":"_withdraw_address","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setCommission",
+			"inputs": [
+				{"name":"_commission","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "createNFTPairCrystall",
+			"inputs": [
+				{"name":"price","type":"uint128"},
+				{"name":"time","type":"uint64"},
+				{"name":"client","type":"address"},
+				{"name":"pubkey","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "createNFTAuctionCrystall",
+			"inputs": [
+				{"name":"price","type":"uint128"},
+				{"name":"time","type":"uint64"},
+				{"name":"step","type":"uint128"},
+				{"name":"client","type":"address"},
+				{"name":"pubkey","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "resolveNFTPair",
+			"inputs": [
+				{"name":"price","type":"uint128"},
+				{"name":"time","type":"uint64"},
+				{"name":"client","type":"address"},
+				{"name":"pubkey","type":"uint256"}
+			],
+			"outputs": [
+				{"name":"addrData","type":"address"}
+			]
+		},
+		{
+			"name": "resolveNFTAuction",
+			"inputs": [
+				{"name":"price","type":"uint128"},
+				{"name":"time","type":"uint64"},
+				{"name":"step","type":"uint128"},
+				{"name":"client","type":"address"},
+				{"name":"pubkey","type":"uint256"}
+			],
+			"outputs": [
+				{"name":"addrData","type":"address"}
+			]
+		},
+		{
+			"name": "addIndex",
+			"inputs": [
+				{"name":"status","type":"uint8"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "withdraw",
+			"inputs": [
+				{"name":"amount","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "timestamp",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"timestamp","type":"uint32"}
+			]
+		},
+		{
+			"name": "name",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"name","type":"bytes"}
+			]
+		},
+		{
+			"name": "commission",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"commission","type":"uint128"}
+			]
+		},
+		{
+			"name": "highest_commission",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"highest_commission","type":"uint256"}
+			]
+		},
+		{
+			"name": "pair_code",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"pair_code","type":"cell"}
+			]
+		},
+		{
+			"name": "auction_code",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"auction_code","type":"cell"}
+			]
+		},
+		{
+			"name": "pairs",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"pairs","type":"map(address,uint8)"}
+			]
+		},
+		{
+			"name": "time_limit",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"time_limit","type":"uint64"}
+			]
+		},
+		{
+			"name": "withdraw_address",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"withdraw_address","type":"address"}
+			]
+		}
+	],
+	"data": [
+	],
+	"events": [
+		{
+			"name": "pair_change_status",
+			"inputs": [
+				{"name":"pair","type":"address"},
+				{"name":"status","type":"uint8"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"timestamp","type":"uint32"},
+		{"name":"name","type":"bytes"},
+		{"name":"commission","type":"uint128"},
+		{"name":"highest_commission","type":"uint256"},
+		{"name":"pair_code","type":"cell"},
+		{"name":"auction_code","type":"cell"},
+		{"name":"pairs","type":"map(address,uint8)"},
+		{"name":"time_limit","type":"uint64"},
+		{"name":"withdraw_address","type":"address"}
+	]
+}

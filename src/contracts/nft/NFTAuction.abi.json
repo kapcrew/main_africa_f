@@ -1,0 +1,184 @@
+{
+	"ABI version": 2,
+	"version": "2.1",
+	"header": ["pubkey", "time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "sell",
+			"inputs": [
+				{"name":"client","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "addNewToken",
+			"inputs": [
+				{"name":"token_addr","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "approveSell",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "pre_finish",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "finish",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "seller",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"seller","type":"address"}
+			]
+		},
+		{
+			"name": "seller_pubkey",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"seller_pubkey","type":"uint256"}
+			]
+		},
+		{
+			"name": "exchanger",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"exchanger","type":"address"}
+			]
+		},
+		{
+			"name": "wallets",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"wallets","type":"address[]"}
+			]
+		},
+		{
+			"name": "status",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"status","type":"uint8"}
+			]
+		},
+		{
+			"name": "receiver",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"receiver","type":"address"}
+			]
+		},
+		{
+			"name": "finish_time",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"finish_time","type":"uint64"}
+			]
+		},
+		{
+			"name": "commission",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"commission","type":"uint128"}
+			]
+		},
+		{
+			"name": "m_price",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"m_price","type":"uint128"}
+			]
+		},
+		{
+			"name": "m_wallets",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"m_wallets","type":"map(address,address)"}
+			]
+		},
+		{
+			"name": "type_contract",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"type_contract","type":"uint8"}
+			]
+		},
+		{
+			"name": "step",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"step","type":"uint128"}
+			]
+		},
+		{
+			"name": "price",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"price","type":"uint128"}
+			]
+		}
+	],
+	"data": [
+		{"key":1,"name":"seller","type":"address"},
+		{"key":2,"name":"seller_pubkey","type":"uint256"},
+		{"key":3,"name":"exchanger","type":"address"},
+		{"key":4,"name":"finish_time","type":"uint64"},
+		{"key":5,"name":"commission","type":"uint128"},
+		{"key":6,"name":"step","type":"uint128"},
+		{"key":7,"name":"price","type":"uint128"}
+	],
+	"events": [
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"seller","type":"address"},
+		{"name":"seller_pubkey","type":"uint256"},
+		{"name":"exchanger","type":"address"},
+		{"name":"wallets","type":"address[]"},
+		{"name":"status","type":"uint8"},
+		{"name":"receiver","type":"address"},
+		{"name":"finish_time","type":"uint64"},
+		{"name":"commission","type":"uint128"},
+		{"name":"m_price","type":"uint128"},
+		{"name":"m_wallets","type":"map(address,address)"},
+		{"name":"type_contract","type":"uint8"},
+		{"name":"step","type":"uint128"},
+		{"name":"price","type":"uint128"}
+	]
+}

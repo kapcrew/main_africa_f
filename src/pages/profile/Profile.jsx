@@ -1,7 +1,7 @@
 import React from 'react';
 import './profile.css'
 import profile_banner from '../../assets/profile_banner.png'
-import profile_pic from '../../assets/profile.jpg'
+import profile_pic from '../../assets/svg/profile.svg'
 import Bids from '../../components/bids/Bids'
 
 const Profile = () => {
@@ -14,7 +14,8 @@ const Profile = () => {
         </div>
         <div className="profile-pic">
             <img src={profile_pic} alt="profile" />
-            <h3>James Bond</h3>
+            <h3>Darkwing Duck</h3>
+            <div></div>
         </div>
       </div>
       <div className="profile-bottom">

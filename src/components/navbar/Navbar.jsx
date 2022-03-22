@@ -1,30 +1,51 @@
-import React,{ useState} from 'react'
+import React,{ useState, useEffect} from 'react'
 import './navbar.css'
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import logo from '../../assets/logo.png'
 import {  Link } from "react-router-dom";
 import { FaWallet } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import {login, login_out, login_extraton} from '../../scripts/index.js';
+import useModal from 'use-react-modal';
+
 
 
 const Menu = () => (
   <>
-  <Link to="/"><p>Explore</p> </Link>
-  <p>Create</p>
+  <Link to="/explorer"><p>Explore</p> </Link>
+  <a href="http://45.137.64.34:4000/"><p>Create</p></a>
   <p>Features</p>
 
   </>
 )
 
 const Navbar = () => {
+  const { isOpen, openModal, closeModal, Modal } = useModal()
+
   const [toggleMenu,setToggleMenu] = useState(false)
   const [user,setUser] = useState(false)
+  const [address, setAddress] = useState([]);
+
+  useEffect(() => {
+  const address = localStorage.getItem('wallet_address');
+  if (address) {
+   setAddress(address);
+   setUser(true);
+
+  }
+}, []);
 
   const handleLogout = () => {
+    login_out();
     setUser(false);
   }
   const handleLogin = () => {
-    setUser(true);
+    login();
+  //  setUser(true);
+  }
+  const handleLoginExtraton = () => {
+    login_extraton();
+  //  setUser(true);
   }
 
   return (
@@ -47,17 +68,47 @@ const Navbar = () => {
     {user ? (
       <>
       <Link to="/create">
-      <button type='button' className='primary-btn' >Create</button>
+      <button type='button' className='primary-btn'>Create</button>
       </Link>
-      <button type='button' className='secondary-btn'>Connect</button>
+      <p>{address.substring(0,15)}</p>
+      {/*<button type='button' className='secondary-btn'>Connect</button>*/}
       </>
     ): (
       <>
-      <Link to="/login">
-      <CgProfile size={25} color='rgba(72, 43, 8, 0.8)' className='header-icon'  onClick={handleLogin}/>
+      {/*<Link to="/login">*/}
+      <Link to="">
+      <CgProfile size={25} color='rgba(72, 43, 8, 0.8)' className='header-icon'  onClick={openModal}/>
+
       </Link>
-      <Link to="/register">
-      <FaWallet size={25} color='rgba(72, 43, 8, 0.8)' className='header-icon'  onClick={handleLogin}/>
+      {isOpen &&
+        <Modal>
+          <div className="modal">
+          <div className='login section__padding'>
+            <div className="login-container">
+              <h1>Login</h1>
+              <form className='login-writeForm' autoComplete='off'>
+              <div className="login-formGroup">
+                <button onClick={handleLogin} className='login-writeButton' type='submit'>EVERWallet</button>
+              </div>
+                <div className="login-formGroup">
+                  <button onClick={handleLoginExtraton} className='login-writeButton' type='submit'>Extraton</button>
+                </div>
+                <div className="login-formGroup">
+                  <button className='login-writeButton' type='submit'>EverscaleWallet</button>
+                </div>
+               {/*<div className="login-button">
+                <button onClick={closeModal} className='login-writeButton' type='submit'>Close</button>
+               </div>*/}
+              </form>
+            </div>
+          </div>
+          </div>
+        </Modal>
+      }
+      {/*<Link to="/register">*/}
+
+      <Link to="">
+      <FaWallet size={25} color='rgba(72, 43, 8, 0.8)' className='header-icon'  onClick={handleLogout}/>
       </Link>
       </>
     )}

@@ -1,5 +1,6 @@
 import './create.css'
 import Image from '../../assets/Image.png'
+
 const Create = () => {
 
   return (
@@ -13,7 +14,7 @@ const Create = () => {
             <p>Drag and Drop File</p>
         </div>
         <form className='writeForm' autoComplete='off'>
-          
+
           <div className="formGroup">
             <label>Upload</label>
             <input type="file" className='custom-file-input'
@@ -26,7 +27,7 @@ const Create = () => {
           <div className="formGroup">
             <label>Description</label>
             <textarea type="text" rows={4}
-          placeholder='Decription of your item' 
+          placeholder='Decription of your item'
           ></textarea>
           </div>
           <div className="formGroup">
@@ -34,9 +35,7 @@ const Create = () => {
             <div className="twoForm">
               <input type="text" placeholder='Price'  />
               <select>
-                <option value="ETH">ETH</option>
-                <option value="BTC">BTC</option>
-                <option value="LTC">LTC</option>
+                <option value="ETH">EVER</option>
               </select>
             </div>
           </div>
@@ -59,7 +58,7 @@ const Create = () => {
         </form>
       </div>
     </div>
-   
+
   )
 };
 
