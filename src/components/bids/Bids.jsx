@@ -23,6 +23,7 @@ const Bids = ({title}) => {
   `;
   const { data, loading, error } = useQuery(FILMS_QUERY);
 
+
   console.log(data);
   if (loading) return "Loading...";
   if (error) return <pre>{error.message}</pre>
@@ -33,7 +34,7 @@ const Bids = ({title}) => {
     <div className="bids-container">
     <div className="bids-container-text">
     <h1>{title}</h1>
-    
+
     </div>
     <div className="bids-container-card">
     <div className="card-column" >

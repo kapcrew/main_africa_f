@@ -7,15 +7,19 @@ import { FaWallet } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import {login, login_out, login_extraton} from '../../scripts/index.js';
 import useModal from 'use-react-modal';
+import {
+  auth,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+} from "../../firebase";
 
 
 
 const Menu = () => (
   <>
   <Link to="/explorer"><p>Explore</p> </Link>
-  <a href="http://45.137.64.34:4000/"><p>Create</p></a>
+  {/*  <Link to="/create"><p>Сreate</p> </Link>*/}
   <p>Features</p>
-
   </>
 )
 
@@ -26,26 +30,37 @@ const Navbar = () => {
   const [user,setUser] = useState(false)
   const [address, setAddress] = useState([]);
 
-  useEffect(() => {
-  const address = localStorage.getItem('wallet_address');
-  if (address) {
-   setAddress(address);
-   setUser(true);
+  /*const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");*/
 
-  }
-}, []);
+  useEffect(() => {
+    const address = localStorage.getItem('wallet_address');
+    if (address) {
+      setAddress(address);
+      setUser(true);
+
+    }
+  }, []);
 
   const handleLogout = () => {
     login_out();
     setUser(false);
   }
-  const handleLogin = () => {
+  function handleLogin (e){
+      e.preventDefault();
     login();
-  //  setUser(true);
+    const address = "0:c19b003394bef654680b0304b632728f264a85bba9a85b84f8090e1cd39df021";
+    const name = "0:c19b003394bef654680b0304b632728f264a85bba9a85b84f8090e1cd39df021";
+    const email = "temp6@impara.space"
+    const password = "v4REsVAXkUEBsYSB";
+    const test = registerWithEmailAndPassword(email, name, password, email);
+    console.log(test)
+    //  setUser(true);
   }
   const handleLoginExtraton = () => {
     login_extraton();
-  //  setUser(true);
+    //  setUser(true);
   }
 
   return (
@@ -67,49 +82,62 @@ const Navbar = () => {
     <div className="navbar-sign">
     {user ? (
       <>
-      <Link to="/create">
-      <button type='button' className='primary-btn'>Create</button>
+      <Link to="">
+      <div class="dropdown">
+      <CgProfile size={25} color='rgba(72, 43, 8, 0.8)' class="dropbtn" className='header-icon' /* onClick={handleLogout}*//>
+      <div class="dropdown-content">
+      <a><h4 class="menu_item">{address.substring(0,6)}...{address.substring(60,66)}</h4></a>
+      <a href="#"><h4 class="menu_item">Create</h4></a>
+      <a href="#"><h4 class="menu_item">Profile</h4></a>
+      <a href="#"><h4 class="menu_item">My Collections</h4></a>
+      </div>
+      </div>
       </Link>
-      <p>{address.substring(0,15)}</p>
-      {/*<button type='button' className='secondary-btn'>Connect</button>*/}
+      <Link to="">
+      <FaWallet size={25} color='rgba(72, 43, 8, 0.8)' className='header-icon'  onClick={openModal}/>
+      </Link>
       </>
     ): (
       <>
       {/*<Link to="/login">*/}
       <Link to="">
-      <CgProfile size={25} color='rgba(72, 43, 8, 0.8)' className='header-icon'  onClick={openModal}/>
-
+      <div class="dropdown">
+      <CgProfile size={25} color='rgba(72, 43, 8, 0.8)' class="dropbtn" className='header-icon' /* onClick={handleLogout}*//>
+      <div class="dropdown-content">
+      <a href="#">Profile</a>
+      <a href="#">Settings</a>
+      </div>
+      </div>
+      </Link>
+      <Link to="">
+      <FaWallet size={25} color='rgba(72, 43, 8, 0.8)' className='header-icon'  onClick={openModal}/>
       </Link>
       {isOpen &&
         <Modal>
-          <div className="modal">
-          <div className='login section__padding'>
-            <div className="login-container">
-              <h1>Login</h1>
-              <form className='login-writeForm' autoComplete='off'>
-              <div className="login-formGroup">
-                <button onClick={handleLogin} className='login-writeButton' type='submit'>EVERWallet</button>
-              </div>
-                <div className="login-formGroup">
-                  <button onClick={handleLoginExtraton} className='login-writeButton' type='submit'>Extraton</button>
-                </div>
-                <div className="login-formGroup">
-                  <button className='login-writeButton' type='submit'>EverscaleWallet</button>
-                </div>
-               {/*<div className="login-button">
-                <button onClick={closeModal} className='login-writeButton' type='submit'>Close</button>
-               </div>*/}
-              </form>
-            </div>
-          </div>
-          </div>
+        <div className="modal">
+        <div className='login section__padding'>
+        <div className="login-container">
+        <h1>Login</h1>
+        <form className='login-writeForm' autoComplete='off'>
+        <div className="login-formGroup">
+        <button onClick={handleLogin} className='login-writeButton' type='submit'>EVERWallet</button>
+        </div>
+        <div className="login-formGroup">
+        <button onClick={handleLoginExtraton}  className='login-writeButton' type='submit'>Extraton</button>
+        </div>
+        <div className="login-formGroup">
+        <button className='login-writeButton' type='submit'>EverscaleWallet</button>
+        </div>
+        {/*<div className="login-button">
+        <button onClick={closeModal} className='login-writeButton' type='submit'>Close</button>
+        </div>*/}
+        </form>
+        </div>
+        </div>
+        </div>
         </Modal>
       }
       {/*<Link to="/register">*/}
-
-      <Link to="">
-      <FaWallet size={25} color='rgba(72, 43, 8, 0.8)' className='header-icon'  onClick={handleLogout}/>
-      </Link>
       </>
     )}
 
