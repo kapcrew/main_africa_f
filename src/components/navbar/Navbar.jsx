@@ -7,11 +7,7 @@ import { FaWallet } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import {login, login_out, login_extraton} from '../../scripts/index.js';
 import useModal from 'use-react-modal';
-import {
-  auth,
-  registerWithEmailAndPassword,
-  signInWithGoogle,
-} from "../../firebase";
+
 
 
 
@@ -30,10 +26,6 @@ const Navbar = () => {
   const [user,setUser] = useState(false)
   const [address, setAddress] = useState([]);
 
-  /*const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");*/
-
   useEffect(() => {
     const address = localStorage.getItem('wallet_address');
     if (address) {
@@ -50,13 +42,7 @@ const Navbar = () => {
   function handleLogin (e){
       e.preventDefault();
     login();
-    const address = "0:c19b003394bef654680b0304b632728f264a85bba9a85b84f8090e1cd39df021";
-    const name = "0:c19b003394bef654680b0304b632728f264a85bba9a85b84f8090e1cd39df021";
-    const email = "temp6@impara.space"
-    const password = "v4REsVAXkUEBsYSB";
-    const test = registerWithEmailAndPassword(email, name, password, email);
-    console.log(test)
-    //  setUser(true);
+  
   }
   const handleLoginExtraton = () => {
     login_extraton();
