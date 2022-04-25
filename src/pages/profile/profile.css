@@ -2,6 +2,33 @@
   padding:  0;
   /* padding-bottom: 6rem; */
 }
+.address{
+  background: linear-gradient(89.7deg, rgba(242, 125, 12, 0.2) 1.02%, rgba(202, 173, 25, 0.2) 99.74%);
+border-radius: 22px;
+}
+.joined{
+  font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+display: flex;
+align-items: center;
+
+color: rgba(72, 43, 8, 0.6);
+
+
+}
+
+.address_title{
+  font-weight: 800;
+font-size: 16px;
+line-height: 16px;
+display: flex;
+align-items: center;
+
+color: rgba(72, 43, 8, 0.6);
+
+}
 .profile-top{
   position: relative;
   padding-bottom: 3.75rem;
