@@ -1,6 +1,8 @@
 body{
   background: var(--color-bg);
   scroll-behavior: smooth;
+  overflow-x: none;
+  /* overflow: hidden; */
 }
 a{
   text-decoration: none;

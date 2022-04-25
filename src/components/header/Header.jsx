@@ -1,11 +1,11 @@
-import React from 'react'
-import './header.css'
+import React from "react";
+import "./header.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import promo from '../../assets/svg/cover_img.svg';
-import cover_gradient from '../../assets/svg/cover_g_f.svg'
+import promo from "../../assets/svg/cover_img.svg";
+import cover_gradient from "../../assets/svg/cover_g_f.svg";
 
-import { Link  } from 'react-router-dom';
+import { Link } from "react-router-dom";
 const Header = () => {
   var settings = {
     dots: false,
@@ -14,23 +14,23 @@ const Header = () => {
     slidesToShow: 5,
     slidesToScroll: 1,
     initialSlide: 0,
-    swipeToSlide:true,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1160,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-          swipeToSlide:true,
-        }
+          swipeToSlide: true,
+        },
       },
       {
         breakpoint: 950,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          swipeToSlide:true,
-        }
+          swipeToSlide: true,
+        },
       },
       {
         breakpoint: 750,
@@ -38,21 +38,21 @@ const Header = () => {
           slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 2,
-        }
+        },
       },
       {
         breakpoint: 550,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1
-        }
+          slidesToScroll: 1,
+        },
       },
       {
         breakpoint: 470,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-        }
+        },
       },
       {
         breakpoint: 400,
@@ -60,32 +60,43 @@ const Header = () => {
           slidesToShow: 2,
           slidesToScroll: 1,
           variableWidth: true,
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
   return (
     <div>
-      <div className='promo'>
-          <div className="promo-content">
-            <div className="promo-content-title">
-              <h1>Discover & trade extraordinary NFTs from African artists</h1>
-            </div>
-            <div className="promo-content-detail">
-              <p>Shujaa is the first ethnic NFT marketplace on Everscale blockchain
-               created to support local creators. Founded by the African community for the whole world</p>
-            </div>
-            <div className="promo-content-buy">
-              <button className="primary-btn">Explore now</button>
-              <button className="secondary-btn">Create</button>
-            </div>
+      <div className="promo">
+        <div className="promo-content">
+          <div className="promo-content-title">
+            <h1>
+              Discover & trade{" "}
+              <span className="promo-content-title__main-word">
+                extraordinary
+              </span>{" "}
+              NFTs from African artists
+            </h1>
           </div>
-          <div className="promo-image">
-            <img src={promo} alt="promo" />
+          <div className="promo-content-detail">
+            <p>
+              Shujaa is the first ethnic NFT marketplace on Everscale blockchain
+              created to support local creators. Founded by the African
+              community for the whole world
+            </p>
           </div>
+          <div className="promo-content-buy">
+            <button className="primary-btn">Explore now</button>
+            <button className="secondary-btn">Create</button>
+          </div>
+        </div>
+        <div className="promo-image">
+          <img src={promo} alt="promo" />
+        </div>
       </div>
-      <div>
-        <img src={cover_gradient} alt="promo" />
+      <div className="promo-specifications">
+        <div className="promo-specifications__image">
+          <img src={cover_gradient} alt="promo" />
+        </div>
       </div>
 
       {/*}<div className="header-slider">
@@ -160,7 +171,7 @@ const Header = () => {
         </Slider>
       </div>*/}
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
