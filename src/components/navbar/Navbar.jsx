@@ -42,7 +42,7 @@ const Navbar = () => {
   function handleLogin (e){
       e.preventDefault();
     login();
-  
+
   }
   const handleLoginExtraton = () => {
     login_extraton();
@@ -73,9 +73,13 @@ const Navbar = () => {
       <CgProfile size={25} color='rgba(72, 43, 8, 0.8)' class="dropbtn" className='header-icon' /* onClick={handleLogout}*//>
       <div class="dropdown-content">
       <a><h4 class="menu_item">{address.substring(0,6)}...{address.substring(60,66)}</h4></a>
-      <a href="#"><h4 class="menu_item">Create</h4></a>
-      <a href="#"><h4 class="menu_item">Profile</h4></a>
-      <a href="#"><h4 class="menu_item">My Collections</h4></a>
+      <Link to="/create">
+      <a href="/create"><h4 class="menu_item">Create</h4></a>
+      </Link>
+      <Link to={"/profile/"+address}>
+      <a href={"/profile/"+address}><h4 class="menu_item">Profile</h4></a>
+      </Link>
+      <a href="/collections"><h4 class="menu_item">My Collections</h4></a>
       </div>
       </div>
       </Link>

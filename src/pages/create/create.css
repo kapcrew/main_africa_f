@@ -11,6 +11,16 @@
   font-size: 28px;
   line-height: 42px;
   margin-bottom: 40px;
+  font-style: normal;
+font-weight: 800;
+font-size: 24px;
+line-height: 29px;
+display: flex;
+align-items: center;
+
+color: rgba(72, 43, 8, 0.8);
+
+transform: rotate(-0.01deg);
 }
 .create-container .upload-file {
   font-weight: 600;
@@ -19,23 +29,34 @@ line-height: 42px;
 margin-bottom: 20px;
 }
 .upload-img-show{
-  background: #2D2E36;
+  background: transparent;
   /* White */
   padding: 30px 40px;
-  border: 1px dashed #FFFFFF;
-  box-sizing: border-box;
-  border-radius: 10px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 50px;
+  border: 4px dashed rgba(72, 43, 8, 0.24);
+box-sizing: border-box;
+border-radius: 27px;
 }
 .upload-img-show h3{
   font-weight: 600;
 font-size: 20px;
 line-height: 30px;
 margin-bottom: 20px;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+display: flex;
+align-items: center;
+
+color: rgba(72, 43, 8, 0.7);
+
+transform: rotate(-0.01deg);
 }
 .upload-img-show img{
   margin-bottom: 20px;
@@ -52,32 +73,48 @@ line-height: 21px;
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
+
 }
 .formGroup label{
   font-weight: 600;
   font-size: 24px;
   line-height: 36px;
   margin-bottom: 20px;
+  font-style: normal;
+font-weight: 800;
+font-size: 24px;
+line-height: 29px;
+display: flex;
+align-items: center;
+
+color: rgba(72, 43, 8, 0.8);
+
+transform: rotate(-0.01deg);
 }
 .formGroup input{
-  background: #2D2E36;
+  background: transparent;
   border-radius: 10px;
   padding: 1rem 1.5rem;
   outline: none;
   border: none;
-  color: white;
+  color: rgba(72, 43, 8, 0.5);
   font-size: 16px;
   line-height: 26px;
   width: 100%;
+  border: 3px solid rgba(72, 43, 8, 0.24);
+box-sizing: border-box;
+border-radius: 15px;
 }
 
 .formGroup textarea{
-  background: #2D2E36;
+  background: transparent;
+  border: 3px solid rgba(72, 43, 8, 0.24);
+box-sizing: border-box;
+border-radius: 15px;
   border-radius: 10px;
   padding: 1rem 1.5rem;
   outline: none;
-  border: none;
-  color: white;
+  color: rgba(72, 43, 8, 0.5);
   font-size: 16px;
   line-height: 26px;
 }
@@ -141,7 +178,7 @@ line-height: 21px;
   outline: 0;
 }
 .custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 @media screen and (max-width: 550px){
   .create{
