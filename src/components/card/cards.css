@@ -109,7 +109,7 @@
 }
 @media screen and (max-width: 550px) {
   .section__padding{
-    padding: 2rem 14px !important;
+    /* padding: 2rem 14px !important; */
   }
   .bids-card{
     margin-bottom: 10px;

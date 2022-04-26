@@ -11,6 +11,7 @@ import {
   iconProfile,
   iconMyCollections,
   iconSettings,
+  iconEverWallet
 } from "../../assets/icon";
 const Menu = () => (
   <>
@@ -25,7 +26,8 @@ const Menu = () => (
 );
 
 const Navbar = () => {
-  const { isOpen, openModal, closeModal, Modal } = useModal();
+  // const { isOpen, openModal, closeModal, Modal } = useModal();
+  const [isOpenModalLogin, setisOpenModalLogin] = useState(false);
 
   const [toggleMenu, setToggleMenu] = useState(false);
   const [user, setUser] = useState(false);
@@ -99,7 +101,6 @@ const Navbar = () => {
                   <div>
                     <a href="#">
                       <div className="menu_item__block">
-                        
                         <div className="menu_item__icon">{iconProfile}</div>
                         <h4 class="menu_item">Create</h4>
                       </div>
@@ -138,7 +139,9 @@ const Navbar = () => {
                 size={30}
                 color="rgba(72, 43, 8, 0.8)"
                 className="header-icon"
-                onClick={openModal}
+                onClick={() => {
+                  // setisOpenModalLogin(!isOpenModalLogin);
+                }}
               />
             </Link>
           </>
@@ -164,47 +167,100 @@ const Navbar = () => {
                 size={30}
                 color="rgba(72, 43, 8, 0.8)"
                 className="header-icon"
-                onClick={openModal}
+                onClick={() => {
+                  setisOpenModalLogin(!isOpenModalLogin);
+                }}
               />
             </Link>
-            {isOpen && (
-              <Modal>
-                <div className="modal">
-                  <div className="login section__padding">
-                    <div className="login-container">
-                      <h1>Login</h1>
-                      <form className="login-writeForm" autoComplete="off">
-                        <div className="login-formGroup">
-                          <button
-                            onClick={handleLogin}
-                            className="login-writeButton"
-                            type="submit"
-                          >
-                            EVERWallet
-                          </button>
-                        </div>
-                        <div className="login-formGroup">
-                          <button
-                            onClick={handleLoginExtraton}
-                            className="login-writeButton"
-                            type="submit"
-                          >
-                            Extraton
-                          </button>
-                        </div>
-                        <div className="login-formGroup">
-                          <button className="login-writeButton" type="submit">
-                            EverscaleWallet
-                          </button>
-                        </div>
-                        {/*<div className="login-button">
-        <button onClick={closeModal} className='login-writeButton' type='submit'>Close</button>
-        </div>*/}
-                      </form>
-                    </div>
+            {isOpenModalLogin && (
+              <div className="modal">
+                <div className="modal__name-modal">
+                  <div className="modal__icon">
+                    <FaWallet
+                      size={30}
+                      color="rgba(72, 43, 8, 0.8)"
+                      className="header-icon"
+                      // onClick={() => {
+                      //   setisOpenModalLogin(!isOpenModalLogin);
+                      // }}
+                    />
+                  </div>
+                  <div className="modal__name">
+                    My wallet
                   </div>
                 </div>
-              </Modal>
+                <div className="model__content-auth">
+                  <div className="model__text-auth"> Please, connect your wallet to get full access</div>
+                  <div className="model__block-auth">
+                    <div className="model__block-wallet" onClick={handleLogin}>
+                      <div className="model__block-wallet__icon">
+                          {iconEverWallet}
+                      </div>
+                      <div className="model__block-wallet__name">
+                          EVER Wallet
+                      </div>
+                    </div>
+                    
+                    {/* <div className="model__block-wallet">
+                      <div className="model__block-wallet__icon ">
+                          {iconEverWallet}
+                      </div>
+                      <div className="model__block-wallet__name">
+                          EVER Wallet
+                      </div>
+                    </div>
+                    <div className="model__block-wallet">
+                      <div className="model__block-wallet__icon">
+                          {iconEverWallet}
+                      </div>
+                      <div className="model__block-wallet__name">
+                          EVER Wallet
+                      </div>
+                    </div> */}
+                  </div>
+                </div>
+              </div>
+              // <div className="modal">
+              //   <div className="login">
+              //     <div className="login-container">
+              //       <h1>Login</h1>
+              //       <form className="login-writeForm" autoComplete="off">
+              //         <div className="login-formGroup">
+              //           <button
+              //             onClick={handleLogin}
+              //             className="login-writeButton"
+              //             type="submit"
+              //           >
+              //             EVERWallet
+              //           </button>
+              //         </div>
+              //         <div className="login-formGroup">
+              //           <button
+              //             onClick={handleLoginExtraton}
+              //             className="login-writeButton"
+              //             type="submit"
+              //           >
+              //             Extraton
+              //           </button>
+              //         </div>
+              //         <div className="login-formGroup">
+              //           <button className="login-writeButton" type="submit">
+              //             EverscaleWallet
+              //           </button>
+              //         </div>
+              //         <div className="login-button">
+              //           <button
+              //             onClick={closeModal}
+              //             className="login-writeButton"
+              //             type="submit"
+              //           >
+              //             Close
+              //           </button>
+              //         </div>
+              //       </form>
+              //     </div>
+              //   </div>
+              // </div>
             )}
             {/*<Link to="/register">*/}
           </>
