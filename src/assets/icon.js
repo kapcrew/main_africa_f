@@ -4,6 +4,15 @@ export const iconCategory = <svg width="24" height="24" viewBox="0 0 24 24" fill
 <rect x="14" y="14" width="6" height="6" rx="1" stroke="#482B08" stroke-opacity="0.8" stroke-width="2" stroke-linejoin="round"/>
 <rect x="14" y="4" width="6" height="6" rx="1" stroke="#482B08" stroke-opacity="0.8" stroke-width="2" stroke-linejoin="round"/>
 </svg>
+export const iconDischarge = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.33334 11.3333L1.74734 12.99C1.81945 13.2785 1.98589 13.5345 2.22023 13.7175C2.45457 13.9005 2.74335 14 3.04068 14H12.9593C13.2567 14 13.5455 13.9005 13.7798 13.7175C14.0141 13.5345 14.1806 13.2785 14.2527 12.99L14.6667 11.3333M8.00001 2V10V2ZM8.00001 2L5.33334 4.66667L8.00001 2ZM8.00001 2L10.6667 4.66667L8.00001 2Z" stroke="url(#paint0_linear_120_452)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_120_452" x1="1.43861" y1="8.58064" x2="14.6696" y2="8.5043" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F27D0C"/>
+<stop offset="1" stop-color="#CAAD19"/>
+</linearGradient>
+</defs>
+</svg>
 
 export const iconCollection = <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4 9C4 7.11438 4 6.17157 4.58579 5.58579C5.17157 5 6.11438 5 8 5H8.34315C9.16065 5 9.5694 5 9.93694 5.15224C10.3045 5.30448 10.5935 5.59351 11.1716 6.17157L11.8284 6.82843C12.4065 7.40649 12.6955 7.69552 13.0631 7.84776C13.4306 8 13.8394 8 14.6569 8H16C17.8856 8 18.8284 8 19.4142 8.58579C20 9.17157 20 10.1144 20 12V15C20 16.8856 20 17.8284 19.4142 18.4142C18.8284 19 17.8856 19 16 19H8C6.11438 19 5.17157 19 4.58579 18.4142C4 17.8284 4 16.8856 4 15V9Z" stroke="#482B08" stroke-opacity="0.8" stroke-width="2"/>
