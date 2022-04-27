@@ -1,0 +1,40 @@
+.bids-card-home{
+    background: #FFFCF9;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 0px 13px 13px;
+    padding: 11px 12px 19px 11px;
+    margin-inline: 10px;
+    margin-bottom: 20px;
+  }
+  .bids-card img{
+    border-radius: 20px;
+    width: 100%;
+  }
+  .bids-card-top p{
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color:rgba(72, 43, 8, 0.9);
+    margin-top: 15px;
+  }
+  .bids-card-bottom{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(242, 125, 12, 0.3);
+  }
+  .bids-card-bottom p{
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    /* text-align: right; */
+    color: rgba(72, 43, 8, 0.5);
+  }
+  .bids-card-bottom p:last-child{
+    font-weight: normal;
+  
+  }
+  .bids-card-bottom span{
+    font-weight: normal;
+  }

@@ -106,7 +106,7 @@
   justify-content: flex-start;
   flex-direction: column;
 }
-.footer-links_div h4 {
+.footer-links_div {
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 14px;

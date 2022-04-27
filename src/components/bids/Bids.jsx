@@ -11,7 +11,12 @@ import bids7 from "../../assets/bids7.png";
 import bids8 from "../../assets/bids8.png";
 import { Link } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
-
+import Carousel, {
+  slidesToShowPlugin,
+  arrowsPlugin,
+} from "@brainhubeu/react-carousel";
+import CardHomePage from "../cardHomePage/CardHomePage"
+import "@brainhubeu/react-carousel/lib/style.css";
 const Bids = ({ title }) => {
   const FILMS_QUERY = gql`
     {
@@ -36,8 +41,52 @@ const Bids = ({ title }) => {
     <div className="bids section__padding">
       <div className="bids-container">
         <div className="bids-container-text">
-          <h1>{title}</h1>
+          <h1>Top collections</h1>
         </div>
+        <Carousel
+          plugins={[
+            "infinite",
+            "centered",
+            {
+              resolve: slidesToShowPlugin,
+              options: {
+                numberOfSlides: 4,
+              },
+            },
+            {
+              resolve: arrowsPlugin,
+              options: {
+                arrowLeft: <button>1</button>,
+                arrowLeftDisabled: <button>2</button>,
+                arrowRight: (
+                  <button>
+                    <svg
+                      width="8"
+                      height="14"
+                      viewBox="0 0 8 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 12L5 7L0 2L1 0L8 7L1 14L0 12Z"
+                        fill="#482B08"
+                      />
+                    </svg>
+                  </button>
+                ),
+                arrowRightDisabled: <button>4</button>,
+                addArrowClickHandler: true,
+              },
+            },
+          ]}
+        >
+          <CardHomePage icon={bids1}/>
+          <CardHomePage icon={bids1}/>
+          <CardHomePage icon={bids1}/>
+          <CardHomePage icon={bids1}/>
+          
+        </Carousel>
+
         <div className="bids-container-card">
           <div className="card-column">
             <div className="bids-card">

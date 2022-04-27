@@ -38,14 +38,14 @@ const Footer = () => {
         </div>
         <div className="footer-links_divs"> 
           <div className="footer-links_div">
-            <h4>Imara NFT</h4>
+            <div>Imara NFT</div>
             <p>Explore</p>
             <p>How it Works</p>
             <p>Counters</p>
             <p>Contact Us</p>
           </div>
           <div className="footer-links_div">
-            <h4>Need help?</h4>
+            <div>Need help?</div>
             <p>Support</p>
             <p>FAQ</p>
             <p>Contact us</p>
