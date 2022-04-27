@@ -1,13 +1,12 @@
-
-.bids-container{
+.bids-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
-  width: 90%;
+  /* margin: auto; */
+  /* width: 90%; */
 }
-.bids-container-text h1{
+.bids-container-text h1 {
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 28px;
@@ -15,7 +14,7 @@
   color: var(--primary-color);
   margin-bottom: 1rem;
 }
-.bids-container-card{
+.bids-container-card {
   margin: 0 -5px;
 }
 .bids-container-card:after {
@@ -23,36 +22,146 @@
   display: table;
   clear: both;
 }
-.card-column{
+.card-column {
   float: left;
   width: 20%;
 }
-.bids-card{
-  background: #FFFCF9;
+.bids-card {
+  width: 225px;
+  height: 318px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fffcf9;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 0px 0px 13px 13px;
-  padding: 11px 12px 19px 11px;
-  margin-inline: 10px;
-  margin-bottom: 20px;
+  border-radius: 13px;
 }
-.bids-card img{
+.bids-top {
+  padding: 0px 10px 12px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.bids-card img {
+  border-radius: 20px;
+  width: 193px;
+  height: 143px;
+  object-fit: cover;
+}
+.bids-card img:active {
   border-radius: 20px;
   width: 100%;
+  height: 143px;
+  /* position: absolute; */
+  transition: 1s;
+  object-fit: cover;
 }
-.bids-card-top p{
+.bids-card-top p {
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
-  color:rgba(72, 43, 8, 0.9);
+  color: rgba(72, 43, 8, 0.9);
   margin-top: 15px;
 }
-.bids-card-bottom{
+.buy-and-love {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid rgba(242, 125, 12, 0.3);
 }
-.bids-card-bottom p{
+.card-btn-buy {
+  display: flex;
+  justify-content: center;
+  width: 90px;
+  height: 32px;
+  border: none;
+  /* градиент */
+
+  background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
+  border-radius: 46px;
+
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+.card-price {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.9);
+
+  padding: 15px 0;
+  text-align: left;
+  width: 100%;
+}
+.card-bottom {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* justify-content: space-between;
+  border-top: 1px solid rgba(242, 125, 12, 0.3); */
+}
+.card-name {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.love{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.love-icon{
+  margin-top: 5px;
+  margin-right: 4px;
+}
+.love-number {
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.8);
+}
+.card-name__main {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.9);
+}
+.card-name__submain {
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.5);
+}
+.bids-card-bottom p {
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 12px;
@@ -60,20 +169,19 @@
   /* text-align: right; */
   color: rgba(72, 43, 8, 0.5);
 }
-.bids-card-bottom p:last-child{
-  font-weight: normal;
-
-}
-.bids-card-bottom span{
+.bids-card-bottom p:last-child {
   font-weight: normal;
 }
-.load-more{
+.bids-card-bottom span {
+  font-weight: normal;
+}
+.load-more {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
 }
-.load-more button{
+.load-more button {
   background: transparent;
   border: 1px solid var(--primary-color);
   margin: 0 1rem;
@@ -85,8 +193,11 @@
   font-size: 14px;
   line-height: 21px;
 }
-
-@media screen and (max-width: 1440px) {
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* @media screen and (max-width: 1440px) {
   .card-column {
     width: 20%;
 
@@ -108,9 +219,7 @@
   }
 }
 @media screen and (max-width: 550px) {
-  .section__padding{
-    /* padding: 2rem 14px !important; */
-  }
+
   .bids-card{
     margin-bottom: 10px;
     margin-inline: 5px;
@@ -129,4 +238,4 @@
   }
 
 
-}
+} */

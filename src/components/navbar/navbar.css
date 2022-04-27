@@ -36,7 +36,7 @@
   background: #fffcf9;
   border-radius: 11px;
   border: 1px solid rgba(242, 125, 12, 1);
-  left: -115px;
+  left: -100px;
 }
 
 /* Links inside the dropdown */
@@ -58,6 +58,13 @@
 }
 .menu_item__block {
   display: flex;
+}
+.main-tab{
+  padding: 0 15px;
+}
+.iconProfile{
+  margin-left: 20px;
+  /* padding: 15px; */
 }
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -124,7 +131,7 @@
   border-bottom: 1px solid rgba(72, 43, 8, 0.25);
 }
 .modal__icon {
-  margin: 4px 4px 0 10px;
+  margin: 4px 10px 0 18px;
 }
 .model__content-auth {
   padding: 20px 26px 42px 20px;
@@ -181,7 +188,18 @@
 
   margin-left: 12px;
 }
+.address_text{
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
 
+  color: rgba(72, 43, 8, 0.6);
+  padding-bottom: 5px;
+}
 .modal__name {
   font-family: "Neometric";
   font-style: normal;
@@ -213,7 +231,7 @@
   align-items: center;
   color: white;
 }
-.navbar-links_logo h1 {
+.main-logo {
   font-family: "Neometric";
   font-style: normal;
   font-weight: 700;

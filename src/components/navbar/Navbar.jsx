@@ -11,17 +11,19 @@ import {
   iconProfile,
   iconMyCollections,
   iconSettings,
-  iconEverWallet
+  iconEverWallet,
+  iconWalletModal,
+  iconUserModal,
 } from "../../assets/icon";
 const Menu = () => (
   <>
     <Link to="/explorer">
-      <p>Explore</p>{" "}
+      <div>Explore</div>{" "}
     </Link>
     <Link to="/create">
-      <p>Сreate</p>{" "}
+      <div>Сreate</div>{" "}
     </Link>
-    <p>Features</p>
+    <div>Features</div>
   </>
 );
 
@@ -34,20 +36,23 @@ const Navbar = () => {
   const [address, setAddress] = useState([]);
 
   useEffect(() => {
-    const address = localStorage.getItem("wallet_address");
+    const address = localStorage.getItem("userAddress");
     if (address) {
       setAddress(address);
       setUser(true);
     }
   }, []);
 
-  const handleLogout = () => {
-    login_out();
+  const handleLogout = async() => {
+    setisOpenModalLogin(false)
+    await login_out();
     setUser(false);
+    window.location.reload();
   };
   function handleLogin(e) {
     e.preventDefault();
     login();
+    
   }
   const handleLoginExtraton = () => {
     login_extraton();
@@ -62,7 +67,7 @@ const Navbar = () => {
             <img src={logo} alt="logo" />
           </div>
           <Link to="/">
-            <h1>shujaa</h1>
+            <div className="main-logo">shujaa</div>
           </Link>
         </div>
       </div>
@@ -76,191 +81,173 @@ const Navbar = () => {
             placeholder="Search items and collections"
             autoFocus={true}
           />
-          {user && (
-            <Link to="/">
-              <p onClick={handleLogout}>Logout</p>
-            </Link>
-          )}
         </div>
         {user ? (
           <>
-            <Link to="">
-              <div class="dropdown">
+            {/* <Link to=""> */}
+            <div class="dropdown">
+              <div style={{ display: "none" }}>
                 <CgProfile
                   size={30}
                   color="rgba(72, 43, 8, 0.8)"
                   class="dropbtn"
                   className="header-icon" /* onClick={handleLogout}*/
                 />
-                <div class="dropdown-content">
-                  <a>
-                    <h4 class="menu_item">
-                      {address.substring(0, 6)}...{address.substring(60, 66)}
-                    </h4>
-                  </a>
-                  <div>
-                    <a href="#">
-                      <div className="menu_item__block">
-                        <div className="menu_item__icon">{iconProfile}</div>
-                        <h4 class="menu_item">Create</h4>
-                      </div>
-                    </a>
-                  </div>
-
+              </div>
+              <div className="iconProfile main-tab">{iconUserModal}</div>
+              <div class="dropdown-content">
+                <div>
                   <a href="#">
                     <div className="menu_item__block">
                       <div className="menu_item__icon">{iconProfile}</div>
-
-                      <h4 class="menu_item">Profile</h4>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div className="menu_item__block">
-                      <div className="menu_item__icon">
-                        {" "}
-                        {iconMyCollections}
-                      </div>
-
-                      <h4 class="menu_item">My Collections</h4>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div className="menu_item__block">
-                      <div className="menu_item__icon"> {iconSettings}</div>
-
-                      <h4 class="menu_item">Setting</h4>
+                      <div class="menu_item">Create</div>
                     </div>
                   </a>
                 </div>
+
+                <Link to={`/profile/${address}`}>
+                  <div className="menu_item__block">
+                    <div className="menu_item__icon">{iconProfile}</div>
+
+                    <div class="menu_item">Profile</div>
+                  </div>
+                </Link>
+                <a href="#">
+                  <div className="menu_item__block">
+                    <div className="menu_item__icon"> {iconMyCollections}</div>
+
+                    <div class="menu_item">My Collections</div>
+                  </div>
+                </a>
+                <a href="#">
+                  <div className="menu_item__block">
+                    <div className="menu_item__icon"> {iconSettings}</div>
+
+                    <div class="menu_item">Setting</div>
+                  </div>
+                </a>
               </div>
-            </Link>
-            <Link to="">
-              <FaWallet
-                size={30}
-                color="rgba(72, 43, 8, 0.8)"
-                className="header-icon"
-                onClick={() => {
-                  // setisOpenModalLogin(!isOpenModalLogin);
-                }}
-              />
-            </Link>
-          </>
-        ) : (
-          <>
-            {/*<Link to="/login">*/}
-            <Link to="">
-              <div class="dropdown">
-                <CgProfile
-                  size={30}
-                  color="rgba(72, 43, 8, 0.8)"
-                  class="dropbtn"
-                  className="header-icon" /* onClick={handleLogout}*/
-                />
-                <div class="dropdown-content">
-                  <a href="#">Profile</a>
-                  <a href="#">Settings</a>
-                </div>
-              </div>
-            </Link>
-            <Link to="">
-              <FaWallet
+            </div>
+            {/* </Link> */}
+            {/* <Link to=""> */}
+            {/* <FaWallet
                 size={30}
                 color="rgba(72, 43, 8, 0.8)"
                 className="header-icon"
                 onClick={() => {
                   setisOpenModalLogin(!isOpenModalLogin);
                 }}
-              />
-            </Link>
+              /> */}
+            {/* </Link> */}
+            <div
+              className="iconWalletModal main-tab"
+              onClick={() => {
+                setisOpenModalLogin(!isOpenModalLogin);
+              }}
+            >
+              {iconWalletModal}
+            </div>
             {isOpenModalLogin && (
               <div className="modal">
                 <div className="modal__name-modal">
                   <div className="modal__icon">
-                    <FaWallet
-                      size={30}
-                      color="rgba(72, 43, 8, 0.8)"
-                      className="header-icon"
-                      // onClick={() => {
-                      //   setisOpenModalLogin(!isOpenModalLogin);
-                      // }}
-                    />
+                  {iconWalletModal}
                   </div>
-                  <div className="modal__name">
-                    My wallet
-                  </div>
+                  <div className="modal__name">My wallet</div>
                 </div>
                 <div className="model__content-auth">
-                  <div className="model__text-auth"> Please, connect your wallet to get full access</div>
-                  <div className="model__block-auth">
-                    <div className="model__block-wallet" onClick={handleLogin}>
-                      <div className="model__block-wallet__icon">
-                          {iconEverWallet}
-                      </div>
-                      <div className="model__block-wallet__name">
-                          EVER Wallet
-                      </div>
-                    </div>
+                <a cl>
+                  <div class="address_text">
+                  Your address: {address.substring(0, 6)}...{address.substring(60, 66)}
+                  </div>
+                </a>
+                  <div className="model__text-auth">
+                    {" "}
                     
-                    {/* <div className="model__block-wallet">
-                      <div className="model__block-wallet__icon ">
-                          {iconEverWallet}
+                    You can log out of the wallet
+                    
+                  </div>
+                  
+                  <div className="model__block-auth">
+                  <Link to="/">
+                    <div className="model__block-wallet"  onClick={handleLogout}>
+                    <div className="model__block-wallet__name">
+                    Logout
                       </div>
-                      <div className="model__block-wallet__name">
-                          EVER Wallet
-                      </div>
+              
+            
                     </div>
-                    <div className="model__block-wallet">
-                      <div className="model__block-wallet__icon">
-                          {iconEverWallet}
-                      </div>
-                      <div className="model__block-wallet__name">
-                          EVER Wallet
-                      </div>
-                    </div> */}
+                    </Link>
                   </div>
                 </div>
               </div>
-              // <div className="modal">
-              //   <div className="login">
-              //     <div className="login-container">
-              //       <h1>Login</h1>
-              //       <form className="login-writeForm" autoComplete="off">
-              //         <div className="login-formGroup">
-              //           <button
-              //             onClick={handleLogin}
-              //             className="login-writeButton"
-              //             type="submit"
-              //           >
-              //             EVERWallet
-              //           </button>
-              //         </div>
-              //         <div className="login-formGroup">
-              //           <button
-              //             onClick={handleLoginExtraton}
-              //             className="login-writeButton"
-              //             type="submit"
-              //           >
-              //             Extraton
-              //           </button>
-              //         </div>
-              //         <div className="login-formGroup">
-              //           <button className="login-writeButton" type="submit">
-              //             EverscaleWallet
-              //           </button>
-              //         </div>
-              //         <div className="login-button">
-              //           <button
-              //             onClick={closeModal}
-              //             className="login-writeButton"
-              //             type="submit"
-              //           >
-              //             Close
-              //           </button>
-              //         </div>
-              //       </form>
-              //     </div>
-              //   </div>
-              // </div>
+             
+            )}
+          </>
+        ) : (
+          <>
+            {/*<Link to="/login">*/}
+            <Link to="">
+              <div class="dropdown">
+                <div style={{ display: "none" }}>
+                  <CgProfile
+                    size={30}
+                    color="rgba(72, 43, 8, 0.8)"
+                    class="dropbtn"
+                    className="header-icon" /* onClick={handleLogout}*/
+                  />
+                </div>
+
+                <div className="iconProfile main-tab">{iconUserModal}</div>
+                <div class="dropdown-content">
+                  <a href="#">Profile</a>
+                  <a href="#">Settings</a>
+                </div>
+              </div>
+            </Link>
+            <div
+              className="iconWalletModal main-tab"
+              onClick={() => {
+                setisOpenModalLogin(!isOpenModalLogin);
+              }}
+            >
+              {iconWalletModal}
+            </div>
+            {/* <FaWallet
+                size={30}
+                color="rgba(72, 43, 8, 0.8)"
+                className="header-icon"
+                onClick={() => {
+                  setisOpenModalLogin(!isOpenModalLogin);
+                }}
+              /> */}
+
+            {isOpenModalLogin && (
+              <div className="modal">
+                <div className="modal__name-modal">
+                  <div className="modal__icon">
+                  {iconWalletModal}
+                  </div>
+                  <div className="modal__name">My wallet</div>
+                </div>
+                <div className="model__content-auth">
+                  <div className="model__text-auth">
+                    {" "}
+                    Please, connect your wallet to get full access
+                  </div>
+                  <div className="model__block-auth">
+                    <div className="model__block-wallet" onClick={handleLogin}>
+                      <div className="model__block-wallet__icon">
+                        {iconEverWallet}
+                      </div>
+                      <div className="model__block-wallet__name">
+                        EVER Wallet
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
             )}
             {/*<Link to="/register">*/}
           </>

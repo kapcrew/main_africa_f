@@ -149,7 +149,7 @@ const Explorer = () => {
   menuItems={menuItems_title}
   />
   {/*<Bids title="Test" />*/}
-      <Card item={item} title="Explore" />
+      <Card item={item} />
     </div>
   );
 };

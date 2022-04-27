@@ -4,6 +4,9 @@ body{
   overflow-x: none;
   /* overflow: hidden; */
 }
+.content{
+  height: 100%;
+}
 a{
   text-decoration: none;
   color: inherit;

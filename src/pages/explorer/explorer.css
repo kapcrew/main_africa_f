@@ -1,6 +1,9 @@
 .content {
   padding: 0 6rem;
 }
+.filter{
+    padding-bottom: 70px;
+}
 .main_name {
   font-family: "NeometricBold";
   font-style: normal;
