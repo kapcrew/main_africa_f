@@ -1,3 +1,14 @@
+export const iconCheck = <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.279 0.356995L14.021 1.57899L6.46804 12.473H4.72604L0.514038 6.57099L2.25604 4.94599L5.59704 8.06599L12.279 0.356995Z" fill="url(#paint0_linear_36_484)"/>
+<defs>
+<linearGradient id="paint0_linear_36_484" x1="0.620672" y1="7.00125" x2="14.024" y2="6.92365" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F27D0C"/>
+<stop offset="1" stop-color="#CAAD19"/>
+</linearGradient>
+</defs>
+</svg>
+
+
 export const iconCategory = <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="4" y="4" width="6" height="6" rx="1" stroke="#482B08" stroke-opacity="0.8" stroke-width="2" stroke-linejoin="round"/>
 <rect x="4" y="14" width="6" height="6" rx="1" stroke="#482B08" stroke-opacity="0.8" stroke-width="2" stroke-linejoin="round"/>

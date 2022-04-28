@@ -27,17 +27,17 @@
 
   /* Chrome, Edge, and Safari */
   *::-webkit-scrollbar {
-    width: 14px;
+    /* width: 14px; */
   }
 
   *::-webkit-scrollbar-track {
-    background: transparent;
+    /* background: transparent; */
   }
 
   *::-webkit-scrollbar-thumb {
-    background: var(--color-card);
+    /* background: var(--color-card);
     border-radius: 10px;
-    border: 3px none #ffffff;
+    border: 3px none #ffffff; */
   }
 
   @font-face {

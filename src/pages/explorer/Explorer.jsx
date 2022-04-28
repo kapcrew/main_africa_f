@@ -1,8 +1,9 @@
 import React from "react";
 import { Bids, Filter, Cards, Button } from "../../components";
 import Data from "./Data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./explorer.css";
+import { iconCheck } from "../../assets/icon";
 import {
   iconSaleType,
   iconPriceRange,
@@ -13,7 +14,7 @@ import {
 import birdExplorer from "../../assets/svg/birdExplorer.svg";
 const Explorer = () => {
   /*Constants*/
-  const [item, setItem] = useState(Data);
+  const [items, setItems] = useState(Data);
   const [newItem_title, setItem_title] = useState(Data);
   const [newItem_collection, setItem_collection] = useState(Data);
 
@@ -25,7 +26,7 @@ const Explorer = () => {
     const newItem = Data.filter((newVal) => {
       return newVal.category === curcat;
     });
-    setItem(newItem);
+    setItems(newItem);
   };
 
   /*********************/
@@ -36,7 +37,7 @@ const Explorer = () => {
     const newItem = Data.filter((newVal) => {
       return newVal.title === curcat;
     });
-    setItem(newItem);
+    setItems(newItem);
   };
 
   /*********************/
@@ -47,7 +48,7 @@ const Explorer = () => {
     const newItem = Data.filter((newVal) => {
       return newVal.collection === curcat;
     });
-    setItem(newItem);
+    setItems(newItem);
   };
   /*********************/
 
@@ -83,13 +84,46 @@ const Explorer = () => {
   const [modalMost, setModalMost] = useState(false);
 
   //CATEGORY
-  const [categories, setcategories] = useState({
-    all: true,
-    art: false,
-    audio: false,
-    video: false,
-    collectibles: false,
+  const [categories, setcategories] = useState(() => {
+    const arr_cat = [...new Set(items.map((item) => item.category))];
+    const obj_cat = {};
+    for (const key of arr_cat) {
+      obj_cat[key] = true;
+    }
+    return obj_cat;
   });
+  const [categoriesArr, setcategoriesArr] = useState(() => {
+    const arr_cat = [...new Set(items.map((item) => item.category))];
+    // console.log(arr_cat);
+    return arr_cat;
+  });
+  const changeCategory = (event) => {
+    setcategories((pre) => ({
+      ...pre,
+      [event.target.id]: !categories[event.target.id],
+    }));
+    console.log(categories, categories[event.target.id]);
+    // updateListToken();
+  };
+  const updateListToken = () => {
+    setItems(
+      Data.filter((newVal) => {
+        for (const category in categories) {
+          console.log(categories[category]);
+          if (categories[category] && category === newVal.category) {
+            return newVal;
+          }
+        }
+      })
+    );
+    // console.log(newItem)
+    // setItems(newItem);
+    console.log(items);
+  };
+  useEffect(() => {
+    updateListToken();
+  }, []);
+
   return (
     <div className="section__padding">
       {/*<Filter title="Test" />
@@ -108,13 +142,29 @@ const Explorer = () => {
           </button>
           {modalCategory && (
             <div className="modal_category">
-              <button className="modal_category__btn modal-btn">All</button>
-              <button className="modal_category__btn modal-btn">Art</button>
-              <button className="modal_category__btn modal-btn">Audio</button>
-              <button className="modal_category__btn modal-btn">Video</button>
-              <button className="modal_category__btn modal-btn">
-                Collectibles
-              </button>
+              {categoriesArr.map((category) => {
+                // console.log(category);
+                // console.log(categories[category]);
+                return (
+                  <>
+                    <button
+                      className="modal_category__btn modal-btn"
+                      id={category}
+                      onClick={(event) => {
+                        changeCategory(event);
+                        updateListToken();
+                      }}
+                    >
+                      <div className="modal_category__text-btn">{category}</div>
+                      {categories[category] && (
+                        <div className="modal_category__icon_check">
+                          {iconCheck}
+                        </div>
+                      )}
+                    </button>
+                  </>
+                );
+              })}
             </div>
           )}
 
@@ -161,19 +211,19 @@ const Explorer = () => {
           {/* <div className="filter-bottom-input">
             <Button
               filterItem={filterItem}
-              setItem={setItem}
+              setItems={setItems}
               menuItems={menuItems}
               title="Type"
             />
             <Button
               filterItem={filterItem_title}
-              setItem={newItem_title}
+              setItems={newItem_title}
               menuItems={menuItems_title}
               title="Name"
             />
             <Button
               filterItem={filterItem_collection}
-              setItem={newItem_collection}
+              setItems={newItem_collection}
               menuItems={menuItems_collection}
               title="Collection"
             />
@@ -183,18 +233,18 @@ const Explorer = () => {
 
       {/*<Button
   filterItem={filterItem}
-  setItem={setItem}
+  setItems={setItems}
   menuItems={menuItems}
   />
   <Button
   filterItem={filterItem_title}
-  setItem={newItem_title}
+  setItems={newItem_title}
   menuItems={menuItems_title}
   />
   {/*<Bids title="Test" />*/}
-      <Cards items={item} />
+      <Cards items={items} />
 
-      {/* {JSON.stringify(item)} */}
+      {/* {JSON.stringify(items)} */}
     </div>
   );
 };
