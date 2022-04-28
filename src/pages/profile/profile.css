@@ -1,7 +1,7 @@
 .cover-image {
   /* border: 1px solid #000; */
   width: 100%;
-  border-radius: 5%;
+  border-radius: 25px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -15,7 +15,7 @@
   border-radius: 50%;
   object-fit: cover;
   overflow: hidden;
-  border: 2px solid #c4c4c4;
+  border: 4px solid #c4c4c4;
 }
 
 .icon-profile img {
@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 80px;
+  padding-top: 85px;
 }
 .info-user__name-user {
   font-family: "NeometricBold";
@@ -49,7 +49,6 @@
   );
   border-radius: 22px;
 
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,4 +60,199 @@
   line-height: 16px;
 
   color: rgba(72, 43, 8, 0.6);
+  margin: 10px 0;
+  margin-bottom: 15px;
+}
+.info-user__date-reg {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.6);
+  padding-bottom: 15px;
+}
+
+.info-user__btns {
+  display: flex;
+  gap: 20px;
+}
+.info-user__bnt-update,
+.info-user__bnt-discharge {
+  width: 39px;
+  height: 39px;
+
+  border: 1px solid rgba(72, 43, 8, 0.6);
+  box-sizing: border-box;
+  border-radius: 9px;
+}
+
+.info-user__bnt-update,
+.info-user__bnt-discharge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-user__description {
+  background: linear-gradient(
+    89.7deg,
+    rgba(242, 125, 12, 0.2) 1.02%,
+    rgba(202, 173, 25, 0.2) 99.74%
+  );
+  border-radius: 25px;
+  margin: 15px 0;
+  /* padding: 15px 0; */
+  border: 1px solid rgba(243, 169, 99, 0.2);
+}
+.info-user__description_text {
+  text-align: center;
+  word-break: break-all;
+  max-width: 500px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.6);
+  padding: 15px;
+}
+.modalUpdateData {
+  right: 50%;
+  transform: translate(50%, 0);
+  background-color: #fff;
+  border: 3px solid rgba(243, 169, 99, 0.2);
+  position: absolute;
+  z-index: 1000;
+  max-width: 590px;
+  min-height: 310px;
+  padding: 30px;
+  border-radius: 10px;
+}
+.modalUpdateData__content {
+  width: 100%;
+
+  height: 100%;
+  /* border: 2px solid rgba(243, 169, 99, 0.2); */
+}
+.modalUpdateData__title {
+  padding-bottom: 5px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 17px;
+  display: flex;
+  color: rgba(72, 43, 8, 0.6);
+}
+.modalUpdateData__block_name {
+  gap: 7px;
+  /* justify-content: space-between; */
+  display: flex;
+  flex-wrap: wrap;
+}
+.modalUpdateData__input_name {
+  border-radius: 10px;
+  padding-left: 15px;
+  width: 185px;
+  border: 3px solid rgba(203, 142, 84, 0.2);
+  height: 40px;
+
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(72, 43, 8, 0.6);
+  display: flex;
+}
+.modalUpdateData__block_data {
+  padding-bottom: 15px;
+}
+.modalUpdateData__input_description {
+  border-radius: 10px;
+  resize: none;
+  outline: none;
+  border: 3px solid rgba(203, 142, 84, 0.2);
+  color: rgba(72, 43, 8, 0.6);
+  word-break: break-all;
+  width: 92%;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  /* width: 100%; */
+  height: 120px;
+}
+.modalUpdateData__btns {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+  /* margin-top: -10px; */
+}
+.modalUpdateData__btn {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 32px;
+  border: none;
+  /* градиент */
+
+  background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
+  border-radius: 46px;
+
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tabs-line {
+  width: 100%;
+  /* he-ight: 1px; */
+  border-top: 2px solid rgba(72, 43, 8, 0.2);
+}
+.tabs-token {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.tab-btn {
+  background-color: transparent;
+  border: none;
+  /* border-bottom: 2px solid #F27D0C  ; */
+  width: 138px;
+  height: 40px;
+
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.9);
+}
+.tab-btn:hover {
+
+  border-bottom: 2px solid #F27D0C  ;
+  
 }

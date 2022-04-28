@@ -1,5 +1,5 @@
 import React from "react";
-import { Bids, Filter, Card, Button } from "../../components";
+import { Bids, Filter, Cards, Button } from "../../components";
 import Data from "./Data";
 import { useState } from "react";
 import "./explorer.css";
@@ -76,44 +76,87 @@ const Explorer = () => {
     return filteredCars;
   };
 
-  /*********************/
+  const [modalCategory, setModalCategory] = useState(false);
+  const [modalCollection, setModalCollection] = useState(false);
+  const [modalSale, setModalSale] = useState(false);
+  const [modalPrice, setModalPrice] = useState(false);
+  const [modalMost, setModalMost] = useState(false);
 
+  //CATEGORY
+  const [categories, setcategories] = useState({
+    all: true,
+    art: false,
+    audio: false,
+    video: false,
+    collectibles: false,
+  });
   return (
     <div className="section__padding">
       {/*<Filter title="Test" />
   <input type="range" onInput={ handleInput } />
   <h1>Price: { price }</h1>*/}
+
       <div className="main_name ">Explore NFTs</div>
       <div className="filter">
         <div className="filter-bottoms">
-          <button className="filter-bottom_">
+          <button
+            className="filter-bottom_"
+            onClick={() => setModalCategory(!modalCategory)}
+          >
             <div className="filter-bottom__icon">{iconCategory}</div>
             <div className="filter-bottom__name">Category</div>
           </button>
+          {modalCategory && (
+            <div className="modal_category">
+              <button className="modal_category__btn modal-btn">All</button>
+              <button className="modal_category__btn modal-btn">Art</button>
+              <button className="modal_category__btn modal-btn">Audio</button>
+              <button className="modal_category__btn modal-btn">Video</button>
+              <button className="modal_category__btn modal-btn">
+                Collectibles
+              </button>
+            </div>
+          )}
 
-          <button className="filter-bottom_">
+          <button
+            className="filter-bottom_"
+            onClick={() => setModalCollection(!modalCollection)}
+          >
             <div className="filter-bottom__icon">{iconCollection}</div>
             <div className="filter-bottom__name">Collection</div>
           </button>
 
-          <button className="filter-bottom_">
+          {modalCollection && <div className="modal_collection"></div>}
+          <button
+            className="filter-bottom_"
+            onClick={() => setModalPrice(!modalPrice)}
+          >
             <div className="filter-bottom__icon">{iconPriceRange}</div>
             <div className="filter-bottom__name">Price range</div>
           </button>
+          {modalPrice && <div className="modal_price"></div>}
 
-          <button className="filter-bottom_">
+          <button
+            className="filter-bottom_"
+            onClick={() => setModalSale(!modalSale)}
+          >
             <div className="filter-bottom__icon">{iconSaleType}</div>
             <div className="filter-bottom__name">Sale type</div>
           </button>
+          {modalSale && <div className="modal_sale"></div>}
           <div className="filter-bottom_end"></div>
           <div className="image_bird">
-            <img src={birdExplorer} alt="" /></div>
-          
-            <button className="filter-bottom_">
-              <div className="filter-bottom__icon">{iconMostRecent}</div>
-              <div className="filter-bottom__name">Most recent</div>
-            </button>
-          
+            <img src={birdExplorer} alt="" />
+          </div>
+
+          <button
+            className="filter-bottom_"
+            onClick={() => setModalMost(!modalMost)}
+          >
+            <div className="filter-bottom__icon">{iconMostRecent}</div>
+            <div className="filter-bottom__name">Most recent</div>
+          </button>
+          {modalMost && <div className="modal_most"></div>}
 
           {/* <div className="filter-bottom-input">
             <Button
@@ -149,7 +192,9 @@ const Explorer = () => {
   menuItems={menuItems_title}
   />
   {/*<Bids title="Test" />*/}
-      <Card item={item} />
+      <Cards items={item} />
+
+      {/* {JSON.stringify(item)} */}
     </div>
   );
 };
