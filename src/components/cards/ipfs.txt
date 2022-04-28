@@ -1,0 +1,137 @@
+animal
+ipfs.infura.io
+[
+  {
+    "path": "watchful-eyes-lucie-bilodeau.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmZ8bkBGSeQdYXQvtiQfc5NnGU3onyYjFqDWkwU5G6b96L",
+    "size": 44961
+  },
+  {
+    "path": "alpha-maria-barry.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmbL8oznaiNa9FFXLrAwB96Auqnt5mjTFjVm6z4g3r1ZuC",
+    "size": 44940
+  },
+  {
+    "path": "lion-king-jerry-lofaro.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmfQaLRGvfzR8jWZRqimcmNBMFHdzANwbVARMFhx3bdVe8",
+    "size": 25654
+  },
+  {
+    "path": "zebras-richard-wallich.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmWmz1mzmN3ZTtfrzBNsfv3WrzQbBZnBCW1ZGJk9dk1T34",
+    "size": 121032
+  }
+]
+map
+[
+  {
+    "path": "paint-splashes-map-of-africa-map-michael-tompsett.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmYNpbemfT38FWmdLXuXYCCxoDtq6b3VmZd1b17vv1QXtz",
+    "size": 32579
+  },
+  {
+    "path": "typography-map-of-africa-michael-tompsett.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmZNwWSy8eZ4xnvgP9LFghn3HPXTdGwJAPKD2C5392rcbY",
+    "size": 32779
+  }
+]
+
+nature
+[
+  {
+    "path": "elephants-at-sunset-ted-taylor.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmPhqWrqKcESR4dv9nfFNDJNhEKRLnrkgbt8QLk4u79uMK",
+    "size": 10365
+  },
+  {
+    "path": "hot-air-balloons-over-the-serengeti-at-jez-bennett.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmQ8mPDLwS2cnyX1bbgL3cLDoE9ckrajtkyjaoed1s6Pgr",
+    "size": 35300
+  },
+  {
+    "path": "green-trees-in-africa-after-the-rainy-shuttjd.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmW6DwTKhqhVPWjXS9yRUSKnwAmoEG3QFCccy8bHsAme9L",
+    "size": 96956
+  }
+]
+painting
+[
+  {
+    "path": "a-turks-and-caicos-sunset-synthia-saint-james.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmRCn7tzw3grJAnKK6TjzQHXfmSAh4LCfwsHJhHFnJt3Ru",
+    "size": 31697
+  },
+  {
+    "path": "masekelas-marketplace-congo-synthia-saint-james.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmSQ2HDV5qSrQhXYYYqH5C7wrebHdK3ZwxJHmFvh31Rsrx",
+    "size": 35333
+  },
+  {
+    "path": "jazz-on-fire-larry-martin.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmZGhriej489bgdVxzax7wKRSjwvUZTrzmdf2eazBTBoVN",
+    "size": 41870
+  },
+  {
+    "path": "johannesburg-south-africa-skyline-bri-buckley-.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmWxSGswKDPmpTk3DPDTxh73zrviWUVFjomNgAiigFw9wn",
+    "size": 47752
+  },
+  {
+    "path": "sister-act-ikahl-beckford-.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmUbK2VyyUf9vC89cu41e49AVLGoYipcfq2D4SuYSk5k2r",
+    "size": 50589
+  }
+]
+
+pop
+[
+  {
+    "path": "muhammad-ali-versus-sonny-liston-paul-meijering.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmUubyXPZ4syz7bFsDwVMXvwxRp22jER866Psis2FoTFv6",
+    "size": 24734
+  },
+  {
+    "path": "jimi-hendrix-painting-4-paul-meijering.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmVfocsh9gx3dvV8TmqemRmkgpvyuqscPrQxmhB4fqVTgP",
+    "size": 22154
+  }
+]
+
+poster
+[
+  {
+    "path": "miles-watercolor-naxart-studio.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmXHVXYoQeuPzYcHK3Ws8MkT4R2uoiYS3W1aQLBVYwEHJB",
+    "size": 28381
+  },
+  {
+    "path": "morocco-travel-poster-jazzberry-blue.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmW2k6kV5H24NpvXLsL5B5P2EjPAZUU41M7kYGG5NNTSR4",
+    "size": 11977
+  },
+  {
+    "path": "nurture-loveis-wise.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmZYZhqfAW5CoACpp6Awmygb1s1PuV2rWm1bPS2havGLq2",
+    "size": 35250
+  },
+  {
+    "path": "process-program-promised-land-the-alabama-dynasty-rolls-january-18-2016-sports-illustrated-cover.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmZHSu8nun3TVhnQNqYhBunz7tewf546GrRtwSYFg41fhC",
+    "size": 43119
+  }
+]
+
+spirits
+
+[
+  {
+    "path": "african-spirits-i-ricardo-chavez-mendez.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmWGzCDucpQzBZFZ7ppTDbBFWRDRPWZ2grQPPKuy3WYoHY",
+    "size": 34845
+  },
+  {
+    "path": "infinite-isis-sue-halstenberg.jpg",
+    "hash": "https://ipfs.infura.io/ipfs/QmU3BromsXKdQYhWJ6mkhAhmRY3stSuFYk5qcXB1s8ZFwV",
+    "size": 61531
+  }
+]
