@@ -101,6 +101,7 @@ const Data = [
     img: "https://ipfs.infura.io/ipfs/QmW6DwTKhqhVPWjXS9yRUSKnwAmoEG3QFCccy8bHsAme9L",
     desc: "A rich gravy made of khus khus, coconut and milk that tastes best with koftas made from khoya. This velvety and creamy recipe will leave you licking your fingers. Makhmali kofte can be your go-to dish for Nature parties as this is quite different from other kofta recipes and extremely delicious.",
     collection:"African Art",
+    sell_type:"Buy now"
 
 
   },

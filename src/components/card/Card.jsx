@@ -22,7 +22,7 @@ const Card = ({ infoToken }) => {
           <div className="card-name__main">Lorem #33 </div>
           <div className="card-name__submain">Lorem Collection</div>
         </div>
-        <div className="card-price">$ 5345</div>
+        <div className="card-price">$ {infoToken.price}</div>
         <div className="buy-and-love">
           <button className="card-btn-buy">Buy now </button>
           <div className="love">
