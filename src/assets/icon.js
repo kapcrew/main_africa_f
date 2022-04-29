@@ -8,6 +8,15 @@ export const iconCheck = <svg width="15" height="13" viewBox="0 0 15 13" fill="n
 </defs>
 </svg>
 
+export const iconCreactCollection = <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34.8333 0C15.5958 0 0 15.5958 0 34.8333C0 54.0708 15.5958 69.6667 34.8333 69.6667C54.0708 69.6667 69.6667 54.0708 69.6667 34.8333C69.6667 15.5958 54.0708 0 34.8333 0ZM38 47.5C38 48.3399 37.6664 49.1453 37.0725 49.7392C36.4786 50.333 35.6732 50.6667 34.8333 50.6667C33.9935 50.6667 33.188 50.333 32.5942 49.7392C32.0003 49.1453 31.6667 48.3399 31.6667 47.5V38H22.1667C21.3268 38 20.5214 37.6664 19.9275 37.0725C19.3336 36.4786 19 35.6732 19 34.8333C19 33.9935 19.3336 33.188 19.9275 32.5942C20.5214 32.0003 21.3268 31.6667 22.1667 31.6667H31.6667V22.1667C31.6667 21.3268 32.0003 20.5214 32.5942 19.9275C33.188 19.3336 33.9935 19 34.8333 19C35.6732 19 36.4786 19.3336 37.0725 19.9275C37.6664 20.5214 38 21.3268 38 22.1667V31.6667H47.5C48.3399 31.6667 49.1453 32.0003 49.7392 32.5942C50.333 33.188 50.6667 33.9935 50.6667 34.8333C50.6667 35.6732 50.333 36.4786 49.7392 37.0725C49.1453 37.6664 48.3399 38 47.5 38H38V47.5Z" fill="url(#paint0_linear_235_779)"/>
+<defs>
+<linearGradient id="paint0_linear_235_779" x1="0.55" y1="38.2043" x2="69.6823" y2="37.8453" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F27D0C"/>
+<stop offset="1" stop-color="#CAAD19"/>
+</linearGradient>
+</defs>
+</svg>
 
 export const iconCategory = <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="4" y="4" width="6" height="6" rx="1" stroke="#482B08" stroke-opacity="0.8" stroke-width="2" stroke-linejoin="round"/>

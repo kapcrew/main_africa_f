@@ -1,7 +1,7 @@
 import React from "react";
 import "./bids.css";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import bids1 from "../../assets/bids1.png";
+
 import bids2 from "../../assets/bids2.png";
 import bids3 from "../../assets/bids3.png";
 import bids4 from "../../assets/bids4.png";
@@ -11,6 +11,7 @@ import bids7 from "../../assets/bids7.png";
 import bids8 from "../../assets/bids8.png";
 import { Link } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
+import bids1 from "../../assets/bids1.png";
 import Carousel, {
   slidesToShowPlugin,
   arrowsPlugin,
