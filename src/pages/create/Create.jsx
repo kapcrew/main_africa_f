@@ -279,75 +279,9 @@ const Create = () => {
         <div className="create-container__submain-name">Collection</div>
 
         <div className="carousel-collection">
-          {/* <Bids /> */}
-          {/* {listCollection.map((e) =>{
-            return <><div className="btn-collectionQ"></div></>
-          })} */}
-          {/* <Carousel
-            slides={
-              listCollection.map((e) => <div className="btn-collection"></div>)
-            }
-            plugins={[
-              {
-                resolve: slidesToShowPlugin,
-                options: {
-                  numberOfSlides: 3,
-                },
-              },
-              {
-                resolve: arrowsPlugin,
-                options: {
-                  arrowLeft: <button>1</button>,
-                  arrowLeftDisabled: <button>2</button>,
-                  arrowRight: (
-                    <button>
-                      <svg
-                        width="8"
-                        height="14"
-                        viewBox="0 0 8 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0 12L5 7L0 2L1 0L8 7L1 14L0 12Z"
-                          fill="#482B08"
-                        />
-                      </svg>
-                    </button>
-                  ),
-                  arrowRightDisabled: <button>4</button>,
-                  addArrowClickHandler: true,
-                },
-              },
-            ]}
-          >
-
-            {listCollection?.map((colliction, index) => {
-              if (index === 0) {
-                return (
-                  <button
-                    className="btn-collection btn-create-collection"
-                    onClick={() => {
-                      setmodalCreactCollection(!modalCreactCollection);
-                    }}
-                  >
-                    <div className="btn-create-collection__icon">
-                      {iconCreactCollection}
-                    </div>
-                    <div className="btn-create-collection__text">Create</div>
-                  </button>
-                );
-              }
-
-              return (
-                <button className="btn-collection">
-                  <div className="btn-collection__icon"></div>
-                  <div className="btn-collection__name">{colliction.name}</div>
-                </button>
-              );
-            })} 
+          
             
-          </Carousel> */}
+     
           <Carousel itemsToShow={3}>
           <button
                     className="btn-collection btn-create-collection"
