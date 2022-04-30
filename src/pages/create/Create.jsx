@@ -349,10 +349,7 @@ const Create = () => {
             
           </Carousel> */}
           <Carousel itemsToShow={3}>
-            {listCollection?.map((colliction, index) => {
-              if (index === 0) {
-                return (
-                  <button
+          <button
                     className="btn-collection btn-create-collection"
                     onClick={() => {
                       setmodalCreactCollection(!modalCreactCollection);
@@ -363,8 +360,22 @@ const Create = () => {
                     </div>
                     <div className="btn-create-collection__text">Create</div>
                   </button>
-                );
-              }
+            {listCollection?.map((colliction, index) => {
+              // if (index === 0) {
+              //   return (
+              //     <button
+              //       className="btn-collection btn-create-collection"
+              //       onClick={() => {
+              //         setmodalCreactCollection(!modalCreactCollection);
+              //       }}
+              //     >
+              //       <div className="btn-create-collection__icon">
+              //         {iconCreactCollection}
+              //       </div>
+              //       <div className="btn-create-collection__text">Create</div>
+              //     </button>
+              //   );
+              // }
 
               return (
                 <button className={`btn-collection ${listCollectionChoice[colliction.name] ? "activ_collection" :""}`} onClick={collectionChoice} id={colliction.name}>
