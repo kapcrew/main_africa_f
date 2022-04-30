@@ -4,8 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* margin: auto; */
-  /* width: 90%; */
+
 }
 .bids-container-text h1{
   font-family: var(--font-family);
@@ -57,7 +56,7 @@
   font-weight: 600;
   font-size: 12px;
   line-height: 18px;
-  /* text-align: right; */
+
   color: rgba(72, 43, 8, 0.5);
 }
 .bids-card-bottom p:last-child{

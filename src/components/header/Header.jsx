@@ -4,10 +4,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import promo from "../../assets/svg/cover_img.svg";
 import cover_gradient from "../../assets/svg/cover_g_f.svg";
-
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 const Header = () => {
-  
+  const navigate = useNavigate();
   return (
     <div>
       <div className="promo">
@@ -29,8 +29,8 @@ const Header = () => {
             </p>
           </div>
           <div className="promo-content-buy">
-            <button className="primary-btn">Explore now</button>
-            <button className="secondary-btn">Create</button>
+            <button className="primary-btn" onClick={()=>{navigate("/explorer")}}>Explore now</button>
+            <button className="secondary-btn" onClick={()=>{navigate("/create")}}>Create</button>
           </div>
         </div>
         <div className="promo-image">

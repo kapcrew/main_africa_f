@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { Bids, Header } from "../../components";
-
+import { useNavigate } from 'react-router-dom';
 import bids1 from "../../assets/bids1.png";
 import { iconCreactCollection } from "../../assets/icon";
 // import Carousel, {
@@ -12,6 +12,7 @@ import { iconCreactCollection } from "../../assets/icon";
 //   arrowsPlugin,
 // } from "@brainhubeu/react-carousel";
 import Carousel from "react-elastic-carousel";
+import {sendMoney} from '../../scripts/index.js';
 
 import CardHomePage from "../../components/cardHomePage/CardHomePage";
 import apiRequest from "../../api/apiRequest";
@@ -71,8 +72,8 @@ const Create = () => {
       reader.readAsDataURL(file);
     });
   };
-
-  const [mainFile, setmainFile] = useState();
+  const [nameItem, setnameItem] = useState()
+  const [descriptionItem, setdescriptionItem] = useState()
   const [mainFileName, setmainFileName] = useState();
   const [mainFileBase64, setmainFileBase64] = useState();
   const handleOnDrop = (file) => {
@@ -104,6 +105,7 @@ const Create = () => {
     const req = await apiRequest.post("/collections/create_collection", {
       name: nameCollection,
       description: description,
+      picture:iconCollectionBase64
     });
     console.log(req);
     await getListCollection();
@@ -116,6 +118,7 @@ const Create = () => {
   
   const getListCollection = async () => {
     const req = await apiRequest.get("/collections/get_collections");
+    console.log(req.data)
     const arr_list = req.data.map((col, ind) => {
       return (
         <div className="btn-collectionQ" key={ind}>
@@ -160,66 +163,45 @@ const Create = () => {
     
   };
   // CREACT ITEM
-
+  const navigate = useNavigate();
   const creactItem = async () => {
-    const req = await apiRequest.post("/items/create_item", {
-      name: nameCollection,
-      description: description,
-      address: "",
-      image: mainFileBase64,
-      collection: selectedCollection,
-      tags: "",
-      price: priceItem,
-    });
-    console.log(req);
-    console.log({
-      name: nameCollection,
-      description: description,
-      address: "",
-      image: mainFileBase64,
-      collection: selectedCollection,
-      tags: "",
-      price: priceItem,
-    });
+    const reqSendMoney = await sendMoney()
+    if (reqSendMoney.data){
+      const req = await apiRequest.post("/nft/upload_data", {
+        title:nameItem,
+        description:descriptionItem,
+        category:"[string]",
+        price:priceItem,
+        media:mainFileBase64,
+        collection:selectedCollection,
+        userAddress:localStorage.getItem("userAddress"),
+      });
+      navigate("/")
+    }
+    
+    // const req = await apiRequest.post("/items/create_item", {
+    //   name: nameCollection,
+    //   description: description,
+    //   address: "",
+    //   image: mainFileBase64,
+    //   collection: selectedCollection,
+    //   tags: "",
+    //   price: priceItem,
+    // });
+
+    // console.log(req);
+    // console.log({
+    //   name: nameCollection,
+    //   description: description,
+    //   address: "",
+    //   image: mainFileBase64,
+    //   collection: selectedCollection,
+    //   tags: "",
+    //   price: priceItem,
+    // });
   };
   return (
     <div className="create section__padding">
-      {/* <Carousel
-        plugins={[
-          {
-            resolve: slidesToShowPlugin,
-            options: {
-              numberOfSlides: 3,
-            },
-          },
-          {
-            resolve: arrowsPlugin,
-            options: {
-              arrowLeft: <button>1</button>,
-              arrowLeftDisabled: <button>2</button>,
-              arrowRight: (
-                <button>
-                  <svg
-                    width="8"
-                    height="14"
-                    viewBox="0 0 8 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M0 12L5 7L0 2L1 0L8 7L1 14L0 12Z" fill="#482B08" />
-                  </svg>
-                </button>
-              ),
-              arrowRightDisabled: <button>4</button>,
-              addArrowClickHandler: true,
-            },
-          },
-        ]}
-      >
-        {listCollection.map((e) =>{
-            return <div>{e}</div>
-          })}
-      </Carousel> */}
       <div
         className="creat
       e-container"
@@ -271,10 +253,10 @@ const Create = () => {
         </Dropzone>
 
         <div className="create-container__submain-name">Name</div>
-        <input type="text" className="create-container__input" />
+        <input onChange={(e)=>{setnameItem(e.target.value)}} value={nameItem} type="text" className="create-container__input" />
 
         <div className="create-container__submain-name">Description</div>
-        <textarea type="text" className="create-container__textarea" />
+        <textarea onChange={(e)=>{setdescriptionItem(e.target.value)}}  value={descriptionItem} type="text" className="create-container__textarea" />
 
         <div className="create-container__submain-name">Collection</div>
 
@@ -301,7 +283,7 @@ const Create = () => {
 
               return (
                 <button className={`btn-collection ${listCollectionChoice[colliction.name] ? "activ_collection" :""}`} onClick={collectionChoice} id={colliction.name}>
-                  <div className="btn-collection__icon"></div>
+                  <div className="btn-collection__icon"> <img className="btn-collection__icon-img" src={colliction.picture} alt="" /></div>
                   <div className="btn-collection__name">{colliction.name}</div>
                 </button>
                 

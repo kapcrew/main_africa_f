@@ -330,3 +330,8 @@
 
   color: rgba(72, 43, 8, 0.8);
 }
+
+.loaderr{
+  display: flex;
+  justify-content: center;
+}

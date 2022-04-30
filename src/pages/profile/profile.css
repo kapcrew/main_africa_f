@@ -7,6 +7,7 @@
   justify-content: center;
 }
 .icon-profile {
+  background-color: #fff;
   position: absolute;
   right: 50%;
   transform: translate(50%, -50%);
@@ -17,7 +18,9 @@
   overflow: hidden;
   border: 4px solid #c4c4c4;
 }
-
+.tokens{
+  padding-top: 30px;
+}
 .icon-profile img {
   /* border-radius: 50%; */
 }
@@ -37,6 +40,11 @@
   align-items: center;
 
   color: #482b08;
+}
+.icon-profile-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .info-user__address-user {
   width: 131px;

@@ -3,7 +3,7 @@
   border: 1.5px solid #caad19
   ;
   width: 225px;
-  height: 318px;
+  /* height: 318px; */
   display: flex;
   flex-direction: column;
   align-items: center;

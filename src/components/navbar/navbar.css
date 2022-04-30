@@ -231,6 +231,10 @@
   align-items: center;
   color: white;
 }
+.menu_{
+  display: flex;
+  gap: 50px;
+}
 .main-logo {
   font-family: "Neometric";
   font-style: normal;

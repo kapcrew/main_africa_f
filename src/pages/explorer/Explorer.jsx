@@ -3,6 +3,7 @@ import { Bids, Filter, Cards, Button } from "../../components";
 // import Data from "./Data";
 import { useState, useEffect } from "react";
 import "./explorer.css";
+import Loader from "../../components/loader/loader"
 import { iconCheck } from "../../assets/icon";
 import {
   iconSaleType,
@@ -261,7 +262,6 @@ const Explorer = () => {
       {/*<Filter title="Test" />
   <input type="range" onInput={ handleInput } />
   <h1>Price: { price }</h1>*/}
-
       <div className="main_name ">Explore NFTs</div>
       <div className="filter">
         <div className="filter-bottoms">
@@ -508,7 +508,9 @@ const Explorer = () => {
           )}
         </div>
       </div>
-      {isLoading ? <Cards items={items} /> : "LOADING...."}
+      {isLoading ? <Cards items={items} /> : 
+      <div className="loaderr">{<Loader />}</div> 
+      }
     </div>
   );
 };

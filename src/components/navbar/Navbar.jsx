@@ -16,15 +16,15 @@ import {
   iconUserModal,
 } from "../../assets/icon";
 const Menu = () => (
-  <>
+  <div className="menu_">
     <Link to="/explorer">
       <div>Explore</div>{" "}
     </Link>
     <Link to="/create">
       <div>Сreate</div>{" "}
     </Link>
-    <div>Features</div>
-  </>
+    {/* <div>Features</div> */}
+  </div>
 );
 
 const Navbar = () => {
