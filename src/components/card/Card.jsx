@@ -12,15 +12,18 @@ const Card = ({ infoToken }) => {
         <div className="bids-card__menu">{menuCard}</div>
       </div>
       <div className="bids-card-top">
-        <img src={infoToken.img} alt={infoToken.title} />
+        <img src={"https://"+infoToken.media} 
+        // alt={infoToken.media}
+         />
+
         {/* <Link to={`/post/123`}>
           <div className="bids-title">{infoToken.title}</div>
         </Link> */}
       </div>
       <div className="card-bottom">
         <div className="card-name">
-          <div className="card-name__main">Lorem #33 </div>
-          <div className="card-name__submain">Lorem Collection</div>
+          <div className="card-name__main">{infoToken.title} </div>
+          <div className="card-name__submain">{infoToken.category}</div>
         </div>
         <div className="card-price">$ {infoToken.price}</div>
         <div className="buy-and-love">

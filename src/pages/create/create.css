@@ -333,3 +333,8 @@
 .rec-dot{
   display: none;
 }
+
+
+.activ_collection{
+  border: 3px solid #f27d0c;
+}

@@ -11,7 +11,7 @@ import { iconCreactCollection } from "../../assets/icon";
 //   slidesToShowPlugin,
 //   arrowsPlugin,
 // } from "@brainhubeu/react-carousel";
-import Carousel from 'react-elastic-carousel';
+import Carousel from "react-elastic-carousel";
 
 import CardHomePage from "../../components/cardHomePage/CardHomePage";
 import apiRequest from "../../api/apiRequest";
@@ -110,18 +110,55 @@ const Create = () => {
     setmodalCreactCollection(false);
   };
   const [listCollection, setlistCollection] = useState([]);
+  const [listCollectionChoiceInti, setlistCollectionChoiceInti] = useState([]);
+  const [listCollectionChoice, setlistCollectionChoice] = useState([])
+  const [selectedCollection,setselectedCollection] = useState("none")
+  
   const getListCollection = async () => {
     const req = await apiRequest.get("/collections/get_collections");
-    const arr_list = req.data.map((col,ind)=>{
-      return <div className="btn-collectionQ" key={ind}>{col.name}</div>
-    })
-    setlistCollection(req.data)
-    console.log(req, listCollection);
+    const arr_list = req.data.map((col, ind) => {
+      return (
+        <div className="btn-collectionQ" key={ind}>
+          {col.name}
+        </div>
+      );
+    });
+    setlistCollection(req.data);
+    
+
+    setlistCollectionChoice(() => {
+      // const arr_cat = [...new Set(req.data.map((item) => item.category))];
+      const obj_cat = {};
+      for (const key of req.data) {
+        obj_cat[key.name] = false;
+      }
+      return obj_cat;
+    });
+    setlistCollectionChoiceInti(() => {
+      // const arr_cat = [...new Set(req.data.map((item) => item.category))];
+      const obj_cat = {};
+      for (const key of req.data) {
+        obj_cat[key.name] = false;
+      }
+      return obj_cat;
+    });
+    
   };
   useEffect(() => {
     getListCollection();
   }, []);
-
+  const collectionChoice = (event) => {
+    setlistCollectionChoice(listCollectionChoiceInti)
+    setlistCollectionChoice((pre) => {
+      return {
+        ...pre,
+        [event.target.id]: !listCollectionChoice[event.target.id],
+      };
+    });
+    
+    setselectedCollection(event.target.id)
+    
+  };
   // CREACT ITEM
 
   const creactItem = async () => {
@@ -130,11 +167,20 @@ const Create = () => {
       description: description,
       address: "",
       image: mainFileBase64,
-      collection: "",
+      collection: selectedCollection,
       tags: "",
       price: priceItem,
     });
     console.log(req);
+    console.log({
+      name: nameCollection,
+      description: description,
+      address: "",
+      image: mainFileBase64,
+      collection: selectedCollection,
+      tags: "",
+      price: priceItem,
+    });
   };
   return (
     <div className="create section__padding">
@@ -174,9 +220,10 @@ const Create = () => {
             return <div>{e}</div>
           })}
       </Carousel> */}
-      <div className="creat
-      e-container">
-        
+      <div
+        className="creat
+      e-container"
+      >
         <div className="create-container__main-name">Create new Item</div>
         <div className="create-container__submain-name">Upload File</div>
 
@@ -301,8 +348,8 @@ const Create = () => {
             })} 
             
           </Carousel> */}
-          <Carousel  itemsToShow={3}>
-          {listCollection?.map((colliction, index) => {
+          <Carousel itemsToShow={3}>
+            {listCollection?.map((colliction, index) => {
               if (index === 0) {
                 return (
                   <button
@@ -320,12 +367,13 @@ const Create = () => {
               }
 
               return (
-                <button className="btn-collection">
+                <button className={`btn-collection ${listCollectionChoice[colliction.name] ? "activ_collection" :""}`} onClick={collectionChoice} id={colliction.name}>
                   <div className="btn-collection__icon"></div>
                   <div className="btn-collection__name">{colliction.name}</div>
                 </button>
+                
               );
-            })} 
+            })}
           </Carousel>
         </div>
         {modalCreactCollection && (
