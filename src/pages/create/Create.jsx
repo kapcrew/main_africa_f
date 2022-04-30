@@ -362,19 +362,7 @@ const Create = () => {
                   </button>
             {listCollection?.map((colliction, index) => {
               // if (index === 0) {
-              //   return (
-              //     <button
-              //       className="btn-collection btn-create-collection"
-              //       onClick={() => {
-              //         setmodalCreactCollection(!modalCreactCollection);
-              //       }}
-              //     >
-              //       <div className="btn-create-collection__icon">
-              //         {iconCreactCollection}
-              //       </div>
-              //       <div className="btn-create-collection__text">Create</div>
-              //     </button>
-              //   );
+              //   
               // }
 
               return (
