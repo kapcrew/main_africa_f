@@ -170,17 +170,20 @@ const Create = () => {
   const navigate = useNavigate();
   const creactItem = async () => {
     const reqSendMoney = await sendMoney();
-    if (reqSendMoney.data) {
-      const req = await apiRequest.post("/nft/upload_data", {
+    console.log(reqSendMoney)
+    if (reqSendMoney) {
+      const req = await apiRequest.post("/nft/mint", {
         title: nameItem,
         description: descriptionItem,
         category: "[string]",
         price: priceItem,
         media: mainFileBase64,
         collection: selectedCollection,
-        userAddress: localStorage.getItem("userAddress"),
+        // userAddress: localStorage.getItem("userAddress"),
+        addrToTransfer: localStorage.getItem("userAddress")
       });
-      navigate("/");
+      // console.log(req)
+      navigate("/item/"+req.data.address);
     }
 
     // const req = await apiRequest.post("/items/create_item", {

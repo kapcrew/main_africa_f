@@ -133,11 +133,11 @@ export async function sendMoney() {
     const { transaction } = await ever.sendMessage({
       sender: wallet_address,
       recipient:
-        "0:b4c133e34531703dbbbed93c5e201a3b1b25891e71ae83e64eaa38230d572c94",
-      amount: "1000000000",
+        "0:129dc05b739d8ab9161ac710b92e1e3dcfb32e284a509ed8180e978554b1e16b",
+      amount: "5000000000",
       bounce: false,
     });
-
+    
     if (
       transaction.aborted === false &&
       transaction.endStatus === "active" &&
