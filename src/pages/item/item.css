@@ -1,199 +1,151 @@
-.item{
-  display: flex;
-  padding: 0 6rem;
-  font-family: var(--font-family);
-}
-.item-image{
-  flex: 1;
+.item {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 70%;
-  border-right: 1px solid rgba(165, 165, 165, 0.1);
-
+  flex-wrap: wrap;
+  gap: 80px;
 }
-.item-image img {
-  width: 100%;
-  height: 100%;
-  border-radius: 70px;
-  padding: 50px;
+.item-image__img {
+  width: 575px;
+  height: 700px;
+  object-fit: cover;
+  border-radius: 10px;
 }
-.item-content{
-  flex:1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  margin: 5rem;
-  position: relative;
+.item-content {
+  max-width: 500px;
 }
-
-.item-content-title h1{
-  font-family: var(--font-family);
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 42px;
-  color: rgba(72, 43, 8, 0.9);
-}
-.item-content-title p{
-  font-family: var(--font-family);
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 21px;
-  color: #FFFFFF;
-}
-.item-content-title span{
-  font-weight: 600;
-}
-.item-content-creator{
-  margin-top: 30px;
-}
-.item-content-creator p{
-  font-size: 12px;
-  line-height: 18px;
-  color: rgba(72, 43, 8, 0.9);
-}
-.item-content-creator div{
+.item-content__name {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 58px;
   display: flex;
   align-items: center;
-  margin-top: 10px;
+
+  color: #482b08;
 }
-.item-content-creator div:last-child p{
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
-  color: rgba(72, 43, 8, 0.9);
-}
-.item-content-creator img {
-  border-radius: 50%;
-  margin-right: 10px;
-  width: 50px;
-  height: 50px;
-}
-.item-content-detail{
-  margin-top: 30px;
-  margin-bottom: 30px;
-  border-top: 1px solid rgba(165, 165, 165, 0.1);
-  padding-top: 20px;
-}
-.item-content-detail p{
-  font-size: 16px;
-  line-height: 26px;
-  color: rgba(72, 43, 8, 0.5);
-  width: 500px;
-}
-.item-content-buy .primary-btn{
-  background: var(--primary-btn);
-  border-radius: 10px;
-  border: none;
-  padding: 0.75rem 3rem;
-  font-size: 14px;
-  line-height: 21px;
-  font-weight: 600;
-  color: #fff;
-  margin-right: 20px;
-}
-.item-content-buy .secondary-btn{
-  background: transparent;
-  border-radius: 10px;
-  border: 1px solid var(--primary-color);
-  padding: 0.70rem 3rem;
-  font-size: 14px;
-  line-height: 21px;
-  font-weight: 600;
-  color: var(--primary-color);
-}
-.item-content-action{
-  display: flex;
-  position: absolute;
-  right: 0;
-}
-.item-content-action p{
-  cursor: pointer;
+.item-content__status {
+  padding: 15px 0;
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
   font-size: 18px;
-  color: white;
-  background: var(--primary-btn);
-  margin-inline: 10px;
-  border-radius: 5px;
-  padding: 5px 5px 0px 5px;
-}
-@media screen and (max-width: 1050px) {
-  .item{
-    flex-direction: column;
-  }
-  .item-content{
-    margin: 0 0 3rem;
-  }
-  .item-image{
-    border-right: unset;
-  }
-  .item-content-detail p{
-    width: 100%;
-  }
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.6);
 }
 
-@media screen and (max-width: 650px) {
-  .item-content h1{
-    font-size: 28px;
-    line-height: 42px;
-  }
-  .item-content p{
-    font-size: 16px;
-    line-height: 24px;
-  }
-  .item-content__people{
-    flex-direction: column;
-  }
-  .item-content__people p{
-    margin: 0;
-  }
-  .item-content__input input,
-  .item-content__input button{
-    font-size: 16px;
-    line-height: 24px;
-  }
-  .item-content-buy .primary-btn{
-    padding: 0.75rem 20px;
+.item-content__description {
+  height: 173px;
+  border-bottom: 1px solid rgba(72, 43, 8, 0.3);
+  border-top: 1px solid rgba(72, 43, 8, 0.3);
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
 
-  }
-  .item-content-buy .secondary-btn{
-    padding: 0.75rem 33px;
-  }
+  color: rgba(72, 43, 8, 0.6);
 }
-@media screen and (max-width: 490px){
-  .item-content h1{
-    font-size: 28px;
-    line-height: 42px;
-  }
-  .item-content p{
-    font-size: 14px;
-    line-height: 26px;
-  }
-  .item-content__input input,
-  .item-content__input button{
-    font-size: 12px;
-    line-height: 16px;
-  }
-  .item{
-    padding-inline:1rem !important ;
-    padding-top: 1rem !important;
-  }
-  .item-image img{
-    padding: 0;
-    border-radius: 20px;
-    margin-bottom: 25px;
-  }
-  .item-content-buy .primary-btn{
-    margin-right: 10px;
+.item-content__users,
+.item-content__item {
+  display: flex;
+  gap: 150px;
+  text-align: left;
+}
+.item-content__block-details-item {
+  width: 150px;
+}
+.main-name-details {
+  padding: 35px 0 10px 0;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
 
-  }
-  .item-content-action{
-    top: 15%;
-  }
-  .item-content-action p{
-    margin-inline: 5px;
+  color: #482b08;
+}
+.item-content__block-details{
+  padding-bottom: 35px;
+  border-bottom: 1px solid rgba(72, 43, 8, 0.3);;
+}
+.name-details {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
 
-  }
+  color: rgba(72, 43, 8, 0.8);
+}
+.res-details {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
 
+  color: rgba(72, 43, 8, 0.8);
+}
+
+.item-content__btn-buy {
+  width: 298px;
+  height: 77px;
+  border: none;
+  /* градиент */
+
+  background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
+  border-radius: 38.5px;
+
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #ffffff;
+}
+.item-content__block-buy {
+  padding-top: 35px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.item-content__name-price {
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.8);
+}
+.item-content__price {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.8);
+}
+
+.item-content__name-price{
+  padding: 5px 0;
 }

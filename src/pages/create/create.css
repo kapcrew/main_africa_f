@@ -338,3 +338,15 @@
 .activ_collection{
   border: 3px solid #f27d0c;
 }
+
+.btn-collection__icon{
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+.btn-collection__icon-img{
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}

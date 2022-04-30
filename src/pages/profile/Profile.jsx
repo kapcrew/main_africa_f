@@ -4,11 +4,30 @@ import profile_banner from "../../assets/profile_banner.png";
 import profile_pic from "../../assets/svg/profile.svg";
 import Bids from "../../components/bids/Bids";
 import axios from "axios";
+import { Cards} from "../../components";
 import Dropzone from "react-dropzone";
 import apiRequest from "../../api/apiRequest";
 import coverImage from "../../assets/coverImage.png";
 import { menuCard, iconDischarge } from "../../assets/icon";
 const Profile = () => {
+  const [items, setItems] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const getItems = async () => {
+    setisLoading(false);
+    const res = await apiRequest.get("/items/get_items");
+    setItems(res.data);
+   
+    console.log(res.data);
+
+    setisLoading(true);
+    //  CATEGORY  --------------------
+    if (isLoading) {
+    }
+  };
+  useEffect(() => {
+    getItems();
+  }, []);
+
   const [profile, setProfile] = useState([]);
 
   const [modalUpdateData, setmodalUpdateData] = useState(false);
@@ -25,22 +44,22 @@ const Profile = () => {
       setname(response.data.name);
       setsurname(response.data.surname);
       setdescription(response.data.description);
-      seticonPrif(response.data.profilePicture)
+      seticonPrif(response.data.profilePicture);
     });
   };
 
   useEffect(() => {
     getProfile();
   }, []);
-  const updateProfile = async() => {
+  const updateProfile = async () => {
     await apiRequest.post("/profile/update_profile/", {
       description: description,
       name: name,
       surname: surname,
-      profilePicture:imageFile
+      profilePicture: imageFile,
     });
-    await getProfile()
-    setmodalUpdateData(false)
+    await getProfile();
+    setmodalUpdateData(false);
   };
   const formatDate = (date) => {
     let formattedDate = new Date(date);
@@ -85,15 +104,15 @@ const Profile = () => {
       reader.readAsDataURL(file);
     });
   };
-  const [imageFile, setimageFile] = useState()
-  const [imageFileName, setimageFileName] = useState()
-const updateImageHandleOnDrop = (file) =>{
-  readFileDataAsBase64(file[0]).then((file) => {
-    setimageFile(String(file));
-  });
+  const [imageFile, setimageFile] = useState();
+  const [imageFileName, setimageFileName] = useState();
+  const updateImageHandleOnDrop = (file) => {
+    readFileDataAsBase64(file[0]).then((file) => {
+      setimageFile(String(file));
+    });
 
-  setimageFileName(file[0].name);
-}
+    setimageFileName(file[0].name);
+  };
   return (
     <div className="content">
       <div className="cover-image">
@@ -127,7 +146,6 @@ const updateImageHandleOnDrop = (file) =>{
         <div className="info-user__description">
           <div className="info-user__description_text">
             {profile.description}
-          
           </div>
         </div>
         {modalUpdateData && (
@@ -188,8 +206,6 @@ const updateImageHandleOnDrop = (file) =>{
                           className: `dropzone-creact-collection ${additionalClass}`,
                         })}
                       >
-                      
-
                         {!imageFile ? (
                           <div>
                             <div className="dropzone-creact-collection__before">
@@ -234,7 +250,10 @@ const updateImageHandleOnDrop = (file) =>{
         <button className="tab-btn tab-favorites">Favorits</button>
       </div>
       <div className="tabs-line"></div>
-      <div className="tokens"></div>
+      <div className="tokens">
+        {" "}
+        {isLoading ? <Cards items={items} /> : "LOADING...."}
+      </div>
     </div>
   );
 };
