@@ -1,6 +1,6 @@
 import React from "react";
 import { Bids, Filter, Cards, Button } from "../../components";
-import Data from "./Data";
+// import Data from "./Data";
 import { useState, useEffect } from "react";
 import "./explorer.css";
 import { iconCheck } from "../../assets/icon";
@@ -12,70 +12,54 @@ import {
   iconMostRecent,
 } from "../../assets/icon";
 import birdExplorer from "../../assets/svg/birdExplorer.svg";
+import apiRequest from "../../api/apiRequest";
 const Explorer = () => {
   /*Constants*/
-  const [items, setItems] = useState(Data);
-  const [newItem_title, setItem_title] = useState(Data);
-  const [newItem_collection, setItem_collection] = useState(Data);
+  const [items, setItems] = useState([]);
+  const [itemsInitially, setitemsInitially] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const getItems = async () => {
+    setisLoading(false);
+    const res = await apiRequest.get("/items/get_items");
+    setItems(res.data);
+    setitemsInitially(res.data)
+    console.log(res.data);
 
-  const [price, setPrice] = useState(40);
-
-  /*Фильтр по Категории*/
-  const menuItems = [...new Set(Data.map((Val) => Val.category))];
-  const filterItem = (curcat) => {
-    const newItem = Data.filter((newVal) => {
-      return newVal.category === curcat;
-    });
-    setItems(newItem);
-  };
-
-  /*********************/
-
-  /*Фильтр по названию*/
-  const menuItems_title = [...new Set(Data.map((Val) => Val.title))];
-  const filterItem_title = (curcat) => {
-    const newItem = Data.filter((newVal) => {
-      return newVal.title === curcat;
-    });
-    setItems(newItem);
-  };
-
-  /*********************/
-
-  /*Фильтр по Коллекции*/
-  const menuItems_collection = [...new Set(Data.map((Val) => Val.collection))];
-  const filterItem_collection = (curcat) => {
-    const newItem = Data.filter((newVal) => {
-      return newVal.collection === curcat;
-    });
-    setItems(newItem);
-  };
-  /*********************/
-
-  /*Фильтр по цене*/
-  const handleInput = (e) => {
-    setPrice(e.target.value);
-  };
-
-  /*********************/
-
-  /****Filter***********/
-
-  const [filteredList, setFilteredList] = useState(Data);
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedYear, setSelectedYear] = useState();
-
-  const filterByBrand = (filteredData) => {
-    // Avoid filter for empty string
-    if (!selectedBrand) {
-      return filteredData;
+    setisLoading(true);
+    //  CATEGORY  --------------------
+    if (isLoading) {
+    
     }
-
-    const filteredCars = filteredData.filter(
-      (Data) => Data.name.split(" ").indexOf(selectedBrand) !== -1
-    );
-    return filteredCars;
   };
+  useEffect(() => {
+    getItems();
+  }, []);
+
+  useEffect(() => {
+    setcategoriesArr(() => {
+      return [...new Set(items.map((item) => item.category))];
+    });
+    setcategories(() => {
+      const arr_cat = [...new Set(items.map((item) => item.category))];
+      const obj_cat = {};
+      for (const key of arr_cat) {
+        obj_cat[key] = false;
+      }
+      return obj_cat;
+    });
+    //  COLLECTION --------------------
+    setcollections(() => {
+      const arr_cat = [...new Set(items.map((item) => item.collection))];
+      const obj_cat = {};
+      for (const key of arr_cat) {
+        obj_cat[key] = false;
+      }
+      return obj_cat;
+    });
+    setcollectionArr(() => {
+      return [...new Set(items.map((item) => item.collection))];
+    });
+  }, [isLoading]);
 
   const [modalCategory, setModalCategory] = useState(false);
   const [modalCollection, setModalCollection] = useState(false);
@@ -84,17 +68,9 @@ const Explorer = () => {
   const [modalMost, setModalMost] = useState(false);
 
   //  CATEGORY  --------------------
-  const [categories, setcategories] = useState(() => {
-    const arr_cat = [...new Set(items.map((item) => item.category))];
-    const obj_cat = {};
-    for (const key of arr_cat) {
-      obj_cat[key] = false;
-    }
-    return obj_cat;
-  });
-  const [categoriesArr, setcategoriesArr] = useState(() => {
-    return [...new Set(items.map((item) => item.category))];
-  });
+  const [categories, setcategories] = useState([]);
+  const [categoriesArr, setcategoriesArr] = useState([]);
+
   const changeCategory = (event) => {
     console.log(categories);
     setcategories((pre) => {
@@ -107,17 +83,8 @@ const Explorer = () => {
   };
 
   //  COLLECTION --------------------
-  const [collections, setcollections] = useState(() => {
-    const arr_cat = [...new Set(items.map((item) => item.collection))];
-    const obj_cat = {};
-    for (const key of arr_cat) {
-      obj_cat[key] = false;
-    }
-    return obj_cat;
-  });
-  const [collectionArr, setcollectionArr] = useState(() => {
-    return [...new Set(items.map((item) => item.collection))];
-  });
+  const [collections, setcollections] = useState([]);
+  const [collectionArr, setcollectionArr] = useState([]);
 
   const changeCollection = (event) => {
     setcollections((pre) => {
@@ -136,23 +103,11 @@ const Explorer = () => {
   const clearPriceInput = () => {
     setpriceFrom("");
     setpriceTo("");
+    // applyPrice()
   };
 
   const applyPrice = () => {
-    // if (priceFrom !== "" && priceTo !== "") {
-    //   setItems(() => {
-    //     return Data.filter((newVal) => {
-    //       if (
-    //         Number(newVal.price) >= priceFrom &&
-    //         Number(newVal.price) <= priceTo
-    //       ) {
-    //         return newVal;
-    //       }
-    //     });
-    //   });
-    // } else {
-    //   updateListToken();
-    // }
+
     updateListToken();
     setModalPrice(false);
   };
@@ -161,7 +116,7 @@ const Explorer = () => {
 
   const [listSaleTypes, setlistSaleTypes] = useState({
     "Buy now": false,
-    Auction: false,
+    "Auction": false,
     "Not for sale": false,
   });
   const changelistSaleTypes = (event) => {
@@ -174,7 +129,7 @@ const Explorer = () => {
   };
 
   const updateListToken = () => {
-    const newItems = Data.filter((newVal) => {
+    const newItems = itemsInitially.filter((newVal) => {
       let flagCategories = false;
       let flagCollections = false;
       let flagSaleType = false;
@@ -236,6 +191,8 @@ const Explorer = () => {
         flagPriceRange = true;
       }
 
+
+      console.log("flagCategoriesAll",flagCollectionsAll,flagCollections)
       if (
         ((flagCategories || !flagCategoriesAll) &&
           (flagSaleType || !flagSaleTypeAll) &&
@@ -317,7 +274,7 @@ const Explorer = () => {
           </button>
           {modalCategory && (
             <div className="modal_category">
-              {categoriesArr.map((category) => {
+              {categoriesArr?.map((category) => {
                 // console.log(category);
                 // console.log(categories[category]);
                 return (
@@ -549,44 +506,9 @@ const Explorer = () => {
               </div>
             </div>
           )}
-
-          {/* <div className="filter-bottom-input">
-            <Button
-              filterItem={filterItem}
-              setItems={setItems}
-              menuItems={menuItems}
-              title="Type"
-            />
-            <Button
-              filterItem={filterItem_title}
-              setItems={newItem_title}
-              menuItems={menuItems_title}
-              title="Name"
-            />
-            <Button
-              filterItem={filterItem_collection}
-              setItems={newItem_collection}
-              menuItems={menuItems_collection}
-              title="Collection"
-            />
-          </div> */}
         </div>
       </div>
-
-      {/*<Button
-  filterItem={filterItem}
-  setItems={setItems}
-  menuItems={menuItems}
-  />
-  <Button
-  filterItem={filterItem_title}
-  setItems={newItem_title}
-  menuItems={menuItems_title}
-  />
-  {/*<Bids title="Test" />*/}
-      <Cards items={items} />
-
-      {/* {JSON.stringify(items)} */}
+      {isLoading ? <Cards items={items} /> : "LOADING...."}
     </div>
   );
 };

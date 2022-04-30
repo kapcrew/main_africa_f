@@ -97,12 +97,14 @@ const Navbar = () => {
               <div className="iconProfile main-tab">{iconUserModal}</div>
               <div class="dropdown-content">
                 <div>
-                  <a href="#">
+                  
+                  <Link to={`/create`}>
                     <div className="menu_item__block">
                       <div className="menu_item__icon">{iconProfile}</div>
                       <div class="menu_item">Create</div>
                     </div>
-                  </a>
+                    </Link>
+               
                 </div>
 
                 <Link to={`/profile/${address}`}>
@@ -128,17 +130,6 @@ const Navbar = () => {
                 </a>
               </div>
             </div>
-            {/* </Link> */}
-            {/* <Link to=""> */}
-            {/* <FaWallet
-                size={30}
-                color="rgba(72, 43, 8, 0.8)"
-                className="header-icon"
-                onClick={() => {
-                  setisOpenModalLogin(!isOpenModalLogin);
-                }}
-              /> */}
-            {/* </Link> */}
             <div
               className="iconWalletModal main-tab"
               onClick={() => {
@@ -186,25 +177,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            {/*<Link to="/login">*/}
-            <Link to="">
-              <div class="dropdown">
-                <div style={{ display: "none" }}>
-                  <CgProfile
-                    size={30}
-                    color="rgba(72, 43, 8, 0.8)"
-                    class="dropbtn"
-                    className="header-icon" /* onClick={handleLogout}*/
-                  />
-                </div>
 
-                <div className="iconProfile main-tab">{iconUserModal}</div>
-                <div class="dropdown-content">
-                  <a href="#">Profile</a>
-                  <a href="#">Settings</a>
-                </div>
-              </div>
-            </Link>
             <div
               className="iconWalletModal main-tab"
               onClick={() => {
