@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { Bids, Header } from "../../components";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import bids1 from "../../assets/bids1.png";
 import { iconCreactCollection } from "../../assets/icon";
 // import Carousel, {
@@ -12,7 +12,7 @@ import { iconCreactCollection } from "../../assets/icon";
 //   arrowsPlugin,
 // } from "@brainhubeu/react-carousel";
 import Carousel from "react-elastic-carousel";
-import {sendMoney} from '../../scripts/index.js';
+import { sendMoney } from "../../scripts/index.js";
 
 import CardHomePage from "../../components/cardHomePage/CardHomePage";
 import apiRequest from "../../api/apiRequest";
@@ -57,7 +57,7 @@ const Create = () => {
 
   const readFileDataAsBase64 = (file) => {
     //const file = event.target.files[0];
-
+    console.log(file)
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
@@ -72,16 +72,18 @@ const Create = () => {
       reader.readAsDataURL(file);
     });
   };
-  const [nameItem, setnameItem] = useState()
-  const [descriptionItem, setdescriptionItem] = useState()
+  const [nameItem, setnameItem] = useState();
+  const [descriptionItem, setdescriptionItem] = useState();
   const [mainFileName, setmainFileName] = useState();
   const [mainFileBase64, setmainFileBase64] = useState();
   const handleOnDrop = (file) => {
-    readFileDataAsBase64(file[0]).then((file) => {
-      setmainFileBase64(String(file));
-    });
+    if (file[0]) {
+      readFileDataAsBase64(file[0]).then((file) => {
+        setmainFileBase64(String(file));
+      });
 
-    setmainFileName(file[0].name);
+      setmainFileName(file[0].name);
+    }
   };
 
   //CREACT COLLECTION
@@ -95,17 +97,22 @@ const Create = () => {
   const [iconCollectionBase64, seticonCollectionBase64] = useState();
 
   const collectionHandleOnDrop = (file) => {
+    console.log(file)
+    if (file[0]){
     readFileDataAsBase64(file[0]).then((file) => {
       seticonCollectionBase64(String(file));
     });
     seticoniconCollectionName(file[0].name);
+  } else{
+    console.log("NOT FILE")
+  }
   };
 
   const creactCollection = async () => {
     const req = await apiRequest.post("/collections/create_collection", {
       name: nameCollection,
       description: description,
-      picture:iconCollectionBase64
+      picture: iconCollectionBase64,
     });
     console.log(req);
     await getListCollection();
@@ -113,12 +120,12 @@ const Create = () => {
   };
   const [listCollection, setlistCollection] = useState([]);
   const [listCollectionChoiceInti, setlistCollectionChoiceInti] = useState([]);
-  const [listCollectionChoice, setlistCollectionChoice] = useState([])
-  const [selectedCollection,setselectedCollection] = useState("none")
-  
+  const [listCollectionChoice, setlistCollectionChoice] = useState([]);
+  const [selectedCollection, setselectedCollection] = useState("none");
+
   const getListCollection = async () => {
     const req = await apiRequest.get("/collections/get_collections");
-    console.log(req.data)
+    console.log(req.data);
     const arr_list = req.data.map((col, ind) => {
       return (
         <div className="btn-collectionQ" key={ind}>
@@ -127,7 +134,6 @@ const Create = () => {
       );
     });
     setlistCollection(req.data);
-    
 
     setlistCollectionChoice(() => {
       // const arr_cat = [...new Set(req.data.map((item) => item.category))];
@@ -145,40 +151,38 @@ const Create = () => {
       }
       return obj_cat;
     });
-    
   };
   useEffect(() => {
     getListCollection();
   }, []);
   const collectionChoice = (event) => {
-    setlistCollectionChoice(listCollectionChoiceInti)
+    setlistCollectionChoice(listCollectionChoiceInti);
     setlistCollectionChoice((pre) => {
       return {
         ...pre,
         [event.target.id]: !listCollectionChoice[event.target.id],
       };
     });
-    
-    setselectedCollection(event.target.id)
-    
+
+    setselectedCollection(event.target.id);
   };
   // CREACT ITEM
   const navigate = useNavigate();
   const creactItem = async () => {
-    const reqSendMoney = await sendMoney()
-    if (reqSendMoney.data){
+    const reqSendMoney = await sendMoney();
+    if (reqSendMoney.data) {
       const req = await apiRequest.post("/nft/upload_data", {
-        title:nameItem,
-        description:descriptionItem,
-        category:"[string]",
-        price:priceItem,
-        media:mainFileBase64,
-        collection:selectedCollection,
-        userAddress:localStorage.getItem("userAddress"),
+        title: nameItem,
+        description: descriptionItem,
+        category: "[string]",
+        price: priceItem,
+        media: mainFileBase64,
+        collection: selectedCollection,
+        userAddress: localStorage.getItem("userAddress"),
       });
-      navigate("/")
+      navigate("/");
     }
-    
+
     // const req = await apiRequest.post("/items/create_item", {
     //   name: nameCollection,
     //   description: description,
@@ -209,7 +213,9 @@ const Create = () => {
         <div className="create-container__main-name">Create new Item</div>
         <div className="create-container__submain-name">Upload File</div>
 
-        <Dropzone onDrop={handleOnDrop} maxSize={13107200} accept="">
+        <Dropzone onDrop={handleOnDrop} 
+        // maxSize={13107200}
+         accept="">
           {({
             getRootProps,
             getInputProps,
@@ -253,40 +259,65 @@ const Create = () => {
         </Dropzone>
 
         <div className="create-container__submain-name">Name</div>
-        <input onChange={(e)=>{setnameItem(e.target.value)}} value={nameItem} type="text" className="create-container__input" />
+        <input
+          onChange={(e) => {
+            setnameItem(e.target.value);
+          }}
+          value={nameItem}
+          type="text"
+          className="create-container__input"
+        />
 
         <div className="create-container__submain-name">Description</div>
-        <textarea onChange={(e)=>{setdescriptionItem(e.target.value)}}  value={descriptionItem} type="text" className="create-container__textarea" />
+        <textarea
+          onChange={(e) => {
+            setdescriptionItem(e.target.value);
+          }}
+          value={descriptionItem}
+          type="text"
+          className="create-container__textarea"
+        />
 
         <div className="create-container__submain-name">Collection</div>
 
         <div className="carousel-collection">
-          
-            
-     
           <Carousel itemsToShow={3}>
-          <button
-                    className="btn-collection btn-create-collection"
-                    onClick={() => {
-                      setmodalCreactCollection(!modalCreactCollection);
-                    }}
-                  >
-                    <div className="btn-create-collection__icon">
-                      {iconCreactCollection}
-                    </div>
-                    <div className="btn-create-collection__text">Create</div>
-                  </button>
+            <button
+              className="btn-collection btn-create-collection"
+              onClick={() => {
+                setmodalCreactCollection(!modalCreactCollection);
+              }}
+            >
+              <div className="btn-create-collection__icon">
+                {iconCreactCollection}
+              </div>
+              <div className="btn-create-collection__text">Create</div>
+            </button>
             {listCollection?.map((colliction, index) => {
               // if (index === 0) {
-              //   
+              //
               // }
 
               return (
-                <button className={`btn-collection ${listCollectionChoice[colliction.name] ? "activ_collection" :""}`} onClick={collectionChoice} id={colliction.name}>
-                  <div className="btn-collection__icon"> <img className="btn-collection__icon-img" src={colliction.picture} alt="" /></div>
+                <button
+                  className={`btn-collection ${
+                    listCollectionChoice[colliction.name]
+                      ? "activ_collection"
+                      : ""
+                  }`}
+                  onClick={collectionChoice}
+                  id={colliction.name}
+                >
+                  <div className="btn-collection__icon">
+                    {" "}
+                    <img
+                      className="btn-collection__icon-img"
+                      src={colliction.picture}
+                      alt=""
+                    />
+                  </div>
                   <div className="btn-collection__name">{colliction.name}</div>
                 </button>
-                
               );
             })}
           </Carousel>
@@ -320,7 +351,7 @@ const Create = () => {
               <div className="modal-creact-collection__block_data">
                 <Dropzone
                   onDrop={collectionHandleOnDrop}
-                  maxSize={13107200}
+                  // maxSize={13107200}
                   accept=""
                 >
                   {({
