@@ -6,7 +6,7 @@
 }
 .item-image__img {
   width: 575px;
-  height: 700px;
+  height: auto;
   object-fit: cover;
   border-radius: 10px;
 }

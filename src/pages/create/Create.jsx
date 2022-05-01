@@ -78,9 +78,12 @@ const Create = () => {
   const [mainFileName, setmainFileName] = useState();
   const [mainFileBase64, setmainFileBase64] = useState();
   const handleOnDrop = (file) => {
+    // console.log(file)
     if (file[0]) {
       readFileDataAsBase64(file[0]).then((file) => {
-        setmainFileBase64(String(file));
+        console.log(String(file).split(",")[1])
+        setmainFileBase64(String(file).split(",")[1]);
+        
       });
 
       setmainFileName(file[0].name);
@@ -226,7 +229,7 @@ const Create = () => {
         <Dropzone
           onDrop={handleOnDrop}
           // maxSize={13107200}
-          accept=""
+          // accept=""
         >
           {({
             getRootProps,
