@@ -69,7 +69,7 @@ const Item = () => {
               <div className="item-content__item">
                 <div className="item-content__block-details-item">
                   <div className="name-details">Collection</div>
-                  <div className="res-details">Art pieces</div>
+                  <div className="res-details">{infoToken.collection}</div>
                 </div>
                 <div className="item-content__block-details-item">
                   <div className="name-details">Address</div>

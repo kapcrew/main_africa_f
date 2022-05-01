@@ -12,14 +12,18 @@ import { menuCard, iconDischarge } from "../../assets/icon";
 const Profile = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+
   const getItems = async () => {
     setisLoading(false);
     const res = await apiRequest.get("/items/get_items");
-    setItems(res.data);
-   
-    console.log(res.data.filter(function (el) {
+    setItems(res.data.filter(function (el) {
       return el.owner === localStorage.getItem("userAddress")
-    })
+    }));
+    console.log(res.data)
+    console.log(
+      res.data.filter(function (el) {
+        return el.owner === localStorage.getItem("userAddress")
+      })
     )
 
     setisLoading(true);

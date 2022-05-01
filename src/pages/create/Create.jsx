@@ -7,6 +7,7 @@ import { Bids, Header } from "../../components";
 import { useNavigate } from "react-router-dom";
 import bids1 from "../../assets/bids1.png";
 import { iconCreactCollection } from "../../assets/icon";
+import PagePreloader from "../../components/page-preloader/PagePreloader";
 // import Carousel, {
 //   slidesToShowPlugin,
 //   arrowsPlugin,
@@ -57,7 +58,7 @@ const Create = () => {
 
   const readFileDataAsBase64 = (file) => {
     //const file = event.target.files[0];
-    console.log(file)
+    console.log(file);
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
@@ -97,15 +98,15 @@ const Create = () => {
   const [iconCollectionBase64, seticonCollectionBase64] = useState();
 
   const collectionHandleOnDrop = (file) => {
-    console.log(file)
-    if (file[0]){
-    readFileDataAsBase64(file[0]).then((file) => {
-      seticonCollectionBase64(String(file));
-    });
-    seticoniconCollectionName(file[0].name);
-  } else{
-    console.log("NOT FILE")
-  }
+    console.log(file);
+    if (file[0]) {
+      readFileDataAsBase64(file[0]).then((file) => {
+        seticonCollectionBase64(String(file));
+      });
+      seticoniconCollectionName(file[0].name);
+    } else {
+      console.log("NOT FILE");
+    }
   };
 
   const creactCollection = async () => {
@@ -168,9 +169,13 @@ const Create = () => {
   };
   // CREACT ITEM
   const navigate = useNavigate();
+
+  const [isCreated, setisCreated] = useState(false);
+
   const creactItem = async () => {
+    setisCreated(true);
     const reqSendMoney = await sendMoney();
-    console.log(reqSendMoney)
+    console.log(reqSendMoney);
     if (reqSendMoney) {
       const req = await apiRequest.post("/nft/mint", {
         title: nameItem,
@@ -180,12 +185,12 @@ const Create = () => {
         media: mainFileBase64,
         collection: selectedCollection,
         // userAddress: localStorage.getItem("userAddress"),
-        addrToTransfer: localStorage.getItem("userAddress")
+        addrToTransfer: localStorage.getItem("userAddress"),
       });
+      setisCreated(false);
       // console.log(req)
-      navigate("/item/"+req.data.address);
+      navigate("/item/" + req.data.address);
     }
-
     // const req = await apiRequest.post("/items/create_item", {
     //   name: nameCollection,
     //   description: description,
@@ -209,6 +214,8 @@ const Create = () => {
   };
   return (
     <div className="create section__padding">
+      {isCreated && <PagePreloader />}
+
       <div
         className="creat
       e-container"
@@ -216,9 +223,11 @@ const Create = () => {
         <div className="create-container__main-name">Create new Item</div>
         <div className="create-container__submain-name">Upload File</div>
 
-        <Dropzone onDrop={handleOnDrop} 
-        // maxSize={13107200}
-         accept="">
+        <Dropzone
+          onDrop={handleOnDrop}
+          // maxSize={13107200}
+          accept=""
+        >
           {({
             getRootProps,
             getInputProps,
