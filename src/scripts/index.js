@@ -6,43 +6,87 @@ import {
 } from "everscale-inpage-provider";
 import freeton from "freeton";
 import apiRequest from "../api/apiRequest";
+
+import {default as getProvider, PROVIDERS, UTILS} from "https://everscale-connect.svoi.dev/everscale/getProvider.mjs";
 const ever = new ProviderRpcClient();
 const wallet_address = localStorage.getItem("wallet_address") || 0;
 export async function sendMoney() {
-  try {
-    if (!(await ever.hasProvider())) {
-      throw new Error('Extension is not installed');
-    }
-    await ever.ensureInitialized();
-  
-    const { accountInteraction } = await ever.requestPermissions({
-      permissions: ['basic', 'accountInteraction'],
-    });
-    if (accountInteraction == null) {
-      throw new Error('Insufficient permissions');
-    }
-    const { transaction } = await ever.sendMessage({
-      sender: wallet_address,
-      recipient:
-        "0:129dc05b739d8ab9161ac710b92e1e3dcfb32e284a509ed8180e978554b1e16b",
-      amount: "5000000000",
-      bounce: false,
-    });
+  window.getProvider = getProvider;
+  window.PROVIDERS = PROVIDERS;
+  window.UTILS = UTILS;
 
-    if (
-      transaction.aborted === false &&
-      transaction.endStatus === "active" &&
-      transaction.exitCode === 0
-    ) {
-      ever.disconnect();
-      return true;
-    } else {
-      ever.disconnect();
-      return false;
-    }
-  } catch (error) {
-    console.error(error);
+
+  const DEFAULT_WALLET = PROVIDERS.EVERWallet;
+
+
+  let EVER = null;
+  try {
+      //Initialize provider
+      EVER = await getProvider({}, DEFAULT_WALLET);
+      await EVER.requestPermissions();
+      await EVER.start();
+
+      window.TON = EVER;
+
+      try {
+
+          let address = "0:129dc05b739d8ab9161ac710b92e1e3dcfb32e284a509ed8180e978554b1e16b"
+
+          let amount = 1000000000
+          // UTILS.numberToUnsignedNumber(prompt('Enter transfer amount in EVER'))
+
+
+          try {
+              await EVER.walletTransfer(address, amount);
+
+              alert('Transaction created!')
+          } catch (e) {
+              alert('Error ' + JSON.stringify(e));
+          }
+
+      } catch (e) {
+          console.log(e);
+          alert('Invalid data')
+      }
+
+  } catch (e) {
+      alert('This page requires extension')
   }
+
+  // try {
+  //   if (!(await ever.hasProvider())) {
+  //     throw new Error('Extension is not installed');
+  //   }
+  //   await ever.ensureInitialized();
+  
+  //   const { accountInteraction } = await ever.requestPermissions({
+  //     permissions: ['basic', 'accountInteraction'],
+  //   });
+  //   if (accountInteraction == null) {
+  //     throw new Error('Insufficient permissions');
+  //   }
+  //   const { transaction } = await ever.sendMessage({
+  //     sender: wallet_address,
+  //     recipient:
+  //       "0:129dc05b739d8ab9161ac710b92e1e3dcfb32e284a509ed8180e978554b1e16b",
+  //     amount: "5000000000",
+  //     bounce: false,
+  //   });
+
+  //   if (
+  //     transaction.aborted === false &&
+  //     transaction.endStatus === "active" &&
+  //     transaction.exitCode === 0
+  //   ) {
+  //     ever.disconnect();
+  //     return true;
+  //   } else {
+  //     ever.disconnect();
+  //     return false;
+  //   }
+  // } catch (error) {
+  //   console.error(error);
+  // }
 }
 /* Login in EVERCRYSTAL*/
 const getUserDataFromExtension = async () => {
