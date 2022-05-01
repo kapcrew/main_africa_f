@@ -5,6 +5,7 @@ import profile_pic from "../../assets/svg/profile.svg";
 import Bids from "../../components/bids/Bids";
 import axios from "axios";
 import { Cards} from "../../components";
+import Loader from "../../components/loader/loader"
 import Dropzone from "react-dropzone";
 import apiRequest from "../../api/apiRequest";
 import coverImage from "../../assets/coverImage.png";
@@ -12,14 +13,18 @@ import { menuCard, iconDischarge } from "../../assets/icon";
 const Profile = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+
   const getItems = async () => {
     setisLoading(false);
     const res = await apiRequest.get("/items/get_items");
-    setItems(res.data);
-   
-    console.log(res.data.filter(function (el) {
+    setItems(res.data.filter(function (el) {
       return el.owner === localStorage.getItem("userAddress")
-    })
+    }));
+    console.log(res.data)
+    console.log(
+      res.data.filter(function (el) {
+        return el.owner === localStorage.getItem("userAddress")
+      })
     )
 
     setisLoading(true);
@@ -252,7 +257,8 @@ const Profile = () => {
       <div className="tabs-line"></div>
       <div className="tokens">
         {" "}
-        {isLoading ? <Cards items={items} /> : "LOADING...."}
+        
+        {isLoading ? <Cards items={items} /> : <div className="loaderr">{<Loader />}</div> }
       </div>
     </div>
   );

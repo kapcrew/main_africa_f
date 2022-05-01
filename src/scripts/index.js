@@ -7,7 +7,11 @@ import {
 import freeton from "freeton";
 import apiRequest from "../api/apiRequest";
 
-import {default as getProvider, PROVIDERS, UTILS} from "https://everscale-connect.svoi.dev/everscale/getProvider.mjs";
+import {
+  default as getProvider,
+  PROVIDERS,
+  UTILS,
+} from "https://everscale-connect.svoi.dev/everscale/getProvider.mjs";
 const ever = new ProviderRpcClient();
 const wallet_address = localStorage.getItem("wallet_address") || 0;
 export async function sendMoney() {
@@ -15,42 +19,34 @@ export async function sendMoney() {
   window.PROVIDERS = PROVIDERS;
   window.UTILS = UTILS;
 
-
-  const DEFAULT_WALLET = PROVIDERS.EVERWallet;
-
-
   let EVER = null;
   try {
-      //Initialize provider
-      EVER = await getProvider({}, DEFAULT_WALLET);
-      await EVER.requestPermissions();
-      await EVER.start();
+    //Initialize provider
+    EVER = await getProvider({}, PROVIDERS.EVERWallet);
+    await EVER.requestPermissions();
+    await EVER.start();
 
-      window.TON = EVER;
+    window.TON = EVER;
 
-      try {
+    let address =
+      "0:129dc05b739d8ab9161ac710b92e1e3dcfb32e284a509ed8180e978554b1e16b";
 
-          let address = "0:129dc05b739d8ab9161ac710b92e1e3dcfb32e284a509ed8180e978554b1e16b"
+    let amount = 5000000000;
+    // UTILS.numberToUnsignedNumber(prompt('Enter transfer amount in EVER'))
 
-          let amount = 1000000000
-          // UTILS.numberToUnsignedNumber(prompt('Enter transfer amount in EVER'))
+    try {
+      await EVER.walletTransfer(address, amount);
 
-
-          try {
-              await EVER.walletTransfer(address, amount);
-
-              alert('Transaction created!')
-          } catch (e) {
-              alert('Error ' + JSON.stringify(e));
-          }
-
-      } catch (e) {
-          console.log(e);
-          alert('Invalid data')
-      }
-
+      alert("Transaction created!");
+      return true;
+    } catch (e) {
+      window.location.reload();
+      alert("Error " + JSON.stringify(e));
+      return false;
+    }
   } catch (e) {
-      alert('This page requires extension')
+    alert("This page requires extension");
+    window.location.reload();
   }
 
   // try {
@@ -58,7 +54,7 @@ export async function sendMoney() {
   //     throw new Error('Extension is not installed');
   //   }
   //   await ever.ensureInitialized();
-  
+
   //   const { accountInteraction } = await ever.requestPermissions({
   //     permissions: ['basic', 'accountInteraction'],
   //   });
@@ -93,15 +89,15 @@ const getUserDataFromExtension = async () => {
   try {
     // let tonConnection = await ton.rawApi.getProviderState();
     if (!(await ever.hasProvider())) {
-      throw new Error('Extension is not installed');
+      throw new Error("Extension is not installed");
     }
     await ever.ensureInitialized();
-  
+
     const { accountInteraction } = await ever.requestPermissions({
-      permissions: ['basic', 'accountInteraction'],
+      permissions: ["basic", "accountInteraction"],
     });
     if (accountInteraction == null) {
-      throw new Error('Insufficient permissions');
+      throw new Error("Insufficient permissions");
     }
 
     ever.disconnect();
