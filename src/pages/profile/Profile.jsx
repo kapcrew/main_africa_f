@@ -17,12 +17,12 @@ const Profile = () => {
     const res = await apiRequest.get("/items/get_items");
     setItems(res.data);
    
-    console.log(res.data);
+    console.log(res.data.filter(function (el) {
+      return el.owner === localStorage.getItem("userAddress")
+    })
+    )
 
     setisLoading(true);
-    //  CATEGORY  --------------------
-    if (isLoading) {
-    }
   };
   useEffect(() => {
     getItems();
