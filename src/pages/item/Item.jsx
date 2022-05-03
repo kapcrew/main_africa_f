@@ -150,7 +150,7 @@ const Item = () => {
                     {infoToken.owner?.substring(62)}
                     <div className="link-blockchain">
                       {" "}
-                      <LinkBlockchain address={infoToken.creator} />
+                      <LinkBlockchain address={infoToken.owner} />
                     </div>
                   </div>
                 </div>
@@ -167,7 +167,7 @@ const Item = () => {
                     {infoToken.address?.substring(62)}
                     <div className="link-blockchain">
                       {" "}
-                      <LinkBlockchain address={infoToken.creator} />
+                      <LinkBlockchain address={infoToken.address} />
                     </div>
                   </div>
                 </div>
