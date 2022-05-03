@@ -126,7 +126,7 @@ const Create = () => {
         description: descriptionItem,
         category: categoryItem,
         price: priceItem,
-        media: mainFileBase64,
+        media: mainFileBase64.split(",")[1],
         collection: selectedCollection,
         addrToTransfer: localStorage.getItem("userAddress"),
       });
@@ -159,53 +159,6 @@ const Create = () => {
             </>
           }
         />
-
-        {/* <Dropzone
-          onDrop={handleOnDrop}
-          // maxSize={13107200}
-          // accept=""
-        >
-          {({
-            getRootProps,
-            getInputProps,
-            isDragActive,
-            isDragAccept,
-            isDragReject,
-          }) => {
-            const additionalClass = isDragAccept
-              ? "accept"
-              : isDragReject
-              ? "reject"
-              : "";
-
-            return (
-              <div
-                {...getRootProps({
-                  className: `dropzone ${additionalClass}`,
-                })}
-              >
-                <input {...getInputProps()} onChange={handleOnDrop} />
-
-                {!mainFileBase64 ? (
-                  <div>
-                    <div className="dropzone__before">
-                      PNG, GIF, WEBP, MP4 or MP3. Max 100mb. <br />
-                      Click, select or drag a file to the current area
-                    </div>
-                    <span className="dropzone__isDragActive">
-                      {isDragActive ? "Realease" : "Drag"}
-                    </span>
-                  </div>
-                ) : (
-                  <div className={"dropzone__after"}>
-                    {mainFileName}
-                    <div className={""}></div>
-                  </div>
-                )}
-              </div>
-            );
-          }}
-        </Dropzone> */}
 
         <div className="create-container__submain-name">Name</div>
         <input
@@ -321,51 +274,7 @@ const Create = () => {
                     }
                   />
                 </div>
-                {/* <Dropzone
-                  onDrop={collectionHandleOnDrop}
-                  // maxSize={13107200}
-                  accept=""
-                >
-                  {({
-                    getRootProps,
-                    getInputProps,
-                    isDragActive,
-                    isDragAccept,
-                    isDragReject,
-                  }) => {
-                    const additionalClass = isDragAccept
-                      ? "accept"
-                      : isDragReject
-                      ? "reject"
-                      : "";
-
-                    return (
-                      <div
-                        {...getRootProps({
-                          className: `dropzone-creact-collection ${additionalClass}`,
-                        })}
-                      >
-                        <input {...getInputProps()} onChange={handleOnDrop} />
-
-                        {!iconCollectionBase64 ? (
-                          <div>
-                            <div className="dropzone-creact-collection__before">
-                              Click, select or drag a file to the current area
-                            </div>
-                            <span className="isDragActive">
-                              {isDragActive ? "Realease" : "Drag"}
-                            </span>
-                          </div>
-                        ) : (
-                          <div className={"dropzone-creact-collection__after"}>
-                            {iconCollectionName}
-                            <div className={""}></div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  }}
-                </Dropzone> */}
+            
               </div>
             </div>
             <div className="modal-creact-collection__btns">

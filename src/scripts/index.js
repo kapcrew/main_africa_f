@@ -37,7 +37,7 @@ export async function sendMoney() {
     try {
       await EVER.walletTransfer(address, amount);
 
-      alert("Transaction created!");
+      // alert("Transaction created!");
       return true;
     } catch (e) {
       window.location.reload();
