@@ -133,6 +133,8 @@ const Create = () => {
       setisCreated(false);
       // console.log(req)
       navigate("/item/" + req.data.address);
+    } else {
+      setisCreated(false);
     }
   };
 

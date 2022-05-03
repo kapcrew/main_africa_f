@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./item.css";
 import Loader from "../../components/loader/loader";
-import { send } from "../../scripts/index.js";
+// import { send } from "../../scripts/index.js";
 import apiRequest from "../../api/apiRequest";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Account } from '@tonclient/appkit';
@@ -99,7 +99,7 @@ const Item = () => {
   }, []);
 
   const buy = () => {
-    send();
+    // send();
 
     //  setUser(true);
   };
