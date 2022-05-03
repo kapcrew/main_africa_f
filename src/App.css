@@ -2,6 +2,7 @@ body{
   background: var(--color-bg);
   scroll-behavior: smooth;
   overflow-x: none;
+  margin: 0;
   /* overflow: hidden; */
 }
 .content{

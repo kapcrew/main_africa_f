@@ -1,7 +1,8 @@
 import axios from "axios";
-const SERVER_DOMAIN = process.env.SERVER_DOMAIN || "http://45.137.64.34:4002";
+const SERVER_DOMAIN = process.env.SERVER_DOMAIN || "http://localhost:4002"
+//  "http://45.137.64.34:4002";
 const apiRequest = axios.create({
-  // withCredentials: true,
+  withCredentials: true,
   baseURL: SERVER_DOMAIN,
 });
 
@@ -32,7 +33,7 @@ apiRequest.interceptors.response.use(
         const refreshToken = localStorage.getItem("refreshToken");
         console.log(refreshToken)
         const serverResponse = await apiRequest.post(
-          "http://45.137.64.34:4002/auth/refresh",
+          "/auth/refresh",
           // { withCredentials: true },
           { refreshToken: refreshToken }
         );

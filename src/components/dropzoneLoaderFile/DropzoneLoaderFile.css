@@ -1,0 +1,110 @@
+.dropzone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+/* background-color:transparent; */
+  border-radius: 5px;
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  width: 674px;
+  height: 254px;
+  /* height: ; */
+  border: 4px dashed rgba(72, 43, 8, 0.24);
+  box-sizing: border-box;
+  border-radius: 27px;
+}
+.dropzone-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  /* background-color:transparent; */
+    border-radius: 5px;
+    cursor: pointer;
+  
+    pointer-events: auto;
+  
+    width:350px;
+    height: 150px;
+    /* height: ; */
+    border: 4px dashed rgba(72, 43, 8, 0.24);
+    box-sizing: border-box;
+    border-radius: 27px;
+
+    
+  }
+.dropzone__before,
+.dropzone__after,
+.dropzone__isDragActive {
+  text-align: center;
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(72, 43, 8, 0.7);
+}
+.dropzone__before-modal{
+    width: 100%;
+}
+.dropzone__before-modal{
+    text-align: center;
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(72, 43, 8, 0.7);
+}
+
+.main-image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  .main-image-img{
+    border-radius: 11px;
+    height: 90%;
+    width: 30%;
+    object-fit: cover;
+  }
+  
+  .main-image-block{
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+  }
+
+  .dropzone__after{
+      height: 100%;
+      width: 100%;
+  }
+  
+  .dropzone__after-modal{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-family: "Neometric";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    color: rgba(72, 43, 8, 0.7);
+  }

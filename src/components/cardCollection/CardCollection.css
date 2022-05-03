@@ -1,0 +1,117 @@
+.card-collection {
+  height: 350px;
+  width: 278px;
+  background: #fffcf9;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 13px;
+  border: 1.5px solid #f27b0c51;
+  /* overflow: hidden; */
+  position: relative;
+}
+.collection-cover {
+  height: 190px;
+  width: 278px;
+}
+.collection-cover-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 13px 13px 0 0;
+  /* backdrop-filter: blur(10px);  */
+}
+.blur {
+  position: absolute;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(2px);
+  /* height: 100%; */
+  height: 190px;
+  width: 100%;
+}
+.card-collection__collection-icon {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -75%);
+}
+.card-collection__collection-icon-img {
+  border-radius: 50%;
+  width: 99px;
+  height: 99px;
+}
+
+.collection-info__name {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.9);
+}
+
+.collection-info__description {
+  display: flex;
+  justify-content: start;
+  margin: 11px 15px 0 15px;
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.5);
+}
+.collection-info {
+  display: flex;
+  flex-direction: column;
+  /* margin: 11px 15px 0 15px; */
+  /* align-items: ; */
+  height: 112px;
+  /* border: 1px solid rgba(242, 125, 12, 0.3); */
+  border-bottom: 1px solid rgba(242, 125, 12, 0.3);
+}
+.card-collection__attributes{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  /* height: 100%; */
+}
+.card-collection__attribute {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* height: 100%; */
+}
+
+.card-collection__name-attribute {
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  line-height: 11px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.5);
+  
+}
+.card-collection__value-attribute {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(72, 43, 8, 0.8);
+}

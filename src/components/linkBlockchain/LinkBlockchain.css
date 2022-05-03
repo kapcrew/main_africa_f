@@ -1,0 +1,143 @@
+/* .icon{
+    padding-right: 29px;
+    width: 22px;
+} */
+.link {
+    display: flex;
+    text-decoration: none;
+  }
+  .name {
+    height: 22px;
+  
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+  
+    letter-spacing: 0.055em;
+  
+    /* gray */
+  
+    color: #7d7d7d;
+    padding-right: 27px;
+  }
+  
+  @media (max-width: 767px) {
+      .name {
+          height: 22px;
+        
+          font-family: Nunito Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 22px;
+          /* identical to box height */
+        
+          letter-spacing: 0.055em;
+        
+          /* gray */
+        
+          color: #7d7d7d;
+          padding-right: 10px;
+        }
+  
+        .name__view {
+          height: 22px;
+        
+          font-family: Nunito Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 22px;
+          /* identical to box height */
+        
+          letter-spacing: 0.055em;
+        
+          /* gray */
+        
+          color: #A0A1A3;
+          padding-right: 10px;
+        }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1199px) {
+      .name {
+          height: 22px;
+        
+          font-family: Nunito Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 22px;
+          /* identical to box height */
+        
+          letter-spacing: 0.055em;
+        
+          /* gray */
+        
+          color: #7d7d7d;
+          padding-right: 34px;
+        }
+  
+        .name__view {
+          height: 22px;
+        
+          font-family: Nunito Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 22px;
+          /* identical to box height */
+        
+          letter-spacing: 0.055em;
+        
+          /* gray */
+        
+          color: #A0A1A3;
+          padding-right: 10px;
+        }
+  }
+  
+  @media (min-width: 1200px) {
+      .name {
+          height: 22px;
+        
+          font-family: Nunito Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 22px;
+          /* identical to box height */
+        
+          letter-spacing: 0.055em;
+        
+          /* gray */
+        
+          color: #7d7d7d;
+          padding-right: 27px;
+        }
+  
+        .name__view {
+          height: 22px;
+        
+          font-family: Nunito Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 22px;
+          /* identical to box height */
+        
+          letter-spacing: 0.055em;
+        
+          /* gray */
+        
+          color: #A0A1A3;
+          padding-right: 10px;
+        }
+  }
+  
+  .icon {
+  }
+  

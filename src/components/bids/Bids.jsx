@@ -24,18 +24,30 @@ const Bids = ({ title }) => {
   useEffect(() => {
     getItems();
   }, []);
+  const [itemToShow, setItemsToshow] = useState(3);
+
+  window.addEventListener("resize", function () {
+    this.window.innerWidth > 1200
+      ? setItemsToshow(3)
+      : this.window.innerWidth > 800
+      ? setItemsToshow(2)
+      : setItemsToshow(1);
+  });
   return (
     <div className="bids section__padding">
       <div className="bids-container">
         <div className="bids-container-text">
           <h1>Top token</h1>
         </div>
-        {isLoading ? <Carousel itemsToShow={3}>
-          {items.map((infoToken) => {
-            return <Card infoToken={infoToken} />;
-          })}
-        </Carousel> : <Loader />}
-        
+        {isLoading ? (
+          <Carousel itemsToShow={itemToShow}>
+            {items.map((infoToken) => {
+              return <Card infoToken={infoToken} />;
+            })}
+          </Carousel>
+        ) : (
+          <Loader />
+        )}
       </div>
     </div>
   );

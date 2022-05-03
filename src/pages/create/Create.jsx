@@ -1,94 +1,33 @@
 import "./create.css";
-import Image from "../../assets/Image.png";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import Dropzone from "react-dropzone";
-import { Bids, Header } from "../../components";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import bids1 from "../../assets/bids1.png";
 import { iconCreactCollection } from "../../assets/icon";
 import PagePreloader from "../../components/page-preloader/PagePreloader";
-// import Carousel, {
-//   slidesToShowPlugin,
-//   arrowsPlugin,
-// } from "@brainhubeu/react-carousel";
 import Carousel from "react-elastic-carousel";
 import { sendMoney } from "../../scripts/index.js";
-
-import CardHomePage from "../../components/cardHomePage/CardHomePage";
 import apiRequest from "../../api/apiRequest";
+import { useDropzone } from "react-dropzone";
+import DropzoneLoaderFile from "../../components/dropzoneLoaderFile/DropzoneLoaderFile";
 const Create = () => {
-  const itemNameRef = React.useRef();
-  const itemDesciptionRef = React.useRef();
-  const itemPriceRef = React.useRef();
-  const itemAvaibleRef = React.useRef();
-
-  const create_item = async () => {
-    const data = {
-      address:
-        "0:c19b003394bef654680b0304b632728f264a85bba9a85b84f8090e1cd39df021",
-      name: itemNameRef.current.value,
-      description: itemDesciptionRef.current.value,
-      image: "",
-      data: "",
-      collection: "Art",
-      tags: "Epic",
-      price: itemPriceRef.current.value,
-    };
-    try {
-      const response = await axios.post(
-        "http://45.137.64.34:4002/items/create_item",
-        data
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(itemNameRef.current.value);
-    console.log(itemDesciptionRef.current.value);
-    console.log(itemPriceRef.current.value);
-    console.log(itemAvaibleRef.current.value);
-  };
-
   // FILE TO BASE64 -------------------------------------------------
 
-  const readFileDataAsBase64 = (file) => {
-    //const file = event.target.files[0];
-    console.log(file);
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        resolve(event.target?.result);
-      };
-
-      reader.onerror = (err) => {
-        reject(err);
-      };
-
-      reader.readAsDataURL(file);
-    });
-  };
   const [nameItem, setnameItem] = useState();
   const [descriptionItem, setdescriptionItem] = useState();
+  const [categoryItem, setcategoryItem] = useState();
   const [mainFileName, setmainFileName] = useState();
   const [mainFileBase64, setmainFileBase64] = useState();
-  const handleOnDrop = (file) => {
-    // console.log(file)
-    if (file[0]) {
-      readFileDataAsBase64(file[0]).then((file) => {
-        console.log(String(file).split(",")[1])
-        setmainFileBase64(String(file).split(",")[1]);
-        
-      });
+  // const handleOnDrop = (file) => {
 
-      setmainFileName(file[0].name);
-    }
-  };
+  //   if (file[0]) {
+  //     readFileDataAsBase64(file[0]).then((file) => {
+  //       console.log(String(file).split(",")[1]);
+  //       setmainFileBase64(String(file).split(",")[1]);
+  //     });
+
+  //     setmainFileName(file[0].name);
+  //   }
+  // };
 
   //CREACT COLLECTION
   const [modalCreactCollection, setmodalCreactCollection] = useState(false);
@@ -97,20 +36,21 @@ const Create = () => {
   const [priceItem, setpriceItem] = useState();
 
   const [description, setdescription] = useState();
-  const [iconCollectionName, seticoniconCollectionName] = useState();
+
+  const [iconCollectionName, seticonCollectionName] = useState();
   const [iconCollectionBase64, seticonCollectionBase64] = useState();
 
-  const collectionHandleOnDrop = (file) => {
-    console.log(file);
-    if (file[0]) {
-      readFileDataAsBase64(file[0]).then((file) => {
-        seticonCollectionBase64(String(file));
-      });
-      seticoniconCollectionName(file[0].name);
-    } else {
-      console.log("NOT FILE");
-    }
-  };
+  // const collectionHandleOnDrop = (file) => {
+  //   console.log(file);
+  //   if (file[0]) {
+  //     readFileDataAsBase64(file[0]).then((file) => {
+  //       seticonCollectionBase64(String(file));
+  //     });
+  //     seticoniconCollectionName(file[0].name);
+  //   } else {
+  //     console.log("NOT FILE");
+  //   }
+  // };
 
   const creactCollection = async () => {
     const req = await apiRequest.post("/collections/create_collection", {
@@ -122,10 +62,11 @@ const Create = () => {
     await getListCollection();
     setmodalCreactCollection(false);
   };
-  const [listCollection, setlistCollection] = useState([]);
+
   const [listCollectionChoiceInti, setlistCollectionChoiceInti] = useState([]);
   const [listCollectionChoice, setlistCollectionChoice] = useState([]);
   const [selectedCollection, setselectedCollection] = useState("none");
+  const [listCollection, setlistCollection] = useState([]);
 
   const getListCollection = async () => {
     const req = await apiRequest.get("/collections/get_collections");
@@ -183,38 +124,18 @@ const Create = () => {
       const req = await apiRequest.post("/nft/mint", {
         title: nameItem,
         description: descriptionItem,
-        category: "[string]",
+        category: categoryItem,
         price: priceItem,
-        media: mainFileBase64,
+        media: mainFileBase64.split(",")[1],
         collection: selectedCollection,
-        // userAddress: localStorage.getItem("userAddress"),
         addrToTransfer: localStorage.getItem("userAddress"),
       });
       setisCreated(false);
       // console.log(req)
       navigate("/item/" + req.data.address);
     }
-    // const req = await apiRequest.post("/items/create_item", {
-    //   name: nameCollection,
-    //   description: description,
-    //   address: "",
-    //   image: mainFileBase64,
-    //   collection: selectedCollection,
-    //   tags: "",
-    //   price: priceItem,
-    // });
-
-    // console.log(req);
-    // console.log({
-    //   name: nameCollection,
-    //   description: description,
-    //   address: "",
-    //   image: mainFileBase64,
-    //   collection: selectedCollection,
-    //   tags: "",
-    //   price: priceItem,
-    // });
   };
+
   return (
     <div className="create section__padding">
       {isCreated && <PagePreloader />}
@@ -225,53 +146,19 @@ const Create = () => {
       >
         <div className="create-container__main-name">Create new Item</div>
         <div className="create-container__submain-name">Upload File</div>
-
-        <Dropzone
-          onDrop={handleOnDrop}
-          // maxSize={13107200}
-          // accept=""
-        >
-          {({
-            getRootProps,
-            getInputProps,
-            isDragActive,
-            isDragAccept,
-            isDragReject,
-          }) => {
-            const additionalClass = isDragAccept
-              ? "accept"
-              : isDragReject
-              ? "reject"
-              : "";
-
-            return (
-              <div
-                {...getRootProps({
-                  className: `dropzone ${additionalClass}`,
-                })}
-              >
-                <input {...getInputProps()} onChange={handleOnDrop} />
-
-                {!mainFileBase64 ? (
-                  <div>
-                    <div className="dropzone__before">
-                      PNG, GIF, WEBP, MP4 or MP3. Max 100mb. <br />
-                      Click, select or drag a file to the current area
-                    </div>
-                    <span className="dropzone__isDragActive">
-                      {isDragActive ? "Realease" : "Drag"}
-                    </span>
-                  </div>
-                ) : (
-                  <div className={"dropzone__after"}>
-                    {mainFileName}
-                    <div className={""}></div>
-                  </div>
-                )}
-              </div>
-            );
-          }}
-        </Dropzone>
+        <DropzoneLoaderFile
+          className="dropzone"
+          file={mainFileBase64}
+          setfile={setmainFileBase64}
+          namefile={mainFileName}
+          setnameFile={setmainFileName}
+          textBefore={
+            <>
+              PNG, GIF, WEBP, MP4 or MP3. Max 100mb. <br />
+              Click, select or drag a file to the current area
+            </>
+          }
+        />
 
         <div className="create-container__submain-name">Name</div>
         <input
@@ -291,6 +178,16 @@ const Create = () => {
           value={descriptionItem}
           type="text"
           className="create-container__textarea"
+        />
+
+        <div className="create-container__submain-name">Category</div>
+        <input
+          onChange={(e) => {
+            setcategoryItem(e.target.value);
+          }}
+          value={categoryItem}
+          type="text"
+          className="create-container__input"
         />
 
         <div className="create-container__submain-name">Collection</div>
@@ -363,52 +260,21 @@ const Create = () => {
                   className="modal-creact-collection__input_description"
                 />
               </div>
+
               <div className="modal-creact-collection__block_data">
-                <Dropzone
-                  onDrop={collectionHandleOnDrop}
-                  // maxSize={13107200}
-                  accept=""
-                >
-                  {({
-                    getRootProps,
-                    getInputProps,
-                    isDragActive,
-                    isDragAccept,
-                    isDragReject,
-                  }) => {
-                    const additionalClass = isDragAccept
-                      ? "accept"
-                      : isDragReject
-                      ? "reject"
-                      : "";
-
-                    return (
-                      <div
-                        {...getRootProps({
-                          className: `dropzone-creact-collection ${additionalClass}`,
-                        })}
-                      >
-                        <input {...getInputProps()} onChange={handleOnDrop} />
-
-                        {!iconCollectionBase64 ? (
-                          <div>
-                            <div className="dropzone-creact-collection__before">
-                              Click, select or drag a file to the current area
-                            </div>
-                            <span className="isDragActive">
-                              {isDragActive ? "Realease" : "Drag"}
-                            </span>
-                          </div>
-                        ) : (
-                          <div className={"dropzone-creact-collection__after"}>
-                            {iconCollectionName}
-                            <div className={""}></div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  }}
-                </Dropzone>
+                <div className="modal-creact-collection__loader-image">
+                  <DropzoneLoaderFile
+                    className="dropzone-modal"
+                    file={iconCollectionBase64}
+                    setfile={seticonCollectionBase64}
+                    namefile={iconCollectionName}
+                    setnameFile={seticonCollectionName}
+                    textBefore={
+                      <>Click, select or drag a file to the current area</>
+                    }
+                  />
+                </div>
+            
               </div>
             </div>
             <div className="modal-creact-collection__btns">
