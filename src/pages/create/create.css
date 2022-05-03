@@ -1,21 +1,4 @@
-.dropzone {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 
-  border-radius: 5px;
-  cursor: pointer;
-
-  pointer-events: auto;
-
-  width: 674px;
-  height: 254px;
-  /* height: ; */
-  border: 4px dashed rgba(72, 43, 8, 0.24);
-  box-sizing: border-box;
-  border-radius: 27px;
-}
 
 .accept {
   border: 3px dashed #7c7d80;
@@ -26,21 +9,7 @@
   border-color: #d83b01 !important;
 }
 
-.dropzone__before,
-.dropzone__after,
-.dropzone__isDragActive {
-  text-align: center;
-  font-family: "Neometric";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  color: rgba(72, 43, 8, 0.7);
-}
 .create-container__main-name {
   font-family: "Neometric";
   font-style: normal;
@@ -231,7 +200,8 @@
   border: 3px solid rgba(203, 142, 84, 0.2);
   color: rgba(72, 43, 8, 0.6);
   word-break: break-all;
-  width: 90%;
+  width: 100%;
+  max-width: 350px;
   font-family: "NeometricBold";
   font-style: normal;
   font-weight: 400;

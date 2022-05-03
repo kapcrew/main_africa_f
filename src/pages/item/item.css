@@ -11,7 +11,7 @@
   border-radius: 10px;
 }
 .item-content {
-  max-width: 500px;
+  max-width: 450px;
 }
 .item-content__name {
   font-family: "NeometricBold";
@@ -132,7 +132,7 @@
   display: flex;
   align-items: center;
 
-  color: rgba(72, 43, 8, 0.8);
+  color: rgba(72, 43, 8, 0.8); 
 }
 .item-content__price {
   font-family: "NeometricBold";
@@ -148,4 +148,9 @@
 
 .item-content__name-price{
   padding: 5px 0;
+}
+
+.link-blockchain{
+  /* padding: 20px; */
+  padding-left: 10px;
 }

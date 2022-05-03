@@ -24,7 +24,7 @@ const Explorer = () => {
     const res = await apiRequest.get("/items/get_items");
     setItems(res.data);
     setitemsInitially(res.data)
-    console.log(res.data);
+    console.log(res);
 
     setisLoading(true);
     //  CATEGORY  --------------------

@@ -1,6 +1,6 @@
 
 .bids-card {
-  border: 1.5px solid #caad19
+  border: 1.5px solid #f27b0c51 
   ;
   width: 225px;
   /* height: 318px; */
@@ -19,7 +19,7 @@
 }
 .bids-card img {
   border-radius: 20px;
-  width: 193px;
+  /* width: 193px; */
   height: 143px;
   object-fit: cover;
 }

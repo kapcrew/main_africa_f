@@ -162,7 +162,7 @@ export async function login() {
 export async function login_out() {
   // await AuthService.logout()
   const serverResponse = await apiRequest.post(
-    "http://45.137.64.34:4002/auth/logout",
+    "/auth/logout",
     { refreshToken: localStorage.getItem("refreshToken") }
   );
   console.log(serverResponse);

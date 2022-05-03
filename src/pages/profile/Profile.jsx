@@ -4,28 +4,27 @@ import profile_banner from "../../assets/profile_banner.png";
 import profile_pic from "../../assets/svg/profile.svg";
 import Bids from "../../components/bids/Bids";
 import axios from "axios";
-import { Cards} from "../../components";
-import Loader from "../../components/loader/loader"
+import { Cards } from "../../components";
+import Loader from "../../components/loader/loader";
 import Dropzone from "react-dropzone";
 import apiRequest from "../../api/apiRequest";
 import coverImage from "../../assets/coverImage.png";
 import { menuCard, iconDischarge } from "../../assets/icon";
+import CardCollection from "../../components/cardCollection/CardCollection";
+import DropzoneLoaderFile from "../../components/dropzoneLoaderFile/DropzoneLoaderFile";
 const Profile = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setisLoading] = useState(false);
 
   const getItems = async () => {
     setisLoading(false);
-    const res = await apiRequest.get("/items/get_items");
-    setItems(res.data.filter(function (el) {
-      return el.owner === localStorage.getItem("userAddress")
-    }));
-    console.log(res.data)
-    console.log(
-      res.data.filter(function (el) {
-        return el.owner === localStorage.getItem("userAddress")
-      })
-    )
+    const res = await apiRequest.get(
+      `/items/get_items_by_owner?owner=${localStorage.getItem("userAddress")}`
+    );
+    setItems(res.data);
+    console.log("tokens", res.data);
+
+    await getListCollection();
 
     setisLoading(true);
   };
@@ -118,6 +117,26 @@ const Profile = () => {
 
     setimageFileName(file[0].name);
   };
+
+  const [listCollection, setlistCollection] = useState([]);
+
+  const getListCollection = async () => {
+    // setisLoading(false);
+    const req = await apiRequest.get("/collections/get_collections");
+    console.log(req.data);
+    const arr_list = req.data.map((col, ind) => {
+      return (
+        <div className="btn-collectionQ" key={ind}>
+          {col.name}
+        </div>
+      );
+    });
+    setlistCollection(req.data);
+    console.log("collection", req.data);
+    // setisLoading(true);
+  };
+
+  const [selectingTab, setselectingTab] = useState(1);
   return (
     <div className="content">
       <div className="cover-image">
@@ -187,7 +206,19 @@ const Profile = () => {
                 />
               </div>
               <div className="modalUpdateData__block_data">
-                <Dropzone
+                <div className="modal-creact-collection__loader-image">
+                  <DropzoneLoaderFile
+                    className="dropzone-modal"
+                    file={imageFile}
+                    setfile={setimageFile}
+                    namefile={imageFileName}
+                    setnameFile={setimageFileName}
+                    textBefore={
+                      <>Click, select or drag a file to the current area</>
+                    }
+                  />
+                </div>
+                {/* <Dropzone
                   onDrop={updateImageHandleOnDrop}
                   maxSize={13107200}
                   accept=""
@@ -229,7 +260,7 @@ const Profile = () => {
                       </div>
                     );
                   }}
-                </Dropzone>
+                </Dropzone> */}
               </div>
             </div>
             <div className="modalUpdateData__btns">
@@ -249,16 +280,45 @@ const Profile = () => {
         )}
       </div>
       <div className="tabs-token">
-        <button className="tab-btn tab-onsale">On sale</button>
-        <button className="tab-btn tab-creared">Created</button>
+        <button
+          onClick={() => {
+            setselectingTab(1);
+          }}
+          className={`tab-btn tab-onsale ${
+            selectingTab == 1 ? "activ-tab-prof" : ""
+          }`}
+        >
+          Tokens
+        </button>
+        {/* <button className="tab-btn tab-creared">Created</button>
         <button className="tab-btn tab-owned">Owned</button>
-        <button className="tab-btn tab-favorites">Favorits</button>
+        <button className="tab-btn tab-favorites">Favorits</button> */}
+        <button
+          onClick={() => {
+            setselectingTab(2);
+          }}
+          className={`tab-btn tab-favorites ${
+            selectingTab == 2 ? "activ-tab-prof" : ""
+          }`}
+        >
+          Collection
+        </button>
       </div>
       <div className="tabs-line"></div>
       <div className="tokens">
         {" "}
-        
-        {isLoading ? <Cards items={items} /> : <div className="loaderr">{<Loader />}</div> }
+        {isLoading ? (
+          (selectingTab === 1 && <Cards items={items} />) ||
+          (selectingTab === 2 && (
+            <div className="collection-list-profile">
+              {listCollection.map((collection) => {
+                return <CardCollection infoCollection={collection} />;
+              })}
+            </div>
+          ))
+        ) : (
+          <div className="loaderr">{<Loader />}</div>
+        )}
       </div>
     </div>
   );

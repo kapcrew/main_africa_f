@@ -264,3 +264,18 @@
   border-bottom: 2px solid #F27D0C  ;
   
 }
+.activ-tab-prof{
+  border-bottom: 2px solid #F27D0C  ;
+}
+
+.collection-list-profile{
+  display: flex;
+  justify-content: center;
+  gap:20px;
+  flex-wrap: wrap;
+}
+.modal-creact-collection__loader-image{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
