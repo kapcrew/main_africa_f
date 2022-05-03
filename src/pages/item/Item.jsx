@@ -181,12 +181,12 @@ const Item = () => {
                 <div className="item-content__price">{infoToken.price} Ē</div>
               </div>
             </div>
-            <button className="item-content__btn-buy" onClick={putOnSale}>
+            {/* <button className="item-content__btn-buy" onClick={putOnSale}>
               put on sale
             </button>
             <button className="item-content__btn-buy" onClick={withdrawSale}>
               withdraw from sale
-            </button>
+            </button> */}
           </div>
         </div>
       ) : (
