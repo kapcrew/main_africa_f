@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./item.css";
 import Loader from "../../components/loader/loader";
-import { send } from "../../scripts/index.js";
+// import { send } from "../../scripts/index.js";
 import apiRequest from "../../api/apiRequest";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Account } from '@tonclient/appkit';
@@ -99,7 +99,7 @@ const Item = () => {
   }, []);
 
   const buy = () => {
-    send();
+    // send();
 
     //  setUser(true);
   };
@@ -150,7 +150,7 @@ const Item = () => {
                     {infoToken.owner?.substring(62)}
                     <div className="link-blockchain">
                       {" "}
-                      <LinkBlockchain address={infoToken.creator} />
+                      <LinkBlockchain address={infoToken.owner} />
                     </div>
                   </div>
                 </div>
@@ -167,7 +167,7 @@ const Item = () => {
                     {infoToken.address?.substring(62)}
                     <div className="link-blockchain">
                       {" "}
-                      <LinkBlockchain address={infoToken.creator} />
+                      <LinkBlockchain address={infoToken.address} />
                     </div>
                   </div>
                 </div>

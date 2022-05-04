@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@tonclient/appkit": "^0.3.0",
     "@tonclient/core": "^1.30.0",
     "axios": "^0.25.0",
     "everscale-inpage-provider": "^0.3.9",

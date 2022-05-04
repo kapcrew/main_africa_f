@@ -23,7 +23,7 @@ const Header = () => {
           </div>
           <div className="promo-content-detail">
             <p>
-              Shujaa is the first ethnic NFT marketplace on Everscale blockchain
+            Imara is the first ethnic NFT marketplace on Everscale blockchain
               created to support local creators. Founded by the African
               community for the whole world
             </p>

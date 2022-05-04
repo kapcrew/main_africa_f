@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="footer-links_logo">
           <div>
             <img src={nftlogo} alt="logo" />
-            <p className=" footer-links_logo__name">shujaa</p>
+            <p className=" footer-links_logo__name">Imara</p>
           </div>
           <div>
             <h3>Join our community</h3>
