@@ -1,14 +1,6 @@
 import "./App.css";
 import { Navbar, Footer } from "./components";
-import {
-  Home,
-  Profile,
-  Item,
-  Create,
-  Login,
-  Register,
-  Explorer,
-} from "./pages";
+import { Home, Profile, Item, Create, Login, Explorer } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 function App() {
@@ -35,8 +27,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+
           <Route
             path="/explorer"
             element={

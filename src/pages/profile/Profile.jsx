@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./profile.css";
-import profile_banner from "../../assets/profile_banner.png";
-import profile_pic from "../../assets/svg/profile.svg";
-import Bids from "../../components/bids/Bids";
-import axios from "axios";
 import { Cards } from "../../components";
 import Loader from "../../components/loader/loader";
-import Dropzone from "react-dropzone";
 import apiRequest from "../../api/apiRequest";
 import coverImage from "../../assets/coverImage.png";
 import { menuCard, iconDischarge } from "../../assets/icon";
 import CardCollection from "../../components/cardCollection/CardCollection";
 import DropzoneLoaderFile from "../../components/dropzoneLoaderFile/DropzoneLoaderFile";
+
 const Profile = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setisLoading] = useState(false);
@@ -218,49 +214,6 @@ const Profile = () => {
                     }
                   />
                 </div>
-                {/* <Dropzone
-                  onDrop={updateImageHandleOnDrop}
-                  maxSize={13107200}
-                  accept=""
-                >
-                  {({
-                    getRootProps,
-                    getInputProps,
-                    isDragActive,
-                    isDragAccept,
-                    isDragReject,
-                  }) => {
-                    const additionalClass = isDragAccept
-                      ? "accept"
-                      : isDragReject
-                      ? "reject"
-                      : "";
-
-                    return (
-                      <div
-                        {...getRootProps({
-                          className: `dropzone-creact-collection ${additionalClass}`,
-                        })}
-                      >
-                        {!imageFile ? (
-                          <div>
-                            <div className="dropzone-creact-collection__before">
-                              Click, select or drag a file to the current area
-                            </div>
-                            <span className="isDragActive">
-                              {isDragActive ? "Realease" : "Drag"}
-                            </span>
-                          </div>
-                        ) : (
-                          <div className={"dropzone-creact-collection__after"}>
-                            {imageFileName}
-                            <div className={""}></div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  }}
-                </Dropzone> */}
               </div>
             </div>
             <div className="modalUpdateData__btns">
