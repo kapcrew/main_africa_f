@@ -42,13 +42,13 @@
 
   @font-face {
     font-family: "Neometric";
-    src:  url("/src/fonts/NeometricRegular.ttf") format("truetype");
+    src:  url("/src/assets/fonts/NeometricRegular.ttf") format("truetype");
     font-style: normal;
     /* font-weight: 500; */
   }
   @font-face {
     font-family: "NeometricBold";
-    src:  url("/src/fonts/NeometricMedium.ttf") format("truetype");
+    src:  url("/src/assets/fonts/NeometricMedium.ttf") format("truetype");
     font-style: normal;
     font-weight: 500;
   }
