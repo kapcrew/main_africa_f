@@ -11,7 +11,7 @@ const Cards = ({ items }) => {
           <div className="bids-container-card">
             <div className="cards">
              
-              {items?.map((infoToken) => {
+              {items.map((infoToken) => {
                 return (
                 
                     <Card infoToken={infoToken} />

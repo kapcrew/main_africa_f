@@ -69,7 +69,7 @@ const Create = () => {
   const [listCollection, setlistCollection] = useState([]);
 
   const getListCollection = async () => {
-    const req = await apiRequest.get("/collections/get_collections");
+    const req = await apiRequest.get("/collections/get_collections_by_wallet");
     console.log(req.data);
     const arr_list = req.data.map((col, ind) => {
       return (

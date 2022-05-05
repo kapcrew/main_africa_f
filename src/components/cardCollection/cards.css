@@ -1,0 +1,28 @@
+.bids-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin: auto; */
+  /* width: 90%; */
+}
+.bids-container-text h1 {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 42px;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+.bids-container-card {
+  margin: 0 -5px;
+}
+.bids-container-card:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.card-column {
+  float: left;
+  width: 20%;
+}

@@ -1,8 +1,8 @@
 import axios from "axios";
-const SERVER_DOMAIN = process.env.SERVER_DOMAIN || "http://localhost:4002"
-//  "http://45.137.64.34:4002";
+const SERVER_DOMAIN = process.env.SERVER_DOMAIN || " http://45.137.64.34:4010"
+// http://localhost:4002 "http://45.137.64.34:4002";
 const apiRequest = axios.create({
-  withCredentials: true,
+  // withCredentials: true,
   baseURL: SERVER_DOMAIN,
 });
 
@@ -39,7 +39,8 @@ apiRequest.interceptors.response.use(
         );
         
         localStorage.setItem("accessToken", serverResponse.data.accessToken);
-        localStorage.setItem("userAddress", serverResponse.data.user.walletId);
+        console.log("refresh",serverResponse.data.user.walletId)
+        localStorage.setItem("userAddress", "0:"+serverResponse.data.user.walletId);
         localStorage.setItem("refreshToken", serverResponse.data.refreshToken);
 
         return apiRequest.request(originRequest);

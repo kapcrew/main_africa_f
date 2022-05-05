@@ -1,16 +1,14 @@
 import React from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import { menuCard } from "../../assets/icon";
 import "./card.css";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 const Card = ({ infoToken }) => {
   const navigate = useNavigate();
-  console.log(infoToken)
+  // console.log(infoToken)
   return (
     <div className="bids-card">
       <div className="bids-top">
-        <div>icon</div>
+        <div>*</div>
         <div className="bids-card__menu">{menuCard}</div>
       </div>
       <div className="bids-card-top">
@@ -27,7 +25,7 @@ const Card = ({ infoToken }) => {
           <div className="card-name__main">{infoToken.title} </div>
           <div className="card-name__submain">{infoToken.category}</div>
         </div>
-        <div className="card-price">$ {infoToken.price}</div>
+        <div className="card-price">{infoToken.price} EVER</div>
         <div className="buy-and-love">
           <button className="card-btn-buy" onClick={()=>{navigate(`/item/${infoToken.address}`)}}>Buy now </button>
           <div className="love">

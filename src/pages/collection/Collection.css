@@ -1,0 +1,92 @@
+.collection-info-prof {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 90px;
+}
+.collection-info-prof__name {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+
+  color: #482b08;
+}
+
+.collection-info-prof__description {
+  font-family: "Neometric";
+  max-width: 615px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.01em;
+
+  color: rgba(72, 43, 8, 0.6);
+}
+.collection-info-prof__statistics {
+  margin: 20px 0;
+  /* width: 520px; */
+  height: 83px;
+
+  border: 1px solid rgba(72, 43, 8, 0.6);
+  border-radius: 9px;
+  display: flex;
+}
+
+.collection-info-prof__statistics_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 130px;
+  height: 100%;
+  /* border: 1px solid rgba(72, 43, 8, 0.6); */
+}
+.border_block {
+  border-right: 1px solid rgba(72, 43, 8, 0.6);
+}
+/* .right_block{
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+.left_block{
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+} */
+
+.collection-info-prof__statistics__name {
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.6);
+}
+.collection-info-prof__statistics__value {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+
+  color: #482b08;
+}
+.info-collection__btns{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}

@@ -18,7 +18,7 @@ const Profile = () => {
       `/items/get_items_by_owner?owner=${localStorage.getItem("userAddress")}`
     );
     setItems(res.data);
-    console.log("tokens", res.data);
+    console.log("tokens", res.data, localStorage.getItem("userAddress"));
 
     await getListCollection();
 
@@ -118,7 +118,7 @@ const Profile = () => {
 
   const getListCollection = async () => {
     // setisLoading(false);
-    const req = await apiRequest.get("/collections/get_collections");
+    const req = await apiRequest.get("/collections/get_collections_by_wallet");
     console.log(req.data);
     const arr_list = req.data.map((col, ind) => {
       return (

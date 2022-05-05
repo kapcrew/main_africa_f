@@ -5,8 +5,8 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { FaWallet } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import { login, login_out, login_extraton } from "../../scripts/index.js";
-import useModal from "use-react-modal";
+import { login, login_out } from "../../scripts/index.js";
+
 import {
   iconProfile,
   iconMyCollections,
@@ -28,7 +28,7 @@ const Menu = () => (
 );
 
 const Navbar = () => {
-  // const { isOpen, openModal, closeModal, Modal } = useModal();
+
   const [isOpenModalLogin, setisOpenModalLogin] = useState(false);
 
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -54,10 +54,6 @@ const Navbar = () => {
     login();
     
   }
-  const handleLoginExtraton = () => {
-    login_extraton();
-    //  setUser(true);
-  };
 
   return (
     <div className="navbar">
