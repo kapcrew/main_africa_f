@@ -154,3 +154,9 @@
   /* padding: 20px; */
   padding-left: 10px;
 }
+.item-content__btns{
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
