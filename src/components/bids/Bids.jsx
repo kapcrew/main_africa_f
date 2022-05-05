@@ -5,7 +5,6 @@ import Loader from "../loader/loader";
 import Carousel from "react-elastic-carousel";
 import CardHomePage from "../cardHomePage/CardHomePage";
 import apiRequest from "../../api/apiRequest";
-import "@brainhubeu/react-carousel/lib/style.css";
 const Bids = ({ title }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setisLoading] = useState(false);
