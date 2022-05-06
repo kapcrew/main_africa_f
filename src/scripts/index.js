@@ -245,7 +245,12 @@ const DePoolAbi = {
     { name: "_endAuctionTimestamp", type: "uint256" },
   ],
 };
+export async function ParticipateInAuction(addressToken){
 
+}
+export async function StopAuctionOwner(addressToken){
+
+}
 export async function PutOnSale(addressToken) {
   if (!(await ever.hasProvider())) {
     throw new Error("Extension is not installed");

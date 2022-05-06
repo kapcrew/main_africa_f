@@ -12,7 +12,7 @@ import { PutOnSale } from "../../scripts";
 import LinkBlockchain from "../../components/linkBlockchain/LinkBlockchain";
 import { PutUpAuction } from "../../scripts";
 import { WithdrawFromAuction } from "../../scripts";
-import { EndAuction } from "../../scripts";
+import { EndAuction,StopAuctionOwner,ParticipateInAuction } from "../../scripts";
 const Item = () => {
 
   const [isLoading, setisLoading] = useState(false);
@@ -189,6 +189,12 @@ const Item = () => {
             </button>
             <button className="item-content__btn-buy" onClick={()=>{WithdrawFromAuction(infoToken.address)}}>
             withdraw from auction
+            </button>
+            <button className="item-content__btn-buy" onClick={()=>{ParticipateInAuction(infoToken.address)}}>
+            participate in the auction
+            </button>
+            <button className="item-content__btn-buy" onClick={()=>{StopAuctionOwner(infoToken.address)}}>
+            StopAuctionOwner
             </button>
             <button className="item-content__btn-buy" onClick={()=>{EndAuction(infoToken.address)}}>
             EndAuction
