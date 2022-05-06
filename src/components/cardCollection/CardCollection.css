@@ -8,6 +8,10 @@
   /* overflow: hidden; */
   position: relative;
 }
+.card-collection:hover{
+ transition: 1s;
+ box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.301);
+}
 .collection-cover {
   height: 190px;
   width: 278px;

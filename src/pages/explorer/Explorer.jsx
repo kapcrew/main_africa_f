@@ -508,7 +508,7 @@ const Explorer = () => {
           )}
         </div>
       </div>
-      {isLoading ? <Cards items={items} /> : 
+      {isLoading ?  <div> <Cards items={items} /></div> : 
       <div className="loaderr">{<Loader />}</div> 
       }
     </div>

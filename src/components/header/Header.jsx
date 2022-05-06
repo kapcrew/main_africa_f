@@ -1,7 +1,5 @@
 import React from "react";
 import "./header.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import promo from "../../assets/svg/cover_img.svg";
 import cover_gradient from "../../assets/svg/cover_g_f.svg";
 import { useNavigate, useParams, useLocation } from "react-router-dom";

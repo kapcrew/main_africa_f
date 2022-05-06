@@ -1,85 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./item.css";
 import Loader from "../../components/loader/loader";
-// import { send } from "../../scripts/index.js";
 import apiRequest from "../../api/apiRequest";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { Account } from '@tonclient/appkit';
-import {
-  signerKeys,
-  TonClient,
-  MessageBodyType,
-  signerNone,
-  abiContract,
-} from "@tonclient/core";
+
+import { getInfoToken } from "../../scripts";
+import { BuyToken } from "../../scripts";
+import { WithdrawFromSale } from "../../scripts";
+import {Address, ProviderRpcClient,} from 'everscale-inpage-provider';
+import { PutOnSale } from "../../scripts";
 import LinkBlockchain from "../../components/linkBlockchain/LinkBlockchain";
+import { PutUpAuction } from "../../scripts";
+import { WithdrawFromAuction } from "../../scripts";
+import { EndAuction,StopAuctionOwner,ParticipateInAuction } from "../../scripts";
 const Item = () => {
-  function submitform () {
-    (async () => {
-  
-      const client = new TonClient({
-        network: {
-          endpoints: ['net.ton.dev']
-        }
-      });
-      
-  
-      // var form = document.querySelector('#myform');
-      // var formData = new FormData(form);
-      // var address = formData.get('address');
-      // var token = formData.get('token');
-      // const tokenvalue = parseFloat(token) * 1000000000;
-      // console.log(tokenvalue);
-      // var seed = formData.get('seed');
-      // const SEED_PHRASE_WORD_COUNT = 12;
-      // const SEED_PHRASE_DICTIONARY_ENGLISH = 1;
-      // const HD_PATH = "m/44'/396'/0'/0/0";
-      // const keysgen = (await client.crypto.mnemonic_derive_sign_keys({
-      //   dictionary: SEED_PHRASE_DICTIONARY_ENGLISH,
-      //   word_count: SEED_PHRASE_WORD_COUNT,
-      //   phrase: seed,
-      //   path: HD_PATH,
-      // }).catch(e => console.log("ERROR:", e)));
-  
-      // const accountroot = new Account(
-      //   TokenRoot,
-      //   {
-      //     signer: signerKeys(keysgen),
-      //     address: "0:7f6225f4b84d9889593fb1d9366e12132b6b0c007db813f17897e33033e9a9ae",
-      //     client
-      //   }
-      // );
-      // const wallet_address = await(accountroot.runLocal("getWalletAddress",{pubkey:"0x"+keysgen["public"]}).catch(e => console.log("ERROR:", e)))
-      // addHTML(`Ваш адрес токена кошелька: ${(wallet_address["decoded"]["output"]["value0"])}`);
-      // const wallet_address_f = wallet_address["decoded"]["output"]["value0"]
-      // const tip3create = new Account(
-      //   TokenWallet,
-      //   {
-      //     signer: signerKeys(keysgen),
-      //     address: wallet_address_f,
-      //     client
-      //   }
-      // );
-      // const balancedo1 = await(tip3create.runLocal("getBalance",{}).catch(e => console.log("ERROR:", e)))
-      // addHTML(`Ваш баланс: ${(balancedo1["decoded"]["output"]["value0"])} токенов EVR21`);
-      // addHTML(`Переводим с вашего кошелька ${wallet_address_f } на кошелек: ${address} в количестве ${token}`);
-      // const transfer = await(tip3create.run("transfer",{
-      //   answer_addr:wallet_address_f,
-      //   to:address,
-      //   tokens:tokenvalue,
-      //   evers:500000000,
-      //   return_ownership:0,
-      // }).catch(e => console.log("ERROR:", e)))
-  
-  
-    })();
-  };
-
-
-
-
-
-
 
   const [isLoading, setisLoading] = useState(false);
   const paramsURL = useParams();
@@ -100,17 +34,79 @@ const Item = () => {
 
   const buy = () => {
     // send();
-
     //  setUser(true);
   };
   // item
-  const putOnSale = () => {
-    submitform()
+  // async function getExistingMultisigAccount(client) {
+  //   const keys = {
+  //     public:
+  //       "4ba7586a7bc1e621b3dc0630c7562434a0052c592c1a63ea18a85496d7ff6b1a",
+  //     secret:
+  //       "d30409bdc0d1669ff818013240f254895e8854b4f8ba7367daf6c59d6cdd8fe0",
+  //   };
+
+  //   // Generate an ed25519 key pair for new account
+  //   const account = new Account(SafeMultisigContract, {
+  //     address:
+  //       "0:0eb093156b485497001f06cf5332861b34f306963c2476af5f433fe7050da0a0",
+  //     signer: signerKeys(keys),
+  //     client,
+  //   });
+  //   const address = await account.getAddress();
+
+  //   console.log(`Multisig address: ${address}`);
+  //   return account;
+  // }
+
+  // const putinSale = async () => {
+
+  //   const client = new TonClient({
+  //     network: { endpoints: ["http://net.ton.dev"] },
+  //   });
+  //   try {
+  //     let multisigAccount = await getExistingMultisigAccount(client);
+
+  //     const multisigAccountAddress = await multisigAccount.getAddress();
+
+     
+  //     const payload = (
+  //       await client.abi.encode_message_body({
+  //         abi: pkgData.abi,
+  //         call_set: {
+  //           function_name: "getInfo",
+  //           input: {},
+  //         },
+  //         is_internal: true,
+  //         signer: signerNone(),
+  //       })
+  //     ).body;
+
+  //     // Send actual money to use for ordinary stake.
+  //     await multisigAccount.run("sendTransaction", {
+  //       dest: "0:3213540b6c5baa579dc21d6d436be84468201146a5992edcfccb1df50a3452f4",
+  //       value: 1_000_000_000, // Add more than stake in addOrdinaryStake for blockchain fees.
+  //       bounce: false,
+  //       flags: 0,
+  //       payload, // Payload contains the "addOrdinaryStake" message with deposit order for ordinary stake with 10 TONs.
+  //     });
+
+  //     console.log("Wait for depool answer:");
+
+  //   } catch (error) {
+  //     console.error(error);
+  //     process.exit(1);
+  //   }
+
+  //   client.close();
+  //   process.exit(0);
+  // };
+
+  const putOnSale = async () => {
+    await PutOnSale()
+    
   };
 
-  const withdrawSale = () => {
-
-  };
+  const withdrawSale = () => {};
   return (
     <div>
       {isLoading ? (
@@ -174,19 +170,39 @@ const Item = () => {
               </div>
             </div>
             <div className="item-content__block-buy">
-              <button className="item-content__btn-buy">Buy now</button>
+              <button className="item-content__btn-buy" onClick={()=>{BuyToken(infoToken.address)}}>Buy now</button>
 
               <div className="item-content__block-price">
                 <div className="item-content__name-price">Current price</div>
                 <div className="item-content__price">{infoToken.price} Ē</div>
               </div>
             </div>
-            {/* <button className="item-content__btn-buy" onClick={putOnSale}>
+            <div className="item-content__btns">
+            <button className="item-content__btn-buy" onClick={()=>{PutOnSale(infoToken.address)}}>
               put on sale
             </button>
-            <button className="item-content__btn-buy" onClick={withdrawSale}>
+            <button className="item-content__btn-buy" onClick={()=>{WithdrawFromSale(infoToken.address)}}>
               withdraw from sale
-            </button> */}
+            </button>
+            <button className="item-content__btn-buy" onClick={()=>{PutUpAuction(infoToken.address)}}>
+            put it up for auction
+            </button>
+            <button className="item-content__btn-buy" onClick={()=>{WithdrawFromAuction(infoToken.address)}}>
+            withdraw from auction
+            </button>
+            <button className="item-content__btn-buy" onClick={()=>{ParticipateInAuction(infoToken.address)}}>
+            participate in the auction
+            </button>
+            <button className="item-content__btn-buy" onClick={()=>{StopAuctionOwner(infoToken.address)}}>
+            StopAuctionOwner
+            </button>
+            <button className="item-content__btn-buy" onClick={()=>{EndAuction(infoToken.address)}}>
+            EndAuction
+            </button>
+            <button className="item-content__btn-buy" onClick={()=>{getInfoToken(infoToken.address)}}>getInfo</button>
+            </div>
+           
+          
           </div>
         </div>
       ) : (
