@@ -120,19 +120,25 @@ const Create = () => {
     setisCreated(true);
     const reqSendMoney = await sendMoney();
     console.log(reqSendMoney);
+    
     if (reqSendMoney) {
-      const req = await apiRequest.post("/nft/mint", {
-        title: nameItem,
-        description: descriptionItem,
-        category: categoryItem,
-        price: priceItem,
-        media: mainFileBase64.split(",")[1],
-        collection: selectedCollection,
-        addrToTransfer: localStorage.getItem("userAddress"),
-      });
-      setisCreated(false);
-      // console.log(req)
-      navigate("/item/" + req.data.address);
+      try{
+        const req = await apiRequest.post("/nft/mint", {
+          title: nameItem,
+          description: descriptionItem,
+          category: categoryItem,
+          price: priceItem,
+          media: mainFileBase64.split(",")[1],
+          collection: selectedCollection,
+          addrToTransfer: localStorage.getItem("userAddress"),
+        });
+        setisCreated(false);
+        // console.log(req)
+        navigate("/item/" + req.data.address);
+      }catch({ response: { data } }){
+        console.log("error",data)
+      }
+      
     } else {
       setisCreated(false);
     }

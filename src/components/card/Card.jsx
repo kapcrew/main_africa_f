@@ -25,9 +25,9 @@ const Card = ({ infoToken }) => {
           <div className="card-name__main">{infoToken.title} </div>
           <div className="card-name__submain">{infoToken.category}</div>
         </div>
-        <div className="card-price">{infoToken.price} EVER</div>
+        <div className="card-price">{infoToken.price == 0 ? "Not for sale" : infoToken.price+" EVER"} </div>
         <div className="buy-and-love">
-          <button className="card-btn-buy" onClick={()=>{navigate(`/item/${infoToken.address}`)}}>Buy now </button>
+          <button className="card-btn-buy" onClick={()=>{navigate(`/item/${infoToken.address}`)}}>Info </button>
           <div className="love">
             <div className="love-icon">
               <svg

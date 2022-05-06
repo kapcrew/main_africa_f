@@ -7,14 +7,20 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { getInfoToken } from "../../scripts";
 import { BuyToken } from "../../scripts";
 import { WithdrawFromSale } from "../../scripts";
-import {Address, ProviderRpcClient,} from 'everscale-inpage-provider';
+import { Address, ProviderRpcClient } from "everscale-inpage-provider";
 import { PutOnSale } from "../../scripts";
 import LinkBlockchain from "../../components/linkBlockchain/LinkBlockchain";
 import { PutUpAuction } from "../../scripts";
 import { WithdrawFromAuction } from "../../scripts";
-import { EndAuction,StopAuctionOwner,ParticipateInAuction } from "../../scripts";
+import {
+  EndAuction,
+  StopAuctionOwner,
+  ParticipateInAuction,
+} from "../../scripts";
+import Modal from "../../components/Modal/Modal";
+import { Toaster, toast } from "react-hot-toast";
+import PagePreloader from "../../components/page-preloader/PagePreloader";
 const Item = () => {
-
   const [isLoading, setisLoading] = useState(false);
   const paramsURL = useParams();
   const [infoToken, setinfoToken] = useState([]);
@@ -32,83 +38,137 @@ const Item = () => {
     gitInfoItem();
   }, []);
 
-  const buy = () => {
-    // send();
-    //  setUser(true);
+  const [isProcess, setisProcess] = useState(false);
+
+  const [priceTokenModal, setpriceTokenModal] = useState();
+  const [durationAuction, setdurationAuction] = useState();
+  // MODAL PUT ON SALE
+  const [isModalPutOnSale, setisModalPutOnSale] = useState(false);
+
+  const btnPutOnSale = async () => {
+    setisModalPutOnSale(false);
+    await PutOnSale(infoToken.address, priceTokenModal);
+    await checkStatus("onSale", true);
   };
-  // item
-  // async function getExistingMultisigAccount(client) {
-  //   const keys = {
-  //     public:
-  //       "4ba7586a7bc1e621b3dc0630c7562434a0052c592c1a63ea18a85496d7ff6b1a",
-  //     secret:
-  //       "d30409bdc0d1669ff818013240f254895e8854b4f8ba7367daf6c59d6cdd8fe0",
-  //   };
+  const checkStatus = async (field, value) => {
+    toast.loading("There is a process in the blockchain...");
+    // const token = await getInfoToken(infoToken.address)
 
-  //   // Generate an ed25519 key pair for new account
-  //   const account = new Account(SafeMultisigContract, {
-  //     address:
-  //       "0:0eb093156b485497001f06cf5332861b34f306963c2476af5f433fe7050da0a0",
-  //     signer: signerKeys(keys),
-  //     client,
-  //   });
-  //   const address = await account.getAddress();
-
-  //   console.log(`Multisig address: ${address}`);
-  //   return account;
-  // }
-
-  // const putinSale = async () => {
-
-  //   const client = new TonClient({
-  //     network: { endpoints: ["http://net.ton.dev"] },
-  //   });
-  //   try {
-  //     let multisigAccount = await getExistingMultisigAccount(client);
-
-  //     const multisigAccountAddress = await multisigAccount.getAddress();
-
-     
-  //     const payload = (
-  //       await client.abi.encode_message_body({
-  //         abi: pkgData.abi,
-  //         call_set: {
-  //           function_name: "getInfo",
-  //           input: {},
-  //         },
-  //         is_internal: true,
-  //         signer: signerNone(),
-  //       })
-  //     ).body;
-
-  //     // Send actual money to use for ordinary stake.
-  //     await multisigAccount.run("sendTransaction", {
-  //       dest: "0:3213540b6c5baa579dc21d6d436be84468201146a5992edcfccb1df50a3452f4",
-  //       value: 1_000_000_000, // Add more than stake in addOrdinaryStake for blockchain fees.
-  //       bounce: false,
-  //       flags: 0,
-  //       payload, // Payload contains the "addOrdinaryStake" message with deposit order for ordinary stake with 10 TONs.
-  //     });
-
-  //     console.log("Wait for depool answer:");
-
-  //   } catch (error) {
-  //     console.error(error);
-  //     process.exit(1);
-  //   }
-
-  //   client.close();
-  //   process.exit(0);
-  // };
-
-  const putOnSale = async () => {
-    await PutOnSale()
-    
+    let timerId = setInterval(async () => {
+      const token = await getInfoToken(infoToken.address);
+      console.log(token[field], value);
+      if (token[field] === value) {
+        toast.dismiss();
+        toast.success("Your operation is done!");
+        clearInterval(timerId);
+        clearTimeout(timerTimeout);
+        gitInfoItem();
+      }
+    }, 2000);
+    const timerTimeout = setTimeout(() => {
+      toast.dismiss();
+      toast.error("Something went wrong");
+      clearInterval(timerId);
+    }, 30000);
   };
 
-  const withdrawSale = () => {};
+  // MODAL BUY
+  const [isModalBuy, setisModalBuy] = useState(false);
+
+  const btnBuy = async () => {
+    setisModalBuy(false);
+    await BuyToken(infoToken.address, infoToken.price);
+    await checkStatus("onSale", false);
+  };
+
+  // MODAL withdraw from sale
+
+  const [isWithdrawSaleModal, setisWithdrawSaleModal] = useState(false);
+
+  const btnWithdrawSaleModal = async () => {
+    setisWithdrawSaleModal(false);
+    await WithdrawFromSale(infoToken.address, infoToken.price);
+    await checkStatus("onSale", false);
+  };
+
+  // MODAL put it up for auction
+
+  const [isputItUpAuction, setisputItUpAuction] = useState(false);
+
+  const btnPutItUpAuctionModal = async () => {
+    setisputItUpAuction(false);
+    await PutUpAuction(infoToken.address, priceTokenModal, durationAuction);
+    await checkStatus("onAuction", true);
+  };
+
+  // MODAL withdraw from auction
+
+  const [isWithdrawFromAuction, setisWithdrawFromAuction] = useState(false);
+
+  const btnWithdrawFromAuctionModal = async () => {
+    if (await WithdrawFromAuction(infoToken.address))
+      toast.success("The purchase message has been sent");
+    setisWithdrawFromAuction(false);
+  };
+
+  // MODAL participate in the auction
+
+  const [isParticipateInAuction, setisParticipateInAuction] = useState(false);
+
+  const btnParticipateInAuctionModal = async () => {
+    if (await ParticipateInAuction(infoToken.address))
+      toast.success("The purchase message has been sent");
+    setisParticipateInAuction(false);
+  };
+
+  // MODAL StopAuctionOwner
+
+  const [isStopAuctionOwner, setisStopAuctionOwner] = useState(false);
+
+  const btnStopAuctionOwner = async () => {
+    setisStopAuctionOwner(false);
+    await StopAuctionOwner(infoToken.address);
+    await checkStatus("onAuction", false);
+  };
+
+  // MODAL EndAuction
+
+  const [isEndAuction, setisEndAuction] = useState(false);
+
+  const btnEndAuction = async () => {
+    if (await EndAuction(infoToken.address))
+      toast.success("The purchase message has been sent");
+    setisEndAuction(false);
+  };
+  const visibleBtnPutOnSale =
+    !infoToken.onSale &&
+    !infoToken.onAuction &&
+    infoToken.owner === localStorage.getItem("userAddress");
+  const visibleBtnBuyNow =
+    infoToken.onSale &&
+    !infoToken.onAuction &&
+    infoToken.owner !== localStorage.getItem("userAddress");
+
+  const visibleBtnWithdrawFromSale =
+    infoToken.onSale &&
+    !infoToken.onAuction &&
+    infoToken.owner === localStorage.getItem("userAddress");
+
+  const visibleBtnStopAuctionOwner =
+    !infoToken.onSale &&
+    infoToken.onAuction &&
+    infoToken.owner === localStorage.getItem("userAddress");
+
   return (
     <div>
+      {isProcess && <PagePreloader />}
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toaster",
+        }}
+      />
       {isLoading ? (
         <div className="item section__padding">
           <div className="item-image">
@@ -120,7 +180,11 @@ const Item = () => {
           </div>
           <div className="item-content">
             <div className="item-content__name">{infoToken.title}</div>
-            <div className="item-content__status">On sale</div>
+            <div className="item-content__status">
+              {infoToken.onSale && "On sale"}
+              {infoToken.onAuction && "On action"}
+              {!infoToken.onSale && !infoToken.onAuction && "Not for sale"}
+            </div>
             <div className="item-content__description">
               {infoToken.description}
             </div>
@@ -169,47 +233,585 @@ const Item = () => {
                 </div>
               </div>
             </div>
-            <div className="item-content__block-buy">
-              <button className="item-content__btn-buy" onClick={()=>{BuyToken(infoToken.address)}}>Buy now</button>
-
-              <div className="item-content__block-price">
-                <div className="item-content__name-price">Current price</div>
-                <div className="item-content__price">{infoToken.price} Ē</div>
+            {visibleBtnBuyNow && (
+              <div className="item-content__block-buy">
+                <button
+                  className="item-content__btn-buy"
+                  onClick={() => {
+                    setisModalBuy(true);
+                  }}
+                >
+                  Buy now
+                </button>
+                <div className="item-content__block-price">
+                  <div className="item-content__name-price">Current price</div>
+                  <div className="item-content__price">{infoToken.price} Ē</div>
+                </div>
               </div>
-            </div>
+            )}
             <div className="item-content__btns">
-            <button className="item-content__btn-buy" onClick={()=>{PutOnSale(infoToken.address)}}>
-              put on sale
-            </button>
-            <button className="item-content__btn-buy" onClick={()=>{WithdrawFromSale(infoToken.address)}}>
-              withdraw from sale
-            </button>
-            <button className="item-content__btn-buy" onClick={()=>{PutUpAuction(infoToken.address)}}>
-            put it up for auction
-            </button>
-            <button className="item-content__btn-buy" onClick={()=>{WithdrawFromAuction(infoToken.address)}}>
-            withdraw from auction
-            </button>
-            <button className="item-content__btn-buy" onClick={()=>{ParticipateInAuction(infoToken.address)}}>
-            participate in the auction
-            </button>
-            <button className="item-content__btn-buy" onClick={()=>{StopAuctionOwner(infoToken.address)}}>
-            StopAuctionOwner
-            </button>
-            <button className="item-content__btn-buy" onClick={()=>{EndAuction(infoToken.address)}}>
-            EndAuction
-            </button>
-            <button className="item-content__btn-buy" onClick={()=>{getInfoToken(infoToken.address)}}>getInfo</button>
+              <div className="btns-billing">
+                {visibleBtnPutOnSale && (
+                  <button
+                    className="item-content__btn-buy"
+                    onClick={() => {
+                      setisModalPutOnSale(true);
+                      // PutOnSale(infoToken.address);
+                    }}
+                  >
+                    Put on sale
+                  </button>
+                )}
+                {visibleBtnPutOnSale && (
+                  <button
+                    className="item-content__btn-buy"
+                    onClick={() => {
+                      setisputItUpAuction(true);
+                    }}
+                  >
+                    Put it up for auction
+                  </button>
+                )}
+              </div>
+
+              {visibleBtnWithdrawFromSale && (
+                <button
+                  className="item-content__btn-buy"
+                  onClick={() => {
+                    setisWithdrawSaleModal(true);
+                  }}
+                >
+                  withdraw from sale
+                </button>
+              )}
+              {visibleBtnStopAuctionOwner && (
+                <button
+                  className="item-content__btn-buy"
+                  onClick={() => {
+                    setisStopAuctionOwner(true);
+                  }}
+                >
+                  Stop auction
+                </button>
+              )}
+
+              {/* <button
+                className="item-content__btn-buy"
+                onClick={() => {
+                  setisWithdrawFromAuction(true)
+                }}
+              >
+                withdraw from auction
+              </button> */}
+
+              {/* <button
+                className="item-content__btn-buy"
+                onClick={() => {
+                  setisParticipateInAuction(true)
+                }}
+              >
+                participate in the auction
+              </button> */}
+
+              {/* <button
+                className="item-content__btn-buy"
+                onClick={() => {
+                  setisEndAuction(true)
+                }}
+              >
+                EndAuction
+              </button> */}
+              {/* <button
+                className="item-content__btn-buy"
+                onClick={() => {
+                  getInfoToken(infoToken.address);
+                }}
+              >
+                getInfo
+              </button> */}
             </div>
-           
-          
+          </div>
+
+          <div className="modal-windows-tokens">
+            {/* {isModalPutOnSale &&  */}
+            <Modal active={isModalPutOnSale} setActive={setisModalPutOnSale}>
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">Put on sale</div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-tokens-action__submaintext text-name-price">
+                    Your price
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="Enter your price"
+                    className="modal-tokens-action__input"
+                    value={priceTokenModal}
+                    onChange={(e) => {
+                      setpriceTokenModal(e.target.value);
+                    }}
+                  />
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnPutOnSale();
+                      }}
+                    >
+                      Put on sale
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+            {/* <div className="modal-tokens-action">
+
+             </div> */}
+            {/* } */}
+
+            <Modal active={isModalBuy} setActive={setisModalBuy}>
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">Buy item</div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnBuy();
+                      }}
+                    >
+                      Buy now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+
+            <Modal
+              active={isWithdrawSaleModal}
+              setActive={setisWithdrawSaleModal}
+            >
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">
+                  Withdraw from sale
+                </div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnWithdrawSaleModal();
+                      }}
+                    >
+                      Withdraw from sale
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+
+            <Modal
+              active={isWithdrawSaleModal}
+              setActive={setisWithdrawSaleModal}
+            >
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">
+                  Withdraw from sale
+                </div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnWithdrawSaleModal();
+                      }}
+                    >
+                      Withdraw from sale
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+
+            <Modal active={isputItUpAuction} setActive={setisputItUpAuction}>
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">
+                  Put it up for auction
+                </div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+                  <div className="modal-tokens-action__submaintext text-name-price">
+                    Your price
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="Enter your price"
+                    className="modal-tokens-action__input"
+                    value={priceTokenModal}
+                    onChange={(e) => {
+                      setpriceTokenModal(e.target.value);
+                    }}
+                  />
+
+                  <div className="modal-tokens-action__submaintext text-name-price">
+                    Auction duration
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="Enter the auction duration in seconds"
+                    className="modal-tokens-action__input"
+                    value={durationAuction}
+                    onChange={(e) => {
+                      setdurationAuction(e.target.value);
+                    }}
+                  />
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnPutItUpAuctionModal();
+                      }}
+                    >
+                      Put it up for auction
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+
+            <Modal
+              active={isWithdrawFromAuction}
+              setActive={setisWithdrawFromAuction}
+            >
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">
+                  withdraw from auction
+                </div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnWithdrawFromAuctionModal();
+                      }}
+                    >
+                      withdraw from auction
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+
+            <Modal
+              active={isWithdrawFromAuction}
+              setActive={setisWithdrawFromAuction}
+            >
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">
+                  withdraw from auction
+                </div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnWithdrawFromAuctionModal();
+                      }}
+                    >
+                      withdraw from auction
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+
+            <Modal
+              active={isParticipateInAuction}
+              setActive={setisParticipateInAuction}
+            >
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">
+                  participate in the auction
+                </div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnParticipateInAuctionModal();
+                      }}
+                    >
+                      participate in the auction
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+
+            <Modal
+              active={isStopAuctionOwner}
+              setActive={setisStopAuctionOwner}
+            >
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">Stop auction</div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnStopAuctionOwner();
+                      }}
+                    >
+                      Stop auction
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+
+            <Modal active={isEndAuction} setActive={setisEndAuction}>
+              <div className="modal-tokens-action">
+                <div className="modal-tokens-action__name">EndAuction</div>
+                <div className="modal-tokens-action__content">
+                  <div className="modal-tokens-action__submaintext">Item</div>
+                  <div className="modal-tokens-action__token-info">
+                    <div className="modal-tokens-action__image">
+                      <img
+                        src={"https://" + infoToken.media}
+                        className="modal-tokens-action__image-img"
+                        alt=""
+                      />
+                    </div>
+                    <div className="modal-tokens-action__token-title">
+                      <div className="modal-tokens-action__token-title-collection">
+                        {infoToken.collection} Collection
+                      </div>
+                      <div className="modal-tokens-action__token-title-name">
+                        {infoToken.title}
+                      </div>
+                    </div>
+                    <div className="modal-tokens-action__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+
+                  <div className="modal-token__block-btn">
+                    <button
+                      className="modal-token__btn"
+                      onClick={() => {
+                        btnEndAuction();
+                      }}
+                    >
+                      EndAuction
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
           </div>
         </div>
       ) : (
-        <Loader />
+        <div className="loader-content-page">
+          <Loader />
+        </div>
       )}
     </div>
   );
 };
-
+// isModalBuy
 export default Item;

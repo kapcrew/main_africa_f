@@ -6,7 +6,7 @@ import {
 } from "everscale-inpage-provider";
 import apiRequest from "../api/apiRequest";
 // import pkgData from "../../ton-packages/Data.package.ts";
-
+import toast from "react-hot-toast";
 const ever = new ProviderRpcClient();
 // window.getProvider = getProvider;
 // window.PROVIDERS = PROVIDERS;
@@ -245,13 +245,71 @@ const DePoolAbi = {
     { name: "_endAuctionTimestamp", type: "uint256" },
   ],
 };
-export async function ParticipateInAuction(addressToken){
+export async function ParticipateInAuction(addressToken) {
+  if (!(await ever.hasProvider())) {
+    throw new Error("Extension is not installed");
+  }
+  await ever.ensureInitialized();
 
-}
-export async function StopAuctionOwner(addressToken){
+  const { accountInteraction } = await ever.requestPermissions({
+    permissions: ["basic", "accountInteraction"],
+  });
+  if (accountInteraction == null) {
+    throw new Error("Insufficient permissions");
+  }
 
+  const selectedAddress = accountInteraction.address;
+  console.log(addressToken);
+  const dePoolAddress = new Address(addressToken);
+
+  const dePool = new ever.Contract(DePoolAbi, dePoolAddress);
+
+  const transaction = await dePool.methods
+    .auction({
+      price: "6", //price - проверка что цена больше чем auctionPrice
+    })
+    .send({
+      from: selectedAddress,
+      amount: "7000000000", //(price + 1)*1000000000
+      bounce: true,
+    });
+  console.log(transaction);
 }
-export async function PutOnSale(addressToken) {
+export async function StopAuctionOwner(addressToken) {
+  toast.loading("Payment is expected...");
+  if (!(await ever.hasProvider())) {
+    throw new Error("Extension is not installed");
+  }
+  await ever.ensureInitialized();
+
+  const { accountInteraction } = await ever.requestPermissions({
+    permissions: ["basic", "accountInteraction"],
+  });
+  if (accountInteraction == null) {
+    throw new Error("Insufficient permissions");
+  }
+
+  const selectedAddress = accountInteraction.address;
+  console.log(addressToken);
+  const dePoolAddress = new Address(addressToken);
+
+  const dePool = new ever.Contract(DePoolAbi, dePoolAddress);
+
+  const transaction = await dePool.methods.stopAuction({}).send({
+    from: selectedAddress,
+    amount: "1000000000",
+    bounce: true,
+  });
+  console.log(transaction);
+  toast.dismiss();
+  toast.success("Payment has reached!");
+}
+// export async function StopAuctionOwner(addressToken) {
+
+//   фывфы
+// }
+export async function PutOnSale(addressToken, price) {
+  toast.loading("Payment is expected...");
   if (!(await ever.hasProvider())) {
     throw new Error("Extension is not installed");
   }
@@ -272,7 +330,7 @@ export async function PutOnSale(addressToken) {
 
   const transaction = await dePool.methods
     .putOnSale({
-      price: "10",
+      price: String(price),
     })
     .send({
       from: selectedAddress,
@@ -281,19 +339,12 @@ export async function PutOnSale(addressToken) {
     });
   console.log(transaction);
 
-  // const transaction = await dePool
-  //  .methods
-  //   .buy({
-  //   }).send({
-  //     from: selectedAddress,
-  //     amount: '13000000000',
-  //     bounce: true,
-  //   });
-  console.log("transaction", transaction);
+  toast.dismiss();
+  toast.success("Payment has reached!");
+  return transaction;
 }
 
-
-export async function EndAuction (addressToken){
+export async function EndAuction(addressToken) {
   if (!(await ever.hasProvider())) {
     throw new Error("Extension is not installed");
   }
@@ -310,18 +361,17 @@ export async function EndAuction (addressToken){
   const dePoolAddress = new Address(addressToken);
 
   const dePool = new ever.Contract(DePoolAbi, dePoolAddress);
-  
-  const transaction = await dePool
-   .methods
-    .endAuction({
-    }).send({
-      from: selectedAddress,
-     amount: '1000000000',
-      bounce: true,
-    });
-    console.log(transaction)
+
+  const transaction = await dePool.methods.endAuction({}).send({
+    from: selectedAddress,
+    amount: "1000000000",
+    bounce: true,
+  });
+  console.log(transaction);
 }
 export async function WithdrawFromSale(addressToken) {
+  toast.loading("Payment is expected...");
+
   if (!(await ever.hasProvider())) {
     throw new Error("Extension is not installed");
   }
@@ -341,13 +391,16 @@ export async function WithdrawFromSale(addressToken) {
 
   const transaction = await dePool.methods.removeFromSale({}).send({
     from: selectedAddress,
-    amount: "1000000000",
+    amount: "1000000000", //+
     bounce: true,
   });
   console.log(transaction);
-}
-export async function PutUpAuction(addressToken){
 
+  toast.dismiss();
+  toast.success("Payment has reached!");
+}
+export async function PutUpAuction(addressToken, price, time) {
+  toast.loading("Payment is expected...");
   if (!(await ever.hasProvider())) {
     throw new Error("Extension is not installed");
   }
@@ -365,18 +418,20 @@ export async function PutUpAuction(addressToken){
 
   const dePool = new ever.Contract(DePoolAbi, dePoolAddress);
 
-  const transaction = await dePool
-   .methods
+  const transaction = await dePool.methods
     .putOnAuction({
-      initPrice: '1000000000',
-      time: '600'
-    }).send({
+      initPrice: String(price), //price
+      time: String(time), // секунды
+    })
+    .send({
       from: selectedAddress,
-     amount: '10500000000',
+      amount: "1000000000",
       bounce: true,
     });
+  toast.dismiss();
+  toast.success("Payment has reached!");
 }
-export async function WithdrawFromAuction(addressToken){
+export async function WithdrawFromAuction(addressToken) {
   if (!(await ever.hasProvider())) {
     throw new Error("Extension is not installed");
   }
@@ -394,16 +449,13 @@ export async function WithdrawFromAuction(addressToken){
 
   const dePool = new ever.Contract(DePoolAbi, dePoolAddress);
 
-  const transaction = await dePool
-  .methods
-   .stopAuction({
-   }).send({
-     from: selectedAddress,
-    amount: '1000000000',
-     bounce: true,
-   });
+  const transaction = await dePool.methods.stopAuction({}).send({
+    from: selectedAddress,
+    amount: "1000000000",
+    bounce: true,
+  });
 }
-export async function BuyToken(addressToken) {
+export async function BuyToken(addressToken, price) {
   if (!(await ever.hasProvider())) {
     throw new Error("Extension is not installed");
   }
@@ -420,24 +472,14 @@ export async function BuyToken(addressToken) {
   const dePoolAddress = new Address(addressToken);
 
   const dePool = new ever.Contract(DePoolAbi, dePoolAddress);
-
-  // const transaction = await dePool.methods
-  //   .putOnSale({
-  //     price: "10",
-  //   })
-  //   .send({
-  //     from: selectedAddress,
-  //     amount: "1000000000",
-  //     bounce: true,
-  //   });
-  // console.log(transaction);
 
   const transaction = await dePool.methods.buy({}).send({
     from: selectedAddress,
-    amount: "13000000000",
+    amount: String((Number(price) + 1) * 1000000000), //(price +1)*1000000000
     bounce: true,
   });
   console.log("transaction", transaction);
+  return transaction;
 }
 // async function show_nft(){
 
@@ -500,6 +542,7 @@ export async function getInfoToken(addressToken) {
       })
       .call();
     console.log(output);
+    return output;
   } catch (e) {
     if (e instanceof TvmException) {
       console.error(e.code);
@@ -645,4 +688,3 @@ export async function login_out() {
   // window.location.reload();
 }
 // window.login_out = login_out;
-
