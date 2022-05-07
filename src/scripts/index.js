@@ -552,8 +552,6 @@ export async function getInfoToken(addressToken) {
       console.error(e.code);
     }
   }
-  toast.dismiss();
-  toast.success("Payment has reached!");
 }
 export async function sendMoney1() {
   if (!(await ever.hasProvider())) {
