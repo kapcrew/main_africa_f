@@ -3,7 +3,8 @@ import "./item.css";
 import Loader from "../../components/loader/loader";
 import apiRequest from "../../api/apiRequest";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 import { getInfoToken } from "../../scripts";
 import { BuyToken } from "../../scripts";
 import { WithdrawFromSale } from "../../scripts";
@@ -34,8 +35,8 @@ const Item = () => {
     setinfoToken(res.data);
     setisLoading(true);
 
-    setchoiceDetails(1)
-    
+    setchoiceDetails(1);
+
     const token = await getInfoToken(address);
 
     setendAuctionTime(timeConverter(token.endAuctionTimestamp));
@@ -160,9 +161,15 @@ const Item = () => {
   const [isputItUpAuction, setisputItUpAuction] = useState(false);
 
   const btnPutItUpAuctionModal = async () => {
+    // console.log(ToUnix(durationAuction))
+    console.log(+new Date(durationAuction) / 1000, +new Date() / 1000);
+    const timeSeconds = Math.round(
+      +new Date(durationAuction) / 1000 - +new Date() / 1000
+    );
+    console.log(timeSeconds);
     setisputItUpAuction(false);
     console.log(priceAuction, durationAuction);
-    if (await PutUpAuction(infoToken.address, priceAuction, durationAuction)) {
+    if (await PutUpAuction(infoToken.address, priceAuction, timeSeconds)) {
       await checkStatus("onAuction", true);
     }
   };
@@ -275,6 +282,7 @@ const Item = () => {
             <div className="item-content__description">
               {infoToken.description}
             </div>
+            <div className="input-date"></div>
 
             <div className="item-content__block-details">
               <div className="item-content__choice-details">
@@ -449,7 +457,7 @@ const Item = () => {
                     Stop auction
                   </button>
                 )}
-                {JSON.stringify(visibleBtnEndAuction)}
+                
                 {visibleBtnEndAuction && (
                   <button
                     className="item-content__btn-buy"
@@ -699,6 +707,19 @@ const Item = () => {
                     </div>
                   </div>
                   <div className="modal-tokens-action__submaintext text-name-price">
+                    Auction duration
+                  </div>
+
+                  <Datetime
+                    onChange={(e) => {
+                      setdurationAuction(e._d);
+                    }}
+                    value={durationAuction}
+                    className="input-date__datetime"
+                    inputProps={{placeholder:"Specify the end date of the auction"}}
+                   
+                  />
+                  <div className="modal-tokens-action__submaintext text-name-price">
                     Your price
                   </div>
                   <input
@@ -711,10 +732,7 @@ const Item = () => {
                     }}
                   />
 
-                  <div className="modal-tokens-action__submaintext text-name-price">
-                    Auction duration
-                  </div>
-                  <input
+                  {/* <input
                     type="number"
                     placeholder="Enter the auction duration in seconds"
                     className="modal-tokens-action__input"
@@ -722,7 +740,7 @@ const Item = () => {
                     onChange={(e) => {
                       setdurationAuction(e.target.value);
                     }}
-                  />
+                  /> */}
                   <div className="modal-token__block-btn">
                     <button
                       className="modal-token__btn"

@@ -10,6 +10,7 @@
     "everscale-inpage-provider": "^0.3.9",
     "fs": "0.0.1-security",
     "react": "^17.0.2",
+    "react-datetime": "^3.1.1",
     "react-dimmer": "^1.0.7",
     "react-dom": "^17.0.2",
     "react-dropzone": "^12.1.0",

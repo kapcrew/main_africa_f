@@ -254,7 +254,7 @@
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
-  padding: 20px 0;
+  padding: 10px 0;
 }
 .modal-tokens-action__image-img {
   width: 100px;
@@ -307,7 +307,7 @@
   color: rgb(72, 43, 0.9);
 }
 .text-name-price {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 .modal-token__btn {
   min-width: 169px;
@@ -359,4 +359,81 @@ input::-webkit-inner-spin-button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.input-date{
+  color: rgba(72, 43, 8, 0.9);
+  /* background-color: rgb(156, 87, 87); */
+}
+.input-date__datetime {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  
+
+
+  color: rgba(72, 43, 8, 0.9);
+}
+.form-control{
+  /* width: 100%; */
+
+  padding-left: 15px;
+  height: 56px;
+  width: 96%;
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid rgba(72, 43, 8, 0.5);
+  border-radius: 3px;
+  color: rgb(72, 43, 0.9);
+  /* background-color: transparent; */
+}
+.rdtPicker{
+  background: #fffcf9 !important;
+
+  top:0;
+  right: -10px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 20%) !important;
+}
+.rdtToday{
+  background-color: #f27b0c22;
+}
+.rdtPicker td.rdtToday:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-bottom: 7px solid #F27D0C !important;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+.rdtPicker td.rdtActive, .rdtPicker td.rdtActive:hover {
+  background-color: #F27D0C !important;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 25%);
+}
+/* .rdtPicker .dow{  
+  
+  background-color: #f27b0c4a;
+  color: #F27D0C;
+}
+.rdtPicker th{
+  background-color: #f27b0c4a;
+  color: #F27D0C;
+} */
+.rdtPicker .dow:hover{
+  background-color: #f27b0c4a;
+  color: #F27D0C;
+}
+.rdtPicker th:hover{
+  background-color: #f27b0c4a;
+  color: #F27D0C;
 }
