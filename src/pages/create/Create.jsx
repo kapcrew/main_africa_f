@@ -115,7 +115,7 @@ const Create = () => {
   const navigate = useNavigate();
 
   const [isCreated, setisCreated] = useState(false);
-
+  const delay = async (ms) => await new Promise(resolve => setTimeout(resolve, ms));
   const creactItem = async () => {
     setisCreated(true);
     const reqSendMoney = await sendMoney();
@@ -132,8 +132,10 @@ const Create = () => {
           collection: selectedCollection,
           addrToTransfer: localStorage.getItem("userAddress"),
         });
+        
+        console.log(req.data)
+        await delay(7000);
         setisCreated(false);
-        // console.log(req)
         navigate("/item/" + req.data.address);
       }catch({ response: { data } }){
         console.log("error",data)

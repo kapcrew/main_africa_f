@@ -33,30 +33,63 @@ const Item = () => {
     console.log(res.data);
     setinfoToken(res.data);
     setisLoading(true);
+
+    setchoiceDetails(1)
+    
+    const token = await getInfoToken(address);
+
+    setendAuctionTime(timeConverter(token.endAuctionTimestamp));
+    setisAuctionTime(new Date() > new Date(token.endAuctionTimestamp * 1000));
+
+    console.log(new Date(), new Date(token.endAuctionTimestamp * 1000));
+    console.log(new Date() > new Date(token.endAuctionTimestamp * 1000));
   };
+  const [endAuctionTime, setendAuctionTime] = useState();
+  const [isAuctionTime, setisAuctionTime] = useState(true);
+  function timeConverter(UNIX_timestamp) {
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time =
+      date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+    return time;
+  }
   useEffect(() => {
     gitInfoItem();
   }, []);
 
   const [isProcess, setisProcess] = useState(false);
+  const [choiceDetails, setchoiceDetails] = useState(1);
 
   const [priceTokenModal, setpriceTokenModal] = useState();
+  const [priceAuction, setpriceAuction] = useState();
   const [durationAuction, setdurationAuction] = useState();
-  // MODAL PUT ON SALE
-  const [isModalPutOnSale, setisModalPutOnSale] = useState(false);
+  const [bidAuctionPrice, setbidAuctionPrice] = useState();
 
-  const btnPutOnSale = async () => {
-    setisModalPutOnSale(false);
-    await PutOnSale(infoToken.address, priceTokenModal);
-    await checkStatus("onSale", true);
-  };
   const checkStatus = async (field, value) => {
     toast.loading("There is a process in the blockchain...");
     // const token = await getInfoToken(infoToken.address)
 
     let timerId = setInterval(async () => {
       const token = await getInfoToken(infoToken.address);
-      console.log(token[field], value);
       if (token[field] === value) {
         toast.dismiss();
         toast.success("Your operation is done!");
@@ -71,14 +104,44 @@ const Item = () => {
       clearInterval(timerId);
     }, 30000);
   };
+  const checkStatusAuctionLider = async () => {
+    toast.loading("There is a process in the blockchain...");
+    // const token = await getInfoToken(infoToken.address)
+
+    let timerId = setInterval(async () => {
+      const token = await getInfoToken(infoToken.address);
+      if (token.auctionLider._address === localStorage.getItem("userAddress")) {
+        toast.dismiss();
+        toast.success("Your operation is done!");
+        clearInterval(timerId);
+        clearTimeout(timerTimeout);
+        gitInfoItem();
+      }
+    }, 2000);
+    const timerTimeout = setTimeout(() => {
+      toast.dismiss();
+      toast.error("Something went wrong");
+      clearInterval(timerId);
+    }, 30000);
+  };
+  // MODAL PUT ON SALE
+  const [isModalPutOnSale, setisModalPutOnSale] = useState(false);
+
+  const btnPutOnSale = async () => {
+    setisModalPutOnSale(false);
+    if (await PutOnSale(infoToken.address, priceTokenModal)) {
+      await checkStatus("onSale", true);
+    }
+  };
 
   // MODAL BUY
   const [isModalBuy, setisModalBuy] = useState(false);
 
   const btnBuy = async () => {
     setisModalBuy(false);
-    await BuyToken(infoToken.address, infoToken.price);
-    await checkStatus("onSale", false);
+    if (await BuyToken(infoToken.address, infoToken.price)) {
+      await checkStatus("onSale", false);
+    }
   };
 
   // MODAL withdraw from sale
@@ -87,8 +150,9 @@ const Item = () => {
 
   const btnWithdrawSaleModal = async () => {
     setisWithdrawSaleModal(false);
-    await WithdrawFromSale(infoToken.address, infoToken.price);
-    await checkStatus("onSale", false);
+    if (await WithdrawFromSale(infoToken.address, infoToken.price)) {
+      await checkStatus("onSale", false);
+    }
   };
 
   // MODAL put it up for auction
@@ -97,28 +161,36 @@ const Item = () => {
 
   const btnPutItUpAuctionModal = async () => {
     setisputItUpAuction(false);
-    await PutUpAuction(infoToken.address, priceTokenModal, durationAuction);
-    await checkStatus("onAuction", true);
+    console.log(priceAuction, durationAuction);
+    if (await PutUpAuction(infoToken.address, priceAuction, durationAuction)) {
+      await checkStatus("onAuction", true);
+    }
   };
-
-  // MODAL withdraw from auction
-
-  const [isWithdrawFromAuction, setisWithdrawFromAuction] = useState(false);
-
-  const btnWithdrawFromAuctionModal = async () => {
-    if (await WithdrawFromAuction(infoToken.address))
-      toast.success("The purchase message has been sent");
-    setisWithdrawFromAuction(false);
-  };
-
-  // MODAL participate in the auction
 
   const [isParticipateInAuction, setisParticipateInAuction] = useState(false);
 
   const btnParticipateInAuctionModal = async () => {
-    if (await ParticipateInAuction(infoToken.address))
-      toast.success("The purchase message has been sent");
-    setisParticipateInAuction(false);
+    const token = await getInfoToken(infoToken.address);
+
+    setendAuctionTime(timeConverter(token.endAuctionTimestamp));
+    setisAuctionTime(new Date() > new Date(token.endAuctionTimestamp * 1000));
+    console.log(token);
+
+    if (new Date() < new Date(token.endAuctionTimestamp * 1000)) {
+      setisParticipateInAuction(false);
+      if (Number(token.auctionPrice) < bidAuctionPrice) {
+        if (await ParticipateInAuction(infoToken.address, bidAuctionPrice)) {
+          await checkStatusAuctionLider();
+          // token.auctionLider._address
+        }
+      } else {
+        toast.error(
+          `Your bid is lower than the previous one (${token.auctionPrice})`
+        );
+      }
+    } else {
+      toast.error("Unfortunately the auction has already ended :(");
+    }
   };
 
   // MODAL StopAuctionOwner
@@ -127,8 +199,9 @@ const Item = () => {
 
   const btnStopAuctionOwner = async () => {
     setisStopAuctionOwner(false);
-    await StopAuctionOwner(infoToken.address);
-    await checkStatus("onAuction", false);
+    if (await StopAuctionOwner(infoToken.address)) {
+      await checkStatus("onAuction", false);
+    }
   };
 
   // MODAL EndAuction
@@ -136,10 +209,12 @@ const Item = () => {
   const [isEndAuction, setisEndAuction] = useState(false);
 
   const btnEndAuction = async () => {
-    if (await EndAuction(infoToken.address))
-      toast.success("The purchase message has been sent");
     setisEndAuction(false);
+    if (await EndAuction(infoToken.address)) {
+      await checkStatus("onAuction", false);
+    }
   };
+
   const visibleBtnPutOnSale =
     !infoToken.onSale &&
     !infoToken.onAuction &&
@@ -159,6 +234,14 @@ const Item = () => {
     infoToken.onAuction &&
     infoToken.owner === localStorage.getItem("userAddress");
 
+  const visibleBtnEndAuction =
+    !infoToken.onSale && infoToken.onAuction && isAuctionTime;
+
+  const visibleBtnParticipateInAuction =
+    !infoToken.onSale &&
+    infoToken.onAuction &&
+    infoToken.owner !== localStorage.getItem("userAddress") &&
+    !isAuctionTime;
   return (
     <div>
       {isProcess && <PagePreloader />}
@@ -182,56 +265,117 @@ const Item = () => {
             <div className="item-content__name">{infoToken.title}</div>
             <div className="item-content__status">
               {infoToken.onSale && "On sale"}
-              {infoToken.onAuction && "On action"}
+              {infoToken.onAuction && "At the auction before:"}
+              {infoToken.onAuction && (
+                <span className="time-auction">{endAuctionTime}</span>
+              )}
               {!infoToken.onSale && !infoToken.onAuction && "Not for sale"}
             </div>
+
             <div className="item-content__description">
               {infoToken.description}
             </div>
 
             <div className="item-content__block-details">
-              <div className="main-name-details">Details</div>
-              <div className="item-content__users">
-                <div className="item-content__block-details-item">
-                  <div className="name-details">Creator</div>
-                  <div className="res-details">
-                    {infoToken.creator?.substring(0, 4)}...
-                    {infoToken.creator?.substring(62)}
-                    <div className="link-blockchain">
-                      {" "}
-                      <LinkBlockchain address={infoToken.creator} />
-                    </div>
-                  </div>
+              <div className="item-content__choice-details">
+                <div
+                  className={`main-name-details ${
+                    choiceDetails == 1 && "activ-tab-prof"
+                  }`}
+                  onClick={() => {
+                    setchoiceDetails(1);
+                  }}
+                >
+                  Details
                 </div>
-                <div className="item-content__block-details-item">
-                  <div className="name-details">Owner</div>
-                  <div className="res-details">
-                    {infoToken.owner?.substring(0, 4)}...
-                    {infoToken.owner?.substring(62)}
-                    <div className="link-blockchain">
-                      {" "}
-                      <LinkBlockchain address={infoToken.owner} />
-                    </div>
+                {infoToken.onAuction && (
+                  <div
+                    className={`main-name-details ${
+                      choiceDetails == 2 && "activ-tab-prof"
+                    }`}
+                    onClick={() => {
+                      setchoiceDetails(2);
+                    }}
+                  >
+                    Current bid
                   </div>
-                </div>
+                )}
               </div>
-              <div className="item-content__item">
-                <div className="item-content__block-details-item">
-                  <div className="name-details">Collection</div>
-                  <div className="res-details">{infoToken.collection}</div>
-                </div>
-                <div className="item-content__block-details-item">
-                  <div className="name-details">Address</div>
-                  <div className="res-details">
-                    {infoToken.address?.substring(0, 4)}...
-                    {infoToken.address?.substring(62)}
-                    <div className="link-blockchain">
-                      {" "}
-                      <LinkBlockchain address={infoToken.address} />
+              {choiceDetails === 1 && (
+                <div>
+                  <div className="item-content__users">
+                    <div className="item-content__block-details-item">
+                      <div className="name-details">Creator</div>
+                      <div className="res-details">
+                        {infoToken.creator?.substring(0, 4)}...
+                        {infoToken.creator?.substring(62)}
+                        <div className="link-blockchain">
+                          {" "}
+                          <LinkBlockchain address={infoToken.creator} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="item-content__block-details-item">
+                      <div className="name-details">Owner</div>
+                      <div className="res-details">
+                        {infoToken.owner?.substring(0, 4)}...
+                        {infoToken.owner?.substring(62)}
+                        <div className="link-blockchain">
+                          {" "}
+                          <LinkBlockchain address={infoToken.owner} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="item-content__item">
+                    <div className="item-content__block-details-item">
+                      <div className="name-details">Collection</div>
+                      <div className="res-details">{infoToken.collection}</div>
+                    </div>
+                    <div className="item-content__block-details-item">
+                      <div className="name-details">Address</div>
+                      <div className="res-details">
+                        {infoToken.address?.substring(0, 4)}...
+                        {infoToken.address?.substring(62)}
+                        <div className="link-blockchain">
+                          {" "}
+                          <LinkBlockchain address={infoToken.address} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
+              {choiceDetails === 2 && (
+                <div className="auction-info">
+                  {infoToken.onAuction && (
+                    <div className="auction-lider">
+                      Last bid:
+                      {!1 ? (
+                        <span className="auction-lider__address">
+                          the auction is over
+                        </span>
+                      ) : infoToken.auctionLider ===
+                        "0:0000000000000000000000000000000000000000000000000000000000000000" ? (
+                        <span className="auction-lider__address">
+                          your bid will be the first
+                        </span>
+                      ) : (
+                        <span>
+                          <span className="auction-lider__address">
+                            {infoToken.auctionLider?.substring(0, 4)}...
+                            {infoToken.auctionLider?.substring(62)}
+                          </span>
+                          made a bet in{" "}
+                          <span className="auction-lider__address">
+                            {infoToken.auctionPrice} EVER
+                          </span>{" "}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
             {visibleBtnBuyNow && (
               <div className="item-content__block-buy">
@@ -275,52 +419,59 @@ const Item = () => {
               </div>
 
               {visibleBtnWithdrawFromSale && (
+                <div className="item-content__block-buy">
+                  <button
+                    className="item-content__btn-buy"
+                    onClick={() => {
+                      setisWithdrawSaleModal(true);
+                    }}
+                  >
+                    Withdraw from sale
+                  </button>
+                  <div className="item-content__block-price">
+                    <div className="item-content__name-price">
+                      Current price
+                    </div>
+                    <div className="item-content__price">
+                      {infoToken.price} Ē
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div className="btns-billing">
+                {visibleBtnStopAuctionOwner && (
+                  <button
+                    className="item-content__btn-buy"
+                    onClick={() => {
+                      setisStopAuctionOwner(true);
+                    }}
+                  >
+                    Stop auction
+                  </button>
+                )}
+                {JSON.stringify(visibleBtnEndAuction)}
+                {visibleBtnEndAuction && (
+                  <button
+                    className="item-content__btn-buy"
+                    onClick={() => {
+                      setisEndAuction(true);
+                    }}
+                  >
+                    End auction
+                  </button>
+                )}
+              </div>
+              {visibleBtnParticipateInAuction && (
                 <button
                   className="item-content__btn-buy"
                   onClick={() => {
-                    setisWithdrawSaleModal(true);
+                    setisParticipateInAuction(true);
                   }}
                 >
-                  withdraw from sale
-                </button>
-              )}
-              {visibleBtnStopAuctionOwner && (
-                <button
-                  className="item-content__btn-buy"
-                  onClick={() => {
-                    setisStopAuctionOwner(true);
-                  }}
-                >
-                  Stop auction
+                  Place a bet
                 </button>
               )}
 
-              {/* <button
-                className="item-content__btn-buy"
-                onClick={() => {
-                  setisWithdrawFromAuction(true)
-                }}
-              >
-                withdraw from auction
-              </button> */}
-
-              {/* <button
-                className="item-content__btn-buy"
-                onClick={() => {
-                  setisParticipateInAuction(true)
-                }}
-              >
-                participate in the auction
-              </button> */}
-
-              {/* <button
-                className="item-content__btn-buy"
-                onClick={() => {
-                  setisEndAuction(true)
-                }}
-              >
-                EndAuction
-              </button> */}
               {/* <button
                 className="item-content__btn-buy"
                 onClick={() => {
@@ -475,7 +626,7 @@ const Item = () => {
               </div>
             </Modal>
 
-            <Modal
+            {/* <Modal
               active={isWithdrawSaleModal}
               setActive={setisWithdrawSaleModal}
             >
@@ -518,7 +669,7 @@ const Item = () => {
                   </div>
                 </div>
               </div>
-            </Modal>
+            </Modal> */}
 
             <Modal active={isputItUpAuction} setActive={setisputItUpAuction}>
               <div className="modal-tokens-action">
@@ -554,9 +705,9 @@ const Item = () => {
                     type="number"
                     placeholder="Enter your price"
                     className="modal-tokens-action__input"
-                    value={priceTokenModal}
+                    value={priceAuction}
                     onChange={(e) => {
-                      setpriceTokenModal(e.target.value);
+                      setpriceAuction(e.target.value);
                     }}
                   />
 
@@ -586,50 +737,7 @@ const Item = () => {
               </div>
             </Modal>
 
-            <Modal
-              active={isWithdrawFromAuction}
-              setActive={setisWithdrawFromAuction}
-            >
-              <div className="modal-tokens-action">
-                <div className="modal-tokens-action__name">
-                  withdraw from auction
-                </div>
-                <div className="modal-tokens-action__content">
-                  <div className="modal-tokens-action__submaintext">Item</div>
-                  <div className="modal-tokens-action__token-info">
-                    <div className="modal-tokens-action__image">
-                      <img
-                        src={"https://" + infoToken.media}
-                        className="modal-tokens-action__image-img"
-                        alt=""
-                      />
-                    </div>
-                    <div className="modal-tokens-action__token-title">
-                      <div className="modal-tokens-action__token-title-collection">
-                        {infoToken.collection} Collection
-                      </div>
-                      <div className="modal-tokens-action__token-title-name">
-                        {infoToken.title}
-                      </div>
-                    </div>
-                    <div className="modal-tokens-action__price">
-                      {infoToken.price} Ē
-                    </div>
-                  </div>
-
-                  <div className="modal-token__block-btn">
-                    <button
-                      className="modal-token__btn"
-                      onClick={() => {
-                        btnWithdrawFromAuctionModal();
-                      }}
-                    >
-                      withdraw from auction
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </Modal>
+            {/*            
 
             <Modal
               active={isWithdrawFromAuction}
@@ -674,16 +782,14 @@ const Item = () => {
                   </div>
                 </div>
               </div>
-            </Modal>
+            </Modal> */}
 
             <Modal
               active={isParticipateInAuction}
               setActive={setisParticipateInAuction}
             >
               <div className="modal-tokens-action">
-                <div className="modal-tokens-action__name">
-                  participate in the auction
-                </div>
+                <div className="modal-tokens-action__name">Place a bet</div>
                 <div className="modal-tokens-action__content">
                   <div className="modal-tokens-action__submaintext">Item</div>
                   <div className="modal-tokens-action__token-info">
@@ -706,7 +812,18 @@ const Item = () => {
                       {infoToken.price} Ē
                     </div>
                   </div>
-
+                  <div className="modal-tokens-action__submaintext text-name-price">
+                    Your bid
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="Enter the auction duration in seconds"
+                    className="modal-tokens-action__input"
+                    value={bidAuctionPrice}
+                    onChange={(e) => {
+                      setbidAuctionPrice(e.target.value);
+                    }}
+                  />
                   <div className="modal-token__block-btn">
                     <button
                       className="modal-token__btn"
@@ -714,7 +831,7 @@ const Item = () => {
                         btnParticipateInAuctionModal();
                       }}
                     >
-                      participate in the auction
+                      Place a bet
                     </button>
                   </div>
                 </div>
@@ -766,7 +883,7 @@ const Item = () => {
 
             <Modal active={isEndAuction} setActive={setisEndAuction}>
               <div className="modal-tokens-action">
-                <div className="modal-tokens-action__name">EndAuction</div>
+                <div className="modal-tokens-action__name">End auction</div>
                 <div className="modal-tokens-action__content">
                   <div className="modal-tokens-action__submaintext">Item</div>
                   <div className="modal-tokens-action__token-info">
@@ -797,7 +914,7 @@ const Item = () => {
                         btnEndAuction();
                       }}
                     >
-                      EndAuction
+                      End auction
                     </button>
                   </div>
                 </div>

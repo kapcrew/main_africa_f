@@ -12,9 +12,10 @@ const Card = ({ infoToken }) => {
         <div className="bids-card__menu">{menuCard}</div>
       </div>
       <div className="bids-card-top">
-        <img src={"https://"+infoToken.media} 
-        // alt={infoToken.media}
-         />
+        <img
+          src={"https://" + infoToken.media}
+          // alt={infoToken.media}
+        />
 
         {/* <Link to={`/post/123`}>
           <div className="bids-title">{infoToken.title}</div>
@@ -25,9 +26,22 @@ const Card = ({ infoToken }) => {
           <div className="card-name__main">{infoToken.title} </div>
           <div className="card-name__submain">{infoToken.category}</div>
         </div>
-        <div className="card-price">{infoToken.price == 0 ? "Not for sale" : infoToken.price+" EVER"} </div>
+        <div className="card-price">
+          {infoToken.onSale
+            ? infoToken.price + " EVER"
+            : infoToken.onAuction
+            ? "At the auction"
+            : "Not for sale"}{" "}
+        </div>
         <div className="buy-and-love">
-          <button className="card-btn-buy" onClick={()=>{navigate(`/item/${infoToken.address}`)}}>Info </button>
+          <button
+            className="card-btn-buy"
+            onClick={() => {
+              navigate(`/item/${infoToken.address}`);
+            }}
+          >
+            Info{" "}
+          </button>
           <div className="love">
             <div className="love-icon">
               <svg

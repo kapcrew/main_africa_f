@@ -116,9 +116,9 @@ const Explorer = () => {
   //  SALE TYPE
 
   const [listSaleTypes, setlistSaleTypes] = useState({
-    "Buy now": false,
+    "On sale": false,
     "Auction": false,
-    "Not for sale": false,
+    "Not on display": false,
   });
   const changelistSaleTypes = (event) => {
     setlistSaleTypes((pre) => {
@@ -388,13 +388,13 @@ const Explorer = () => {
               <div className="modal_sale__btns">
                 <button
                   className="modal_collection__btn modal-btn"
-                  id={"Buy now"}
+                  id={"On sale"}
                   onClick={changelistSaleTypes}
                 >
                   <div className="modal_collection__text-btn modal-elem">
-                    {"Buy now"}
+                    {"On sale"}
                   </div>
-                  {listSaleTypes["Buy now"] && (
+                  {listSaleTypes["On sale"] && (
                     <div className="modal_collection__icon_check modal-elem">
                       {iconCheck}
                     </div>
@@ -402,13 +402,13 @@ const Explorer = () => {
                 </button>
                 <button
                   className="modal_collection__btn modal-btn"
-                  id={"Aurtion"}
+                  id={"Auction"}
                   onClick={changelistSaleTypes}
                 >
                   <div className="modal_collection__text-btn modal-elem">
-                    {"Aurtion"}
+                    {"Auction"}
                   </div>
-                  {listSaleTypes["Aurtion"] && (
+                  {listSaleTypes["Auction"] && (
                     <div className="modal_collection__icon_check modal-elem">
                       {iconCheck}
                     </div>
@@ -416,13 +416,13 @@ const Explorer = () => {
                 </button>
                 <button
                   className="modal_collection__btn modal-btn"
-                  id={"Not for sale"}
+                  id={"Not on display"}
                   onClick={changelistSaleTypes}
                 >
                   <div className="modal_collection__text-btn modal-elem">
-                    {"Not for sale"}
+                    {"Not on display"}
                   </div>
-                  {listSaleTypes["Not for sale"] && (
+                  {listSaleTypes["Not on display"] && (
                     <div className="modal_collection__icon_check modal-elem">
                       {iconCheck}
                     </div>

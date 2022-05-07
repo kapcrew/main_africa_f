@@ -11,12 +11,13 @@
   border-radius: 10px;
 }
 .item-content {
+  width: 100%;
   max-width: 450px;
 }
 .item-content__name {
   font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 48px;
   line-height: 58px;
   display: flex;
@@ -24,19 +25,53 @@
 
   color: #482b08;
 }
+.auction-info{
+  padding-top: 10px;
+  /* height: 30px; */
+}
 .item-content__status {
-  padding: 15px 0;
-  font-family: "Neometric";
+  padding: 15px 0 5px 0;
+  font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 18px;
   line-height: 22px;
   display: flex;
   align-items: center;
+  justify-content: start;
+/* text-align: left; */
 
   color: rgba(72, 43, 8, 0.6);
 }
+.time-auction{
+  /* color:  #F27D0C; */
+  padding-left: 10px;
+  background: linear-gradient(89.7deg, #F27D0C 1.02%, #CAAD19 99.74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
+.auction-lider{
+  padding-bottom: 5px;
+  height: 30px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+/* text-align: left; */
+
+  color: rgba(72, 43, 8, 0.6);
+}
+.auction-lider__address{
+  padding:0 10px;
+  background: linear-gradient(89.7deg, #F27D0C 1.02%, #CAAD19 99.74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .item-content__description {
   height: 173px;
   border-bottom: 1px solid rgba(72, 43, 8, 0.3);
@@ -58,7 +93,8 @@
   text-align: left;
 }
 .item-content__block-details-item {
-  width: 150px;
+  width: 100%;
+  min-width: 150px;
 }
 .main-name-details {
   padding: 35px 0 10px 0;
@@ -153,7 +189,11 @@
 .item-content__name-price {
   padding: 5px 0;
 }
-
+.item-content__choice-details{
+  display: flex;
+  gap: 20px;
+  /* border-bottom: 1px solid rgba(72, 43, 8, 0.3); */
+}
 .link-blockchain {
   /* padding: 20px; */
   padding-left: 10px;
@@ -180,7 +220,7 @@
 .modal-tokens-action__name {
   font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 32px;
   line-height: 38px;
   display: flex;
@@ -198,7 +238,7 @@
   padding-bottom: 16px;
   font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 20px;
   line-height: 24px;
   display: flex;
@@ -242,7 +282,7 @@
 .modal-tokens-action__price {
   font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 16px;
   line-height: 19px;
   display: flex;
@@ -277,7 +317,7 @@
   /* градиент */
 
   background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
-  border-radius: 26px;
+  border-radius: 38.5px;
   border: none;
   font-family: "NeometricBold";
   font-style: normal;
@@ -303,7 +343,7 @@ input::-webkit-inner-spin-button {
 }
 
 .toaster {
-  font-family: "Neometric";
+  font-family: "NeometricBold";
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
