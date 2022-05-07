@@ -11,12 +11,13 @@
   border-radius: 10px;
 }
 .item-content {
+  width: 100%;
   max-width: 450px;
 }
 .item-content__name {
   font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 48px;
   line-height: 58px;
   display: flex;
@@ -24,19 +25,53 @@
 
   color: #482b08;
 }
+.auction-info{
+  padding-top: 10px;
+  /* height: 30px; */
+}
 .item-content__status {
-  padding: 15px 0;
-  font-family: "Neometric";
+  padding: 15px 0 5px 0;
+  font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 18px;
   line-height: 22px;
   display: flex;
   align-items: center;
+  justify-content: start;
+/* text-align: left; */
 
   color: rgba(72, 43, 8, 0.6);
 }
+.time-auction{
+  /* color:  #F27D0C; */
+  padding-left: 10px;
+  background: linear-gradient(89.7deg, #F27D0C 1.02%, #CAAD19 99.74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
+.auction-lider{
+  padding-bottom: 5px;
+  height: 30px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+/* text-align: left; */
+
+  color: rgba(72, 43, 8, 0.6);
+}
+.auction-lider__address{
+  padding:0 10px;
+  background: linear-gradient(89.7deg, #F27D0C 1.02%, #CAAD19 99.74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .item-content__description {
   height: 173px;
   border-bottom: 1px solid rgba(72, 43, 8, 0.3);
@@ -58,7 +93,8 @@
   text-align: left;
 }
 .item-content__block-details-item {
-  width: 150px;
+  width: 100%;
+  min-width: 150px;
 }
 .main-name-details {
   padding: 35px 0 10px 0;
@@ -72,9 +108,9 @@
 
   color: #482b08;
 }
-.item-content__block-details{
+.item-content__block-details {
   padding-bottom: 35px;
-  border-bottom: 1px solid rgba(72, 43, 8, 0.3);;
+  border-bottom: 1px solid rgba(72, 43, 8, 0.3);
 }
 .name-details {
   font-family: "NeometricBold";
@@ -101,7 +137,7 @@
 }
 
 .item-content__btn-buy {
-  width: 298px;
+  width: 250px;
   height: 77px;
   border: none;
   /* градиент */
@@ -116,6 +152,10 @@
   line-height: 22px;
 
   color: #ffffff;
+}
+.btns-billing{
+  display: flex;
+  gap: 10px;
 }
 .item-content__block-buy {
   padding-top: 35px;
@@ -132,7 +172,7 @@
   display: flex;
   align-items: center;
 
-  color: rgba(72, 43, 8, 0.8); 
+  color: rgba(72, 43, 8, 0.8);
 }
 .item-content__price {
   font-family: "NeometricBold";
@@ -146,17 +186,177 @@
   color: rgba(72, 43, 8, 0.8);
 }
 
-.item-content__name-price{
+.item-content__name-price {
   padding: 5px 0;
 }
-
-.link-blockchain{
+.item-content__choice-details{
+  display: flex;
+  gap: 20px;
+  /* border-bottom: 1px solid rgba(72, 43, 8, 0.3); */
+}
+.link-blockchain {
   /* padding: 20px; */
   padding-left: 10px;
 }
-.item-content__btns{
-  padding-top: 5px;
+.item-content__btns {
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+/* MODAL */
+
+.modal-tokens-action {
+  width: 516px;
+  /* height: 535px; */
+  border-radius: 26px;
+  /* width: 100%;
+  height: 100%; */
+
+  background: #fffcf9;
+  /* border-radius: 26px; */
+}
+.modal-tokens-action__name {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(72, 43, 8, 0.3);
+  padding: 20px 0;
+  color: #482b08;
+  opacity: 0.8;
+}
+.modal-tokens-action__content {
+  padding: 30px 43px;
+}
+.modal-tokens-action__submaintext {
+  padding-bottom: 16px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+
+  color: #482b08;
+
+  opacity: 0.8;
+}
+.modal-tokens-action__token-info {
+  border-top: 1px solid rgba(72, 43, 8, 0.3);
+  border-bottom: 1px solid rgba(72, 43, 8, 0.3);
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 20px 0;
+}
+.modal-tokens-action__image-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.modal-tokens-action__token-title {
+  padding-left: 20px;
+  flex-grow: 1;
+}
+.modal-tokens-action__token-title-collection {
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+
+  color: rgba(72, 43, 8, 0.8);
+}
+.modal-tokens-action__token-title-name,
+.modal-tokens-action__price {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.9);
+}
+.modal-tokens-action__input {
+  padding-left: 15px;
+  height: 56px;
+  width: 96%;
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid rgba(72, 43, 8, 0.5);
+  border-radius: 3px;
+  color: rgb(72, 43, 0.9);
+}
+.text-name-price {
+  padding-top: 30px;
+}
+.modal-token__btn {
+  min-width: 169px;
+  padding: 0 20px;
+  height: 66px;
+
+  /* градиент */
+
+  background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
+  border-radius: 38.5px;
+  border: none;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+.modal-token__block-btn {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.toaster {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+
+  margin-top: 5px;
+  padding-top: -10px;
+  color: rgba(72, 43, 8, 0.9);
+  opacity: 0.8;
+}
+
+.loader-content-page {
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

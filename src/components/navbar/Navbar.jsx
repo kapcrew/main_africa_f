@@ -129,6 +129,7 @@ const Navbar = () => {
             <div
               className="iconWalletModal main-tab"
               onClick={() => {
+                console.log("!!!")
                 setisOpenModalLogin(!isOpenModalLogin);
               }}
             >
@@ -143,7 +144,7 @@ const Navbar = () => {
                   <div className="modal__name">My wallet</div>
                 </div>
                 <div className="model__content-auth">
-                <a cl>
+                <a>
                   <div class="address_text">
                   Your address: {address.substring(0, 6)}...{address.substring(60, 66)}
                   </div>

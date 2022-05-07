@@ -4,7 +4,6 @@ import nftlogo from "../../assets/logo.png";
 import { AiOutlineInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { RiDiscordFill } from "react-icons/ri";
 import { FaTelegramPlane } from "react-icons/fa";
-import cover from "../../assets/svg/footer_g.svg";
 
 const Footer = () => {
   return (

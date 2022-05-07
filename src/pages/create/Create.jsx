@@ -115,24 +115,32 @@ const Create = () => {
   const navigate = useNavigate();
 
   const [isCreated, setisCreated] = useState(false);
-
+  const delay = async (ms) => await new Promise(resolve => setTimeout(resolve, ms));
   const creactItem = async () => {
     setisCreated(true);
     const reqSendMoney = await sendMoney();
     console.log(reqSendMoney);
+    
     if (reqSendMoney) {
-      const req = await apiRequest.post("/nft/mint", {
-        title: nameItem,
-        description: descriptionItem,
-        category: categoryItem,
-        price: priceItem,
-        media: mainFileBase64.split(",")[1],
-        collection: selectedCollection,
-        addrToTransfer: localStorage.getItem("userAddress"),
-      });
-      setisCreated(false);
-      // console.log(req)
-      navigate("/item/" + req.data.address);
+      try{
+        const req = await apiRequest.post("/nft/mint", {
+          title: nameItem,
+          description: descriptionItem,
+          category: categoryItem,
+          price: priceItem,
+          media: mainFileBase64.split(",")[1],
+          collection: selectedCollection,
+          addrToTransfer: localStorage.getItem("userAddress"),
+        });
+        
+        console.log(req.data)
+        await delay(7000);
+        setisCreated(false);
+        navigate("/item/" + req.data.address);
+      }catch({ response: { data } }){
+        console.log("error",data)
+      }
+      
     } else {
       setisCreated(false);
     }
