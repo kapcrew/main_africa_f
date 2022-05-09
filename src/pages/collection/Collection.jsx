@@ -53,7 +53,8 @@ const Collection = () => {
       {isLoading ? (
         <div className="content">
           <div className="cover-image">
-            <img src={coverImage} alt="" />
+            <img className="cover-image__img" src={coverImage} alt="" />
+          {/* infoCollection.collection.picture */}
           </div>
           <div className="icon-profile">
             <img className="icon-profile-img" src={infoCollection.collection.picture} alt="" />

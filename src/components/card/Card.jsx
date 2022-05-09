@@ -59,7 +59,7 @@ const Card = ({ infoToken }) => {
                 />
               </svg>
             </div>
-            <div className="love-number">235</div>
+            <div className="love-number"></div>
           </div>
         </div>
       </div>

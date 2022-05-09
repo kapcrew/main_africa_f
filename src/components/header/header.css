@@ -306,7 +306,10 @@
   line-height: 77px;
 }
 .promo-content-title__main-word{
-  color: rgb(221, 148, 59);
+  background: linear-gradient(89.7deg, #F27D0C 1.02%, #CAAD19 99.74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* color: rgb(221, 148, 59); */
 }
 .promo-content-title p {
   font-family: var(--font-family);
