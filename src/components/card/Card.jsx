@@ -31,7 +31,7 @@ const Card = ({ infoToken }) => {
             ? infoToken.price + " EVER"
             : infoToken.onAuction
             ? "At the auction"
-            : "Not for sale"}{" "}
+            : ""}{" "}
         </div>
         <div className="buy-and-love">
           <button
@@ -59,7 +59,7 @@ const Card = ({ infoToken }) => {
                 />
               </svg>
             </div>
-            <div className="love-number">235</div>
+            <div className="love-number"></div>
           </div>
         </div>
       </div>

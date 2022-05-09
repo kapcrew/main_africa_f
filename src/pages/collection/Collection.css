@@ -15,7 +15,9 @@
 
   color: #482b08;
 }
-
+.cover-image__img{
+  width: 100%;
+}
 .collection-info-prof__description {
   font-family: "Neometric";
   max-width: 615px;

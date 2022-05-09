@@ -6,7 +6,11 @@
   align-items: center;
 
 }
-.bids-container-text h1{
+.carousel-home{}
+.bids-container-text{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 28px;

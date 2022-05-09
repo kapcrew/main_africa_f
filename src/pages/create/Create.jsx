@@ -172,6 +172,7 @@ const Create = () => {
 
         <div className="create-container__submain-name">Name</div>
         <input
+        placeholder="Put the item name here"
           onChange={(e) => {
             setnameItem(e.target.value);
           }}
@@ -182,6 +183,7 @@ const Create = () => {
 
         <div className="create-container__submain-name">Description</div>
         <textarea
+        placeholder="Describe your item"
           onChange={(e) => {
             setdescriptionItem(e.target.value);
           }}
@@ -192,6 +194,7 @@ const Create = () => {
 
         <div className="create-container__submain-name">Category</div>
         <input
+        placeholder="Category your item"
           onChange={(e) => {
             setcategoryItem(e.target.value);
           }}
@@ -251,6 +254,7 @@ const Create = () => {
                 <div className="modal-creact-collection__block_data">
                   <div className="modal-creact-collection__title">Name</div>
                   <input
+                  placeholder="Enter the name of your collection"
                     type="text"
                     value={nameCollection}
                     onChange={(e) => setnameCollection(e.target.value)}
@@ -264,6 +268,7 @@ const Create = () => {
                   Description
                 </div>
                 <textarea
+                placeholder="Enter a description of your collection"
                   onChange={(e) => setdescription(e.target.value)}
                   value={description}
                   type="text"
