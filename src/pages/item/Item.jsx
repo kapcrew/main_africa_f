@@ -274,7 +274,7 @@ const Item = () => {
               {infoToken.onSale && "On sale"}
               {infoToken.onAuction && "At the auction before:"}
               {infoToken.onAuction && (
-                <span className="time-auction">{endAuctionTime}</span>
+                <span className="time-auction">{endAuctionTime ? endAuctionTime : "the auction is over"}</span>
               )}
               {!infoToken.onSale && !infoToken.onAuction && "Not for sale"}
             </div>

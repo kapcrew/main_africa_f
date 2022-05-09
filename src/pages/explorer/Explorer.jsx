@@ -118,7 +118,7 @@ const Explorer = () => {
   const [listSaleTypes, setlistSaleTypes] = useState({
     "On sale": false,
     "Auction": false,
-    "Not on display": false,
+    "Others": false,
   });
   const changelistSaleTypes = (event) => {
     setlistSaleTypes((pre) => {
@@ -131,6 +131,7 @@ const Explorer = () => {
 
   const updateListToken = () => {
     const newItems = itemsInitially.filter((newVal) => {
+      
       let flagCategories = false;
       let flagCollections = false;
       let flagSaleType = false;
@@ -169,9 +170,19 @@ const Explorer = () => {
           flagSaleTypeAll = true;
         }
         // console.log(collections[collection]);
-        if (listSaleTypes[saleType] && saleType === newVal.sell_type) {
+        // console.log(listSaleTypes[saleType],saleType,newVal.onAuction) 
+        
+        if (listSaleTypes[saleType] &&(listSaleTypes[saleType] === newVal.onAuction &&  saleType === "Auction")) {
           flagSaleType = true;
-          // return newVal;
+          
+        }
+        if (listSaleTypes[saleType] &&(listSaleTypes[saleType] === newVal.onSale &&  saleType === "On sale")) {
+          flagSaleType = true;
+          
+        }
+        if (listSaleTypes[saleType] && newVal.onAuction === false && newVal.onSale === false &&  saleType === "Others") {
+          flagSaleType = true;
+          
         }
       }
 
@@ -193,7 +204,7 @@ const Explorer = () => {
       }
 
 
-      console.log("flagCategoriesAll",flagCollectionsAll,flagCollections)
+      // console.log("flagCategoriesAll",flagCollectionsAll,flagCollections)
       if (
         ((flagCategories || !flagCategoriesAll) &&
           (flagSaleType || !flagSaleTypeAll) &&
@@ -210,6 +221,12 @@ const Explorer = () => {
       if (listSortTypes[sortType]) {
         switch (sortType) {
           case "Most recent":
+            // newItems.sort((a, b) => {
+            //   return Number(a.price) - Number(b.price);
+            // });
+            newItems.sort((a, b) => {
+              return b.createdAt - a.createdAt;
+            });
             break;
           case "Price: Low to High":
             newItems.sort((a, b) => {
@@ -416,13 +433,13 @@ const Explorer = () => {
                 </button>
                 <button
                   className="modal_collection__btn modal-btn"
-                  id={"Not on display"}
+                  id={"Others"}
                   onClick={changelistSaleTypes}
                 >
                   <div className="modal_collection__text-btn modal-elem">
-                    {"Not on display"}
+                    {"Others"}
                   </div>
-                  {listSaleTypes["Not on display"] && (
+                  {listSaleTypes["Others"] && (
                     <div className="modal_collection__icon_check modal-elem">
                       {iconCheck}
                     </div>
