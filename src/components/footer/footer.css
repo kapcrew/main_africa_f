@@ -1,4 +1,7 @@
 .footer {
+  margin-top: 70px;
+  margin-left: -5px;
+  width: 102%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,6 +10,17 @@
   border-top: 1px solid rgba(165, 165, 165, 0.1);*/
   background-image: url("../../assets/svg/footer_b.svg");
   background-size: cover;
+  position: relative;
+}
+.footer_waves{
+  z-index: -1;
+  bottom: 160px;
+  position: absolute;
+  margin-left: -5px;
+  width: 102%;
+}
+.footer_waves svg{
+  width: 102%;
 }
 .prefooter {
   display: flex;

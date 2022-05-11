@@ -275,7 +275,7 @@ const Explorer = () => {
   }, [categories, collections, listSaleTypes, listSortTypes]);
 
   return (
-    <div className="section__padding">
+    <div className="content_explorer section__padding">
       {/*<Filter title="Test" />
   <input type="range" onInput={ handleInput } />
   <h1>Price: { price }</h1>*/}

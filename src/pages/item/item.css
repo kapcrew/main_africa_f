@@ -30,7 +30,7 @@
   /* height: 30px; */
 }
 .item-content__status {
-  padding: 15px 0 5px 0;
+  padding: 15px 0 15px 0;
   font-family: "NeometricBold";
   font-style: normal;
   font-weight: 700;
@@ -38,7 +38,7 @@
   line-height: 22px;
   display: flex;
   align-items: center;
-  justify-content: start;
+  /* justify-content: start; */
 /* text-align: left; */
 
   color: rgba(72, 43, 8, 0.6);
@@ -135,6 +135,27 @@
 
   color: rgba(72, 43, 8, 0.8);
 }
+.item-content__btn-buy-sub{
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  height: 77px;
+  border: none;
+  /* градиент */
+
+  background: linear-gradient(89.7deg, #f27b0c6b 1.02%, #caac1966 99.74%);
+  border-radius: 46px;
+
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+
+  color: rgb(72, 43, 8);
+}
 
 .item-content__btn-buy {
   width: 250px;
@@ -145,7 +166,7 @@
   background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
   border-radius: 38.5px;
 
-  font-family: "Neometric";
+  font-family: "NeometricBold";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -293,7 +314,7 @@
 .modal-tokens-action__input {
   padding-left: 15px;
   height: 56px;
-  width: 96%;
+  width: 100%;
   font-family: "Neometric";
   font-style: normal;
   font-weight: 400;
@@ -380,7 +401,7 @@ input::-webkit-inner-spin-button {
 
   padding-left: 15px;
   height: 56px;
-  width: 96%;
+  width: 100%;
   font-family: "Neometric";
   font-style: normal;
   font-weight: 400;

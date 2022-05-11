@@ -71,6 +71,7 @@
   display: block;
 }
 
+
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
@@ -106,7 +107,15 @@
   color: rgba(72, 43, 8, 0.8);
 }
 
+.iconWalletModal:hover~.modal {
+  display: block;
+}
+.modal:hover {
+  display: block;
+}
+
 .modal {
+  display: none;
   position: absolute;
   top: 72px;
   width: 297px;
@@ -168,7 +177,7 @@
   /* border-bottom: 1px solid rgba(72, 43, 8, 0.25); */
 }
 .model__block-wallet:hover{
-  background: rgba(72, 43, 8, 0.6);;
+  background: #ecb888;
 }
 .model__block-wallet__icon {
   margin-top: 5px;

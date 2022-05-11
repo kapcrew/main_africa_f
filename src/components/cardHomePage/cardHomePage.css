@@ -1,3 +1,7 @@
+.card-token-home__block{
+  height: 405px;
+  
+}
 .bids-card-home {
   background: #fffcf9;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
@@ -87,7 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 55px;
 }
 .card-token-home__owner-name {
   font-family: "Neometric";

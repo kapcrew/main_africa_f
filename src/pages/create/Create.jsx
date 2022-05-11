@@ -8,7 +8,10 @@ import Carousel from "react-elastic-carousel";
 import { sendMoney } from "../../scripts/index.js";
 import apiRequest from "../../api/apiRequest";
 import { useDropzone } from "react-dropzone";
+import { starInput } from "../../assets/icon";
 import DropzoneLoaderFile from "../../components/dropzoneLoaderFile/DropzoneLoaderFile";
+import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 const Create = () => {
   // FILE TO BASE64 -------------------------------------------------
 
@@ -52,6 +55,21 @@ const Create = () => {
   //   }
   // };
 
+  const checkFields = () => {
+    if (
+      mainFileBase64 &&
+      descriptionItem &&
+      nameItem &&
+      categoryItem &&
+      selectedCollection
+    ) {
+      console.log("selectedCollection", selectedCollection);
+      return true;
+    } else {
+      toast.error("Fill in all the fields");
+      return false;
+    }
+  };
   const creactCollection = async () => {
     const req = await apiRequest.post("/collections/create_collection", {
       name: nameCollection,
@@ -115,47 +133,59 @@ const Create = () => {
   const navigate = useNavigate();
 
   const [isCreated, setisCreated] = useState(false);
-  const delay = async (ms) => await new Promise(resolve => setTimeout(resolve, ms));
+  const delay = async (ms) =>
+    await new Promise((resolve) => setTimeout(resolve, ms));
+
   const creactItem = async () => {
-    setisCreated(true);
-    const reqSendMoney = await sendMoney();
-    console.log(reqSendMoney);
-    
-    if (reqSendMoney) {
-      try{
-        const req = await apiRequest.post("/nft/mint", {
-          title: nameItem,
-          description: descriptionItem,
-          category: categoryItem,
-          price: priceItem,
-          media: mainFileBase64.split(",")[1],
-          collection: selectedCollection,
-          addrToTransfer: localStorage.getItem("userAddress"),
-        });
-        
-        console.log(req.data)
-        await delay(7000);
+    if (checkFields()) {
+      setisCreated(true);
+      const reqSendMoney = await sendMoney();
+      console.log(reqSendMoney);
+
+      if (reqSendMoney) {
+        try {
+          const req = await apiRequest.post("/nft/mint", {
+            title: nameItem,
+            description: descriptionItem,
+            category: categoryItem,
+            price: priceItem,
+            media: mainFileBase64.split(",")[1],
+            collection: selectedCollection,
+            addrToTransfer: localStorage.getItem("userAddress"),
+          });
+
+          console.log(req.data);
+          await delay(8000);
+          setisCreated(false);
+          navigate("/item/" + req.data.address);
+        } catch ({ response: { data } }) {
+          console.log("error", data);
+        }
+      } else {
         setisCreated(false);
-        navigate("/item/" + req.data.address);
-      }catch({ response: { data } }){
-        console.log("error",data)
       }
-      
-    } else {
-      setisCreated(false);
     }
   };
 
   return (
     <div className="create section__padding">
       {isCreated && <PagePreloader />}
-
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toaster",
+        }}
+      />
       <div
         className="creat
       e-container"
       >
         <div className="create-container__main-name">Create new Item</div>
-        <div className="create-container__submain-name">Upload File</div>
+        <div className="create-container__submain-name">
+          Upload File <div className="starInput">{starInput}</div>
+        </div>
+
         <DropzoneLoaderFile
           className="dropzone"
           file={mainFileBase64}
@@ -170,9 +200,11 @@ const Create = () => {
           }
         />
 
-        <div className="create-container__submain-name">Name</div>
+        <div className="create-container__submain-name">
+          Name <div className="starInput">{starInput}</div>
+        </div>
         <input
-        placeholder="Put the item name here"
+          placeholder="Put the item name here"
           onChange={(e) => {
             setnameItem(e.target.value);
           }}
@@ -181,9 +213,11 @@ const Create = () => {
           className="create-container__input"
         />
 
-        <div className="create-container__submain-name">Description</div>
+        <div className="create-container__submain-name">
+          Description <div className="starInput">{starInput}</div>
+        </div>
         <textarea
-        placeholder="Describe your item"
+          placeholder="Describe your item"
           onChange={(e) => {
             setdescriptionItem(e.target.value);
           }}
@@ -192,9 +226,11 @@ const Create = () => {
           className="create-container__textarea"
         />
 
-        <div className="create-container__submain-name">Category</div>
+        <div className="create-container__submain-name">
+          Category <div className="starInput">{starInput}</div>
+        </div>
         <input
-        placeholder="Category your item"
+          placeholder="Category your item"
           onChange={(e) => {
             setcategoryItem(e.target.value);
           }}
@@ -203,7 +239,9 @@ const Create = () => {
           className="create-container__input"
         />
 
-        <div className="create-container__submain-name">Collection</div>
+        <div className="create-container__submain-name">
+          Collection <div className="starInput">{starInput}</div>
+        </div>
 
         <div className="carousel-collection">
           <Carousel itemsToShow={3}>
@@ -254,7 +292,7 @@ const Create = () => {
                 <div className="modal-creact-collection__block_data">
                   <div className="modal-creact-collection__title">Name</div>
                   <input
-                  placeholder="Enter the name of your collection"
+                    placeholder="Enter the name of your collection"
                     type="text"
                     value={nameCollection}
                     onChange={(e) => setnameCollection(e.target.value)}
@@ -268,7 +306,7 @@ const Create = () => {
                   Description
                 </div>
                 <textarea
-                placeholder="Enter a description of your collection"
+                  placeholder="Enter a description of your collection"
                   onChange={(e) => setdescription(e.target.value)}
                   value={description}
                   type="text"
@@ -289,7 +327,6 @@ const Create = () => {
                     }
                   />
                 </div>
-            
               </div>
             </div>
             <div className="modal-creact-collection__btns">
@@ -303,7 +340,7 @@ const Create = () => {
                 onClick={() => {
                   setmodalCreactCollection(false);
                 }}
-                className="modalUpdateData__btn"
+                className="modalUpdateData__btn-cancel"
               >
                 Cancel{" "}
               </button>
@@ -311,14 +348,13 @@ const Create = () => {
           </div>
         )}
         <div className="block-collection"></div>
-        <div className="create-container__submain-name">Price</div>
-        {/* <input type="number" className="create-container__input" value={price} onClick={(e)=>{setprice(Number(e.target.value))}} /> */}
+        {/* <div className="create-container__submain-name">Price</div>
         <input
           type="number"
           value={priceItem}
           onChange={(e) => setpriceItem(e.target.value)}
           className="create-container__input"
-        />
+        /> */}
 
         <button className="btn-creact-item" onClick={creactItem}>
           Create Item

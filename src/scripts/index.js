@@ -7,6 +7,7 @@ import {
 import apiRequest from "../api/apiRequest";
 // import pkgData from "../../ton-packages/Data.package.ts";
 import toast from "react-hot-toast";
+import { NETWORK } from "../config/config";
 const ever = new ProviderRpcClient();
 // window.getProvider = getProvider;
 // window.PROVIDERS = PROVIDERS;
@@ -633,20 +634,27 @@ export async function sendMoney() {
 
 const getUserDataFromExtension = async () => {
   try {
-    // let tonConnection = await ton.rawApi.getProviderState();
+    let tonConnection = await ever.rawApi.getProviderState();
     if (!(await ever.hasProvider())) {
       throw new Error("Extension is not installed");
     }
     await ever.ensureInitialized();
-
-    const { accountInteraction } = await ever.requestPermissions({
-      permissions: ["basic", "accountInteraction"],
-    });
-    if (accountInteraction == null) {
-      throw new Error("Insufficient permissions");
+    console.log("tonConnection.selectedConnection",tonConnection.selectedConnection)
+    if (tonConnection.selectedConnection === NETWORK){
+      const { accountInteraction } = await ever.requestPermissions({
+        permissions: ["basic", "accountInteraction"],
+      });
+      if (accountInteraction == null) {
+        throw new Error("Insufficient permissions");
+      }
+      // 
+      return accountInteraction;
+    } else {
+      ever.disconnect();
+      toast.error(`Please change the network to ${NETWORK}`)
+      return false
     }
-    // ever.disconnect();
-    return accountInteraction;
+   
   } catch (error) {
     console.error(error);
   }
@@ -654,6 +662,7 @@ const getUserDataFromExtension = async () => {
 
 export async function login() {
   try {
+   
     const userDataFromExtension = await getUserDataFromExtension();
     console.log(userDataFromExtension);
     const serverResponse = await apiRequest.post("/auth/login", {

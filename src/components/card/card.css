@@ -1,7 +1,5 @@
-
 .bids-card {
-  border: 1.5px solid #f27b0c51 
-  ;
+  border: 1.5px solid #f27b0c51;
   width: 225px;
   /* height: 318px; */
   display: flex;
@@ -11,10 +9,10 @@
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   border-radius: 13px;
 }
-.bids-card:hover{
+.bids-card:hover {
   transition: 1s;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.301);
- }
+}
 .bids-top {
   padding: 0px 10px 12px 0;
   width: 100%;
@@ -35,7 +33,7 @@
   transition: 1s;
   object-fit: cover;
 }
-.bids-title{
+.bids-title {
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 14px;
@@ -49,25 +47,23 @@
   justify-content: space-between;
 }
 .card-btn-buy {
-  display: flex;
   justify-content: center;
   width: 90px;
   height: 32px;
+  background: linear-gradient(89.7deg, #f27b0c6b 1.02%, #caac1966 99.74%);
+  /* opacity: 0.2; */
+  border-radius: 38.5px;
   border: none;
-  /* градиент */
 
-  background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
-  border-radius: 46px;
-
-  font-family: "Neometric";
+  font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 16px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
   display: flex;
   align-items: center;
 
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(72, 43, 8);
 }
 .card-price {
   height: 40px;
@@ -99,12 +95,12 @@
   width: 100%;
   justify-content: space-between;
 }
-.love{
+.love {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.love-icon{
+.love-icon {
   margin-top: 5px;
   margin-right: 4px;
 }

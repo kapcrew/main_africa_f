@@ -4,48 +4,49 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 const CardHomePage = ({ infoToken }) => {
   const navigate = useNavigate();
   return (
-    <div className="card-token-home">
-      <div className="card-token-home__top">
-        <img
-          className="card-token-home__top-img"
-          src={"https://" + infoToken.media}
-        />
-      </div>
-      <div className="card-token-home__button">
-        <div className="card-token-home__info">
-          <div className="card-token-home__info-top">
-            <div className="card-token-home__info-main">
-              <div className="card-token-home__collection">
-                {infoToken.collection}
+    <div className="card-token-home__block">
+      <div className="card-token-home">
+        <div className="card-token-home__top">
+          <img
+            className="card-token-home__top-img"
+            src={"https://" + infoToken.media}
+          />
+        </div>
+        <div className="card-token-home__button">
+          <div className="card-token-home__info">
+            <div className="card-token-home__info-top">
+              <div className="card-token-home__info-main">
+                <div className="card-token-home__collection">
+                  {infoToken.collection}
+                </div>
+                <div className="card-token-home__title">{infoToken.title}</div>
               </div>
-              <div className="card-token-home__title">{infoToken.title}</div>
+
+              <div className="card-token-home__price">
+                <div className="card-token-home__name-price">Price</div>
+                <div className="card-token-home__some-price">
+                  {" "}
+                  {infoToken.onSale
+                    ? infoToken.price + " EVER"
+                    : "Not on sale"}{" "}
+                </div>
+              </div>
             </div>
 
-            <div className="card-token-home__price">
-              <div className="card-token-home__name-price">Price</div>
-              <div className="card-token-home__some-price">
-                {" "}
-                {infoToken.onSale
-                  ? infoToken.price + " EVER"
-                  : "Not on sale"}{" "}
-              </div>
+            <div className="card-token-home__description">
+              {infoToken.description.substring(0, 65)}
             </div>
           </div>
-
-          <div className="card-token-home__description">
-            {infoToken.description}
+          <div className="card-token-home__owner">
+            <div className="card-token-home__owner-name">Owner: </div>
+            <div className="card-token-home__owner-address">
+              {" "}
+              {infoToken.owner.substring(0, 6)}...
+              {infoToken.owner.substring(60, 66)}
+            </div>
           </div>
         </div>
-        <div className="card-token-home__owner">
-          <div className="card-token-home__owner-name">Owner: </div>
-          <div className="card-token-home__owner-address">
-            {" "}
-            {infoToken.owner.substring(0, 6)}...
-            {infoToken.owner.substring(60, 66)}
-          </div>
-        </div>
-      </div>
-      {/* <div className="card-token-home-top">
+        {/* <div className="card-token-home-top">
         <div>*</div>
         <div className="bids-card__menu">{menuCard}</div>
       </div>
@@ -94,6 +95,7 @@ const CardHomePage = ({ infoToken }) => {
           </div>
         </div>
       </div> */}
+      </div>
     </div>
   );
 };

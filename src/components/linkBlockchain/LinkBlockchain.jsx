@@ -1,11 +1,11 @@
 import "./LinkBlockchain.css";
-
+import { EVERLIVE } from "../../config/config";
 const LinkBlockchain = ({ address }) => {
   return (
     <div>
       <a
         className="link"
-        href={"https://net.ever.live/accounts/accountDetails?id=" + address}
+        href={`https://${EVERLIVE}/accounts/accountDetails?id=` + address}
         target="_blank"
       >
 

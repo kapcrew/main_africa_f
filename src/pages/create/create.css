@@ -194,6 +194,13 @@
 .modal-creact-collection__block_data {
   padding-bottom: 15px;
 }
+.starInput{
+  margin: -23px 0 0 0;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  /* padding-right: 15px; */
+}
 .modal-creact-collection__input_description {
   border-radius: 10px;
   resize: none;

@@ -416,7 +416,7 @@ const Item = () => {
                 )}
                 {visibleBtnPutOnSale && (
                   <button
-                    className="item-content__btn-buy"
+                    className="item-content__btn-buy-sub"
                     onClick={() => {
                       setisputItUpAuction(true);
                     }}
@@ -429,7 +429,7 @@ const Item = () => {
               {visibleBtnWithdrawFromSale && (
                 <div className="item-content__block-buy">
                   <button
-                    className="item-content__btn-buy"
+                    className="item-content__btn-buy-sub"
                     onClick={() => {
                       setisWithdrawSaleModal(true);
                     }}
@@ -449,7 +449,7 @@ const Item = () => {
               <div className="btns-billing">
                 {visibleBtnStopAuctionOwner && (
                   <button
-                    className="item-content__btn-buy"
+                    className="item-content__btn-buy-sub"
                     onClick={() => {
                       setisStopAuctionOwner(true);
                     }}
@@ -720,7 +720,7 @@ const Item = () => {
                    
                   />
                   <div className="modal-tokens-action__submaintext text-name-price">
-                    Your price
+                  The first bid
                   </div>
                   <input
                     type="number"

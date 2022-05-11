@@ -101,7 +101,7 @@ const Bids = ({ title }) => {
     // setisLoading(true);
   };
   return (
-    <div className="bids section__padding">
+    <div className="bids">
       <div className="bids-container">
         <div className="bids-container-text">Top token</div>
         {isLoading ? (

@@ -1,6 +1,7 @@
 .content {
   padding: 0 6rem;
 }
+.content_explorer{}
 .filter {
   padding-bottom: 70px;
 }
@@ -24,7 +25,7 @@
   height: 48px;
 
   background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(72, 43, 8, 0.5);
+  border:  1.5px solid #f27b0c51;
   box-sizing: border-box;
   border-radius: 46px;
 
@@ -41,6 +42,12 @@
   text-outline: ellipsis;
 
   color: rgba(72, 43, 8, 0.8);
+
+  /* border: 1px solid transparent;
+  border-image: linear-gradient(#f27d0c, #caad19);
+  -moz-border-image: -moz-linear-gradient(#f27d0c, #caad19);
+  -webkit-border-image: -webkit-linear-gradient(#f27d0c, #caad19);
+  border-image-slice: 1; */
 }
 .filter-bottom__icon {
   margin-top: 2.5px;
@@ -53,7 +60,7 @@
 .filter-bottoms {
   flex-wrap: wrap;
   display: flex;
-  gap: 25px;
+  gap: 19px;
 }
 .filter-bottom_end {
   width: 300px;
