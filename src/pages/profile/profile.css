@@ -1,3 +1,6 @@
+.content{
+  min-height: 150vh;
+}
 .cover-image {
   /* border: 1px solid #000; */
   width: 100%;
@@ -190,7 +193,7 @@
   border: 3px solid rgba(203, 142, 84, 0.2);
   color: rgba(72, 43, 8, 0.6);
   word-break: break-all;
-  width: 92%;
+  width: 100%;
   font-family: "NeometricBold";
   font-style: normal;
   font-weight: 400;
@@ -230,7 +233,27 @@
 
   color: rgba(255, 255, 255, 0.9);
 }
+.modalUpdateData__btn-cancel{
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 32px;
+  border: none;
+  /* градиент */
 
+  background: linear-gradient(89.7deg, #f27b0c6b 1.02%, #caac1966 99.74%);
+  border-radius: 46px;
+
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+
+  color: rgb(72, 43, 8);
+}
 .tabs-line {
   width: 100%;
   /* he-ight: 1px; */

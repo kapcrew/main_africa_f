@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { FaWallet } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { login, login_out } from "../../scripts/index.js";
-
+import { Toaster } from "react-hot-toast";
 import {
   iconProfile,
   iconMyCollections,
@@ -28,7 +28,6 @@ const Menu = () => (
 );
 
 const Navbar = () => {
-
   const [isOpenModalLogin, setisOpenModalLogin] = useState(false);
 
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -43,8 +42,8 @@ const Navbar = () => {
     }
   }, []);
 
-  const handleLogout = async() => {
-    setisOpenModalLogin(false)
+  const handleLogout = async () => {
+    setisOpenModalLogin(false);
     await login_out();
     setUser(false);
     window.location.reload();
@@ -52,11 +51,17 @@ const Navbar = () => {
   function handleLogin(e) {
     e.preventDefault();
     login();
-    
   }
 
   return (
     <div className="navbar">
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toaster",
+        }}
+      />
       <div className="navbar-links">
         <div className="navbar-links_logo">
           <div className="logo">
@@ -82,25 +87,15 @@ const Navbar = () => {
           <>
             {/* <Link to=""> */}
             <div class="dropdown">
-              <div style={{ display: "none" }}>
-                <CgProfile
-                  size={30}
-                  color="rgba(72, 43, 8, 0.8)"
-                  class="dropbtn"
-                  className="header-icon" /* onClick={handleLogout}*/
-                />
-              </div>
               <div className="iconProfile main-tab">{iconUserModal}</div>
               <div class="dropdown-content">
                 <div>
-                  
                   <Link to={`/create`}>
                     <div className="menu_item__block">
                       <div className="menu_item__icon">{iconProfile}</div>
                       <div class="menu_item">Create</div>
                     </div>
-                    </Link>
-               
+                  </Link>
                 </div>
 
                 <Link to={`/profile/${address}`}>
@@ -110,71 +105,58 @@ const Navbar = () => {
                     <div class="menu_item">Profile</div>
                   </div>
                 </Link>
-                <a href="#">
+                <Link to={`/profile/${address}`}>
                   <div className="menu_item__block">
                     <div className="menu_item__icon"> {iconMyCollections}</div>
 
                     <div class="menu_item">My Collections</div>
                   </div>
-                </a>
-                <a href="#">
-                  <div className="menu_item__block">
-                    <div className="menu_item__icon"> {iconSettings}</div>
-
-                    <div class="menu_item">Setting</div>
-                  </div>
-                </a>
+                </Link>
               </div>
             </div>
             <div
               className="iconWalletModal main-tab"
               onClick={() => {
-                console.log("!!!")
+                console.log("!!!");
                 setisOpenModalLogin(!isOpenModalLogin);
               }}
             >
               {iconWalletModal}
             </div>
-            {isOpenModalLogin && (
+            {1 && (
               <div className="modal">
                 <div className="modal__name-modal">
-                  <div className="modal__icon">
-                  {iconWalletModal}
-                  </div>
+                  <div className="modal__icon">{iconWalletModal}</div>
                   <div className="modal__name">My wallet</div>
                 </div>
                 <div className="model__content-auth">
-                <a>
-                  <div class="address_text">
-                  Your address: {address.substring(0, 6)}...{address.substring(60, 66)}
-                  </div>
-                </a>
+                  <a>
+                    <div class="address_text">
+                      Your address: {address.substring(0, 6)}...
+                      {address.substring(60, 66)}
+                    </div>
+                  </a>
                   <div className="model__text-auth">
                     {" "}
-                    
                     You can log out of the wallet
-                    
                   </div>
-                  
+
                   <div className="model__block-auth">
-                  <Link to="/">
-                    <div className="model__block-wallet"  onClick={handleLogout}>
-                    <div className="model__block-wallet__name">
-                    Logout
+                    <Link to="/">
+                      <div
+                        className="model__block-wallet"
+                        onClick={handleLogout}
+                      >
+                        <div className="model__block-wallet__name">Logout</div>
                       </div>
-              
-            
-                    </div>
                     </Link>
                   </div>
                 </div>
               </div>
-             
             )}
           </>
         ) : (
           <>
-
             <div
               className="iconWalletModal main-tab"
               onClick={() => {
@@ -183,21 +165,12 @@ const Navbar = () => {
             >
               {iconWalletModal}
             </div>
-            {/* <FaWallet
-                size={30}
-                color="rgba(72, 43, 8, 0.8)"
-                className="header-icon"
-                onClick={() => {
-                  setisOpenModalLogin(!isOpenModalLogin);
-                }}
-              /> */}
+            
 
-            {isOpenModalLogin && (
+            {1 && (
               <div className="modal">
                 <div className="modal__name-modal">
-                  <div className="modal__icon">
-                  {iconWalletModal}
-                  </div>
+                  <div className="modal__icon">{iconWalletModal}</div>
                   <div className="modal__name">My wallet</div>
                 </div>
                 <div className="model__content-auth">
@@ -217,7 +190,6 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-             
             )}
             {/*<Link to="/register">*/}
           </>

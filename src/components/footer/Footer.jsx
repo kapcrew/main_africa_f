@@ -4,10 +4,11 @@ import nftlogo from "../../assets/logo.png";
 import { AiOutlineInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { RiDiscordFill } from "react-icons/ri";
 import { FaTelegramPlane } from "react-icons/fa";
-
+import { footer_waves } from "../../assets/icon";
 const Footer = () => {
   return (
     <div className="footer">
+      <div className="footer_waves">{footer_waves}</div>
       <div className="footer-links">
         <div className="footer-links_logo">
           <div>
@@ -35,7 +36,7 @@ const Footer = () => {
             <p> © {new Date().getFullYear()} Imara NFT</p>
           </div>
         </div>
-        <div className="footer-links_divs"> 
+        <div className="footer-links_divs">
           <div className="footer-links_div">
             <div>Imara NFT</div>
             <p>Explore</p>

@@ -224,7 +224,7 @@ const Profile = () => {
                 onClick={() => {
                   setmodalUpdateData(false);
                 }}
-                className="modalUpdateData__btn"
+                className="modalUpdateData__btn-cancel"
               >
                 Cancel{" "}
               </button>
