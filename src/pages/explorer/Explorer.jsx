@@ -3,7 +3,7 @@ import { Bids, Filter, Cards, Button } from "../../components";
 // import Data from "./Data";
 import { useState, useEffect } from "react";
 import "./explorer.css";
-import Loader from "../../components/loader/loader"
+import Loader from "../../components/loader/loader";
 import { iconCheck } from "../../assets/icon";
 import {
   iconSaleType,
@@ -23,13 +23,12 @@ const Explorer = () => {
     setisLoading(false);
     const res = await apiRequest.get("/items/get_items");
     setItems(res.data);
-    setitemsInitially(res.data)
+    setitemsInitially(res.data);
     console.log(res);
 
     setisLoading(true);
     //  CATEGORY  --------------------
     if (isLoading) {
-    
     }
   };
   useEffect(() => {
@@ -108,7 +107,6 @@ const Explorer = () => {
   };
 
   const applyPrice = () => {
-
     updateListToken();
     setModalPrice(false);
   };
@@ -117,8 +115,8 @@ const Explorer = () => {
 
   const [listSaleTypes, setlistSaleTypes] = useState({
     "On sale": false,
-    "Auction": false,
-    "Others": false,
+    Auction: false,
+    Others: false,
   });
   const changelistSaleTypes = (event) => {
     setlistSaleTypes((pre) => {
@@ -131,7 +129,6 @@ const Explorer = () => {
 
   const updateListToken = () => {
     const newItems = itemsInitially.filter((newVal) => {
-      
       let flagCategories = false;
       let flagCollections = false;
       let flagSaleType = false;
@@ -170,19 +167,29 @@ const Explorer = () => {
           flagSaleTypeAll = true;
         }
         // console.log(collections[collection]);
-        // console.log(listSaleTypes[saleType],saleType,newVal.onAuction) 
-        
-        if (listSaleTypes[saleType] &&(listSaleTypes[saleType] === newVal.onAuction &&  saleType === "Auction")) {
+        // console.log(listSaleTypes[saleType],saleType,newVal.onAuction)
+
+        if (
+          listSaleTypes[saleType] &&
+          listSaleTypes[saleType] === newVal.onAuction &&
+          saleType === "Auction"
+        ) {
           flagSaleType = true;
-          
         }
-        if (listSaleTypes[saleType] &&(listSaleTypes[saleType] === newVal.onSale &&  saleType === "On sale")) {
+        if (
+          listSaleTypes[saleType] &&
+          listSaleTypes[saleType] === newVal.onSale &&
+          saleType === "On sale"
+        ) {
           flagSaleType = true;
-          
         }
-        if (listSaleTypes[saleType] && newVal.onAuction === false && newVal.onSale === false &&  saleType === "Others") {
+        if (
+          listSaleTypes[saleType] &&
+          newVal.onAuction === false &&
+          newVal.onSale === false &&
+          saleType === "Others"
+        ) {
           flagSaleType = true;
-          
         }
       }
 
@@ -202,7 +209,6 @@ const Explorer = () => {
       } else {
         flagPriceRange = true;
       }
-
 
       // console.log("flagCategoriesAll",flagCollectionsAll,flagCollections)
       if (
@@ -282,252 +288,284 @@ const Explorer = () => {
       <div className="main_name ">Explore NFTs</div>
       <div className="filter">
         <div className="filter-bottoms">
-          <button
-            className="filter-bottom_"
-            onClick={() => setModalCategory(!modalCategory)}
-          >
-            <div className="filter-bottom__icon">{iconCategory}</div>
-            <div className="filter-bottom__name">Category</div>
-          </button>
-          {modalCategory && (
-            <div className="modal_category">
-              {categoriesArr?.map((category) => {
-                // console.log(category);
-                // console.log(categories[category]);
-                return (
-                  <>
-                    <button
-                      className="modal_category__btn modal-btn"
-                      id={category}
-                      onClick={changeCategory}
-                    >
-                      <div className="modal_category__text-btn modal-elem">
-                        {category}
-                      </div>
-                      {categories[category] && (
-                        <div className="modal_category__icon_check modal-elem">
-                          {iconCheck}
-                        </div>
-                      )}
-                    </button>
-                  </>
-                );
-              })}
-            </div>
-          )}
-
-          <button
-            className="filter-bottom_"
-            onClick={() => setModalCollection(!modalCollection)}
-          >
-            <div className="filter-bottom__icon">{iconCollection}</div>
-            <div className="filter-bottom__name">Collection</div>
-          </button>
-
-          {modalCollection && (
-            <div className="modal_collection">
-              {collectionArr.map((collection) => {
-                // console.log(category);
-                // console.log(categories[category]);
-                return (
-                  <>
-                    <button
-                      className="modal_collection__btn modal-btn"
-                      id={collection}
-                      onClick={changeCollection}
-                    >
-                      <div className="modal_collection__text-btn modal-elem">
-                        {collection}
-                      </div>
-                      {collections[collection] && (
-                        <div className="modal_collection__icon_check modal-elem">
-                          {iconCheck}
-                        </div>
-                      )}
-                    </button>
-                  </>
-                );
-              })}
-            </div>
-          )}
-          <button
-            className="filter-bottom_"
-            onClick={() => setModalPrice(!modalPrice)}
-          >
-            <div className="filter-bottom__icon">{iconPriceRange}</div>
-            <div className="filter-bottom__name">Price range</div>
-          </button>
-          {modalPrice && (
-            <div className="modal_price">
-              <div className="modal_price__inputs">
-                <input
-                  value={priceFrom}
-                  type="number"
-                  className="modal_price__input"
-                  placeholder="From"
-                  onChange={(e) => {
-                    setpriceFrom(e.target.value);
-                  }}
-                />
-                <input
-                  value={priceTo}
-                  type="number"
-                  className="modal_price__input"
-                  placeholder="To"
-                  onChange={(e) => {
-                    setpriceTo(e.target.value);
-                  }}
-                />
+          <div>
+            <button
+              className={`filter-bottom_ ${
+                modalCategory && "filter-bottom-activ"
+              }`}
+              onClick={() => setModalCategory(!modalCategory)}
+            >
+              <div className="filter-bottom__icon">{iconCategory}</div>
+              <div className="filter-bottom__name">Category</div>
+            </button>
+            {modalCategory && (
+              <div className="for_modal">
+                <div className="modal_category">
+                  {categoriesArr?.map((category) => {
+                    // console.log(category);
+                    // console.log(categories[category]);
+                    return (
+                      <>
+                        <button
+                          className="modal_category__btn modal-btn"
+                          id={category}
+                          onClick={changeCategory}
+                        >
+                          <div className="modal_category__text-btn modal-elem">
+                            {category}
+                          </div>
+                          {categories[category] && (
+                            <div className="modal_category__icon_check modal-elem">
+                              {iconCheck}
+                            </div>
+                          )}
+                        </button>
+                      </>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="modal-price__btns">
-                <button
-                  className="modal-price__btn-clear"
-                  onClick={clearPriceInput}
-                >
-                  Clear all
-                </button>
-                <button className="modal-price__btn-apply" onClick={applyPrice}>
-                  Apply
-                </button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
+          <div>
+            <button
+              className={`filter-bottom_ ${
+                modalCollection && "filter-bottom-activ"
+              }`}
+              onClick={() => setModalCollection(!modalCollection)}
+            >
+              <div className="filter-bottom__icon">{iconCollection}</div>
+              <div className="filter-bottom__name">Collection</div>
+            </button>
 
+            {modalCollection && (
+              <div className="for_modal">
+                <div className="modal_collection">
+                  {collectionArr.map((collection) => {
+                    // console.log(category);
+                    // console.log(categories[category]);
+                    return (
+                      <>
+                        <button
+                          className="modal_collection__btn modal-btn"
+                          id={collection}
+                          onClick={changeCollection}
+                        >
+                          <div className="modal_collection__text-btn modal-elem">
+                            {collection}
+                          </div>
+                          {collections[collection] && (
+                            <div className="modal_collection__icon_check modal-elem">
+                              {iconCheck}
+                            </div>
+                          )}
+                        </button>
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+          <div>
+            <button
+              className={`filter-bottom_ ${
+                modalPrice && "filter-bottom-activ"
+              }`}
+              onClick={() => setModalPrice(!modalPrice)}
+            >
+              <div className="filter-bottom__icon">{iconPriceRange}</div>
+              <div className="filter-bottom__name">Price range</div>
+            </button>
+            {modalPrice && (
+              <div className="for_modal">
+                <div className="modal_price">
+                  <div className="modal_price__inputs">
+                    <input
+                      value={priceFrom}
+                      type="number"
+                      className="modal_price__input"
+                      placeholder="From"
+                      onChange={(e) => {
+                        setpriceFrom(e.target.value);
+                      }}
+                    />
+                    <input
+                      value={priceTo}
+                      type="number"
+                      className="modal_price__input"
+                      placeholder="To"
+                      onChange={(e) => {
+                        setpriceTo(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="modal-price__btns">
+                    <button
+                      className="modal-price__btn-clear"
+                      onClick={clearPriceInput}
+                    >
+                      Clear all
+                    </button>
+                    <button
+                      className="modal-price__btn-apply"
+                      onClick={applyPrice}
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <div>
           <button
-            className="filter-bottom_"
+            className={`filter-bottom_ ${modalSale && "filter-bottom-activ"}`}
             onClick={() => setModalSale(!modalSale)}
           >
             <div className="filter-bottom__icon">{iconSaleType}</div>
             <div className="filter-bottom__name">Sale type</div>
           </button>
           {modalSale && (
-            <div className="modal_sale">
-              <div className="modal_sale__btns">
-                <button
-                  className="modal_collection__btn modal-btn"
-                  id={"On sale"}
-                  onClick={changelistSaleTypes}
-                >
-                  <div className="modal_collection__text-btn modal-elem">
-                    {"On sale"}
-                  </div>
-                  {listSaleTypes["On sale"] && (
-                    <div className="modal_collection__icon_check modal-elem">
-                      {iconCheck}
+            <div className="for_modal">
+              <div className="modal_sale">
+                <div className="modal_sale__btns">
+                  <button
+                    className="modal_collection__btn modal-btn"
+                    id={"On sale"}
+                    onClick={changelistSaleTypes}
+                  >
+                    <div className="modal_collection__text-btn modal-elem">
+                      {"On sale"}
                     </div>
-                  )}
-                </button>
-                <button
-                  className="modal_collection__btn modal-btn"
-                  id={"Auction"}
-                  onClick={changelistSaleTypes}
-                >
-                  <div className="modal_collection__text-btn modal-elem">
-                    {"Auction"}
-                  </div>
-                  {listSaleTypes["Auction"] && (
-                    <div className="modal_collection__icon_check modal-elem">
-                      {iconCheck}
+                    {listSaleTypes["On sale"] && (
+                      <div className="modal_collection__icon_check modal-elem">
+                        {iconCheck}
+                      </div>
+                    )}
+                  </button>
+                  <button
+                    className="modal_collection__btn modal-btn"
+                    id={"Auction"}
+                    onClick={changelistSaleTypes}
+                  >
+                    <div className="modal_collection__text-btn modal-elem">
+                      {"Auction"}
                     </div>
-                  )}
-                </button>
-                <button
-                  className="modal_collection__btn modal-btn"
-                  id={"Others"}
-                  onClick={changelistSaleTypes}
-                >
-                  <div className="modal_collection__text-btn modal-elem">
-                    {"Others"}
-                  </div>
-                  {listSaleTypes["Others"] && (
-                    <div className="modal_collection__icon_check modal-elem">
-                      {iconCheck}
+                    {listSaleTypes["Auction"] && (
+                      <div className="modal_collection__icon_check modal-elem">
+                        {iconCheck}
+                      </div>
+                    )}
+                  </button>
+                  <button
+                    className="modal_collection__btn modal-btn"
+                    id={"Others"}
+                    onClick={changelistSaleTypes}
+                  >
+                    <div className="modal_collection__text-btn modal-elem">
+                      {"Others"}
                     </div>
-                  )}
-                </button>
+                    {listSaleTypes["Others"] && (
+                      <div className="modal_collection__icon_check modal-elem">
+                        {iconCheck}
+                      </div>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           )}
+          </div>
           <div className="filter-bottom_end"></div>
           <div className="image_bird">
             <img src={birdExplorer} alt="" />
           </div>
-
+        </div>
+        <div className="most-recent">
+          {" "}
           <button
-            className="filter-bottom_"
+            className={`filter-bottom_ ${modalMost && "filter-bottom-activ"}`}
             onClick={() => setModalMost(!modalMost)}
           >
             <div className="filter-bottom__icon">{iconMostRecent}</div>
             <div className="filter-bottom__name">Most recent</div>
           </button>
           {modalMost && (
-            <div className="modal_most">
-              <div className="modal_most__btns">
-                <div className="modal_most__namesort">Sort by</div>
-                <button
-                  className="modal_most__btn modal-btn"
-                  id={"Most recent"}
-                  onClick={changelistSortTypes}
-                >
-                  <div className="modal_most__text-btn modal-elem">
-                    {"Most recent"}
-                  </div>
-                  {listSortTypes["Most recent"] && (
-                    <div className="modal_most__icon_check modal-elem">
-                      {iconCheck}
+            <div className="for_modal">
+              <div className="modal_most">
+                <div className="modal_most__btns">
+                  <div className="modal_most__namesort">Sort by</div>
+                  <button
+                    className="modal_most__btn modal-btn"
+                    id={"Most recent"}
+                    onClick={changelistSortTypes}
+                  >
+                    <div className="modal_most__text-btn modal-elem">
+                      {"Most recent"}
                     </div>
-                  )}
-                </button>
-                <button
-                  className="modal_most__btn modal-btn"
-                  id={"Price: Low to High"}
-                  onClick={changelistSortTypes}
-                >
-                  <div className="modal_most__text-btn modal-elem">
-                    {"Price: Low to High"}
-                  </div>
-                  {listSortTypes["Price: Low to High"] && (
-                    <div className="modal_most__icon_check modal-elem">
-                      {iconCheck}
+                    {listSortTypes["Most recent"] && (
+                      <div className="modal_most__icon_check modal-elem">
+                        {iconCheck}
+                      </div>
+                    )}
+                  </button>
+                  <button
+                    className="modal_most__btn modal-btn"
+                    id={"Price: Low to High"}
+                    onClick={changelistSortTypes}
+                  >
+                    <div className="modal_most__text-btn modal-elem">
+                      {"Price: Low to High"}
                     </div>
-                  )}
-                </button>
-                <button
-                  className="modal_most__btn modal-btn"
-                  id={"Price: High to Low"}
-                  onClick={changelistSortTypes}
-                >
-                  <div className="modal_most__text-btn modal-elem">
-                    {"Price: High to Low"}
-                  </div>
-                  {listSortTypes["Price: High to Low"] && (
-                    <div className="modal_most__icon_check modal-elem">
-                      {iconCheck}
+                    {listSortTypes["Price: Low to High"] && (
+                      <div className="modal_most__icon_check modal-elem">
+                        {iconCheck}
+                      </div>
+                    )}
+                  </button>
+                  <button
+                    className="modal_most__btn modal-btn"
+                    id={"Price: High to Low"}
+                    onClick={changelistSortTypes}
+                  >
+                    <div className="modal_most__text-btn modal-elem">
+                      {"Price: High to Low"}
                     </div>
-                  )}
-                </button>
-                <button
-                  className="modal_most__btn modal-btn"
-                  id={"Random"}
-                  onClick={changelistSortTypes}
-                >
-                  <div className="modal_most__text-btn modal-elem">
-                    {"Random"}
-                  </div>
-                  {listSortTypes["Random"] && (
-                    <div className="modal_most__icon_check modal-elem">
-                      {iconCheck}
+                    {listSortTypes["Price: High to Low"] && (
+                      <div className="modal_most__icon_check modal-elem">
+                        {iconCheck}
+                      </div>
+                    )}
+                  </button>
+                  <button
+                    className="modal_most__btn modal-btn"
+                    id={"Random"}
+                    onClick={changelistSortTypes}
+                  >
+                    <div className="modal_most__text-btn modal-elem">
+                      {"Random"}
                     </div>
-                  )}
-                </button>
+                    {listSortTypes["Random"] && (
+                      <div className="modal_most__icon_check modal-elem">
+                        {iconCheck}
+                      </div>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           )}
         </div>
       </div>
-      {isLoading ?  <div> <Cards items={items} /></div> : 
-      <div className="loaderr">{<Loader />}</div> 
-      }
+      {isLoading ? (
+        <div>
+          {" "}
+          <Cards items={items} />
+        </div>
+      ) : (
+        <div className="loaderr">{<Loader />}</div>
+      )}
     </div>
   );
 };

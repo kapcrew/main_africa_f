@@ -12,7 +12,9 @@
 }
 .item-content {
   width: 100%;
-  max-width: 450px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
 }
 .item-content__name {
   font-family: "NeometricBold";
@@ -27,10 +29,16 @@
 }
 .auction-info{
   padding-top: 10px;
-  /* height: 30px; */
+  height: 175px;
+}
+.res-details-img{
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .item-content__status {
-  padding: 15px 0 15px 0;
+  padding: 10px 0 17px 0;
   font-family: "NeometricBold";
   font-style: normal;
   font-weight: 700;
@@ -52,7 +60,7 @@
 }
 
 .auction-lider{
-  padding-bottom: 5px;
+  padding: 25px 0;
   height: 30px;
   font-family: "NeometricBold";
   font-style: normal;
@@ -64,7 +72,7 @@
   justify-content: start;
 /* text-align: left; */
 
-  color: rgba(72, 43, 8, 0.6);
+  color: rgba(72, 43, 8, 0.8);
 }
 .auction-lider__address{
   padding:0 10px;
@@ -96,7 +104,8 @@
   width: 100%;
   min-width: 150px;
 }
-.main-name-details {
+.main-name-details__Details{
+  width: 110px;
   padding: 35px 0 10px 0;
   font-family: "NeometricBold";
   font-style: normal;
@@ -105,6 +114,22 @@
   line-height: 22px;
   display: flex;
   align-items: center;
+  justify-content: start;
+
+  color: #482b08;
+}
+.main-name-details {
+  /* width: 100%; */
+  width: 140px;
+  padding: 35px 0 10px 0;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
 
   color: #482b08;
 }
@@ -166,9 +191,9 @@
   background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
   border-radius: 38.5px;
 
-  font-family: "NeometricBold";
+  font-family: "Neometric";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 18px;
   line-height: 22px;
 
@@ -212,12 +237,16 @@
 }
 .item-content__choice-details{
   display: flex;
-  gap: 20px;
-  /* border-bottom: 1px solid rgba(72, 43, 8, 0.3); */
+
+  border-bottom: 1px solid rgba(72, 43, 8, 0.3);
+  width: min-content;
 }
 .link-blockchain {
   /* padding: 20px; */
   padding-left: 10px;
+}
+.res-details-images{
+  margin-right: 15px;
 }
 .item-content__btns {
   padding-top: 20px;

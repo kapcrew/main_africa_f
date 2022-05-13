@@ -4,6 +4,8 @@ import { Home, Profile, Item, Create, Login, Explorer } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import Collection from "./pages/collection/Collection";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import Error404 from "./pages/error404/error404";
+import { Navigate } from "react-router";
 function App() {
   return (
     <div>
@@ -45,6 +47,9 @@ function App() {
               // </PrivateRoute>
             }
           />
+          <Route path="/error-404" element={<Error404 />} />
+
+          <Route path="*" element={<Navigate to="/error-404" />} />
         </Routes>
       </div>
       <div className="footerApp">

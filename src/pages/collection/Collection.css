@@ -7,13 +7,35 @@
 .collection-info-prof__name {
   font-family: "NeometricBold";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 24px;
   line-height: 29px;
-  display: flex;
-  align-items: center;
+
 
   color: #482b08;
+}
+.collection-info-prof__by{
+  /* margin-left: 2px; */
+  font-family: 'Neometric';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 29px;
+
+
+color: #482B08;
+}
+.collection-info-prof__owner{
+  /* margin-left: 2px; */
+  font-family: 'Neometric';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 29px;
+
+background: linear-gradient(89.7deg, #F27D0C 1.02%, #CAAD19 99.74%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 .cover-image__img{
   width: 100%;

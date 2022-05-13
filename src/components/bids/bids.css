@@ -1,24 +1,38 @@
-
-.bids-container{
+.bids-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
-.carousel-home{}
-.bids-container-text{
+.carousel-home {
+}
+.bids-container-text {
   display: flex;
   justify-content: center;
-  padding: 15px 0;
+  padding: 46px 0;
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 28px;
   line-height: 42px;
   color: var(--primary-color);
-  margin-bottom: 1rem;
 }
-.bids-container-card{
+.bids-container-text_rear {
+  text-transform: uppercase;
+  padding: 32px 0;
+  top: 0;
+  position: absolute;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 58px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(242, 125, 12, 0.1);
+}
+.bids-container-card {
   margin: 0 -5px;
 }
 .bids-container-card:after {
@@ -26,36 +40,36 @@
   display: table;
   clear: both;
 }
-.card-column{
+.card-column {
   float: left;
   width: 20%;
 }
-.bids-card{
-  background: #FFFCF9;
+.bids-card {
+  background: #fffcf9;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   border-radius: 0px 0px 13px 13px;
   padding: 11px 12px 19px 11px;
-  margin-inline: 10px;
-  margin-bottom: 20px;
+  /* margin-inline: 10px; */
+  margin-bottom: 38px;
 }
-.bids-card img{
+.bids-card img {
   border-radius: 20px;
   width: 100%;
 }
-.bids-card-top p{
+.bids-card-top p {
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
-  color:rgba(72, 43, 8, 0.9);
+  color: rgba(72, 43, 8, 0.9);
   margin-top: 15px;
 }
-.bids-card-bottom{
+.bids-card-bottom {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid rgba(242, 125, 12, 0.3);
 }
-.bids-card-bottom p{
+.bids-card-bottom p {
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 12px;
@@ -63,20 +77,19 @@
 
   color: rgba(72, 43, 8, 0.5);
 }
-.bids-card-bottom p:last-child{
-  font-weight: normal;
-
-}
-.bids-card-bottom span{
+.bids-card-bottom p:last-child {
   font-weight: normal;
 }
-.load-more{
+.bids-card-bottom span {
+  font-weight: normal;
+}
+.load-more {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
 }
-.load-more button{
+.load-more button {
   background: transparent;
   border: 1px solid var(--primary-color);
   margin: 0 1rem;
@@ -88,51 +101,51 @@
   font-size: 14px;
   line-height: 21px;
 }
-.collection-container{
+.collection-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   padding-bottom: 100px;
 }
 
 @media screen and (max-width: 1440px) {
   .card-column {
     width: 25%;
-
   }
 }
-
 
 @media screen and (max-width: 1200px) {
   .card-column {
     width: 33.33%;
-
   }
 }
 
 @media screen and (max-width: 900px) {
   .card-column {
     width: 50%;
-
   }
 }
 @media screen and (max-width: 550px) {
-  .section__padding{
+  .section__padding {
     padding: 2rem 14px !important;
   }
-  .bids-card{
+  .bids-card {
     margin-bottom: 10px;
     margin-inline: 5px;
   }
-  .bids-card-top p{
+  .bids-card-top p {
     font-size: 12px;
     line-height: 18px;
     margin-top: 5px;
   }
-  .bids-card-bottom p{
+  .bids-card-bottom p {
     font-size: 10px;
     line-height: 15px;
   }
-  .bids-container{
+  .bids-container {
     width: 100%;
   }
-
-
 }

@@ -1,5 +1,5 @@
 .footer {
-  margin-top: 70px;
+  margin-top: 170px;
   margin-left: -5px;
   width: 102%;
   display: flex;
@@ -13,14 +13,16 @@
   position: relative;
 }
 .footer_waves{
+  object-fit: cover;
   z-index: -1;
   bottom: 160px;
   position: absolute;
   margin-left: -5px;
-  width: 102%;
+  /* max-width: 102%; */
 }
 .footer_waves svg{
-  width: 102%;
+  width: 100rem;
+  object-fit: cover;
 }
 .prefooter {
   display: flex;
@@ -161,6 +163,14 @@
     font-size: 44px;
     line-height: 50px;
   }
+  .footer_waves{
+    object-fit: cover;
+    z-index: -1;
+    bottom: 100px;
+    position: absolute;
+    margin-left: -5px;
+    /* max-width: 102%; */
+  }
 }
 .footer-links div {
   margin: 8px 0;
@@ -179,6 +189,7 @@
     font-size: 14px;
     line-height: 20px;
   }
+
 }
 
 @media screen and (max-width: 400px) {

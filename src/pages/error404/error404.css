@@ -1,0 +1,11 @@
+.Error404 {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  /* font-size: 14px; */
+  line-height: 17px;
+  color: rgba(72, 43, 8, 0.8);
+}

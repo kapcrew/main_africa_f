@@ -104,6 +104,7 @@ const Bids = ({ title }) => {
     <div className="bids">
       <div className="bids-container">
         <div className="bids-container-text">Top token</div>
+        <div className="bids-container-text_rear">Top token</div>
         {isLoading ? (
           <Carousel className="carousel-home" itemsToShow={itemToShow}>
             {items.map((infoToken) => {
@@ -117,6 +118,8 @@ const Bids = ({ title }) => {
 
       <div className="collection-container">
         <div className="bids-container-text">Top collection</div>
+        <div className="bids-container-text_rear">Top collection</div>
+
         {isLoadingCollection ? (
           <Carousel className="carousel-home" itemsToShow={collectionToShow}>
             {listCollection.map((collection) => {

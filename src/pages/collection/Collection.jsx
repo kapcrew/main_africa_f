@@ -15,10 +15,13 @@ const Collection = () => {
   const [infoCollection, setinfoCollection] = useState([]);
   const [selectingTab, setselectingTab] = useState(1);
   const [items, setItems] = useState([]);
-  
+  const navigate = useNavigate();
   const getItems = async () => {
     setisLoadingItem(false);
-    const res = await apiRequest.get(`/collections/get_collection_tokens_by_id?id=${paramsURL.collectionId}`)
+
+    const res = await apiRequest.get(
+      `/collections/get_collection_tokens_by_id?id=${paramsURL.collectionId}`
+    );
     console.log("tokens", res.data);
     setItems(res.data.collectionTokens);
     console.log("tokens", res.data);
@@ -33,18 +36,22 @@ const Collection = () => {
 
   const gitInfoItem = async () => {
     setisLoading(false);
-    const idCollection = paramsURL.collectionId;
-    const res = await apiRequest.get(
-      `/collections/get_collection_by_id?id=${paramsURL.collectionId}`
-    );
-    console.log(res.data);
-    setinfoCollection(res.data);
-    setisLoading(true);
+    try {
+      const idCollection = paramsURL.collectionId;
+      const res = await apiRequest.get(
+        `/collections/get_collection_by_id?id=${paramsURL.collectionId}`
+      );
+      console.log(res.data);
+      setinfoCollection(res.data);
+      setisLoading(true);
+    } catch {
+      navigate("/error404");
+    }
 
-    await getItems()
-    
+    await getItems();
   };
   useEffect(() => {
+    
     gitInfoItem();
   }, []);
 
@@ -54,20 +61,27 @@ const Collection = () => {
         <div className="content">
           <div className="cover-image">
             <img className="cover-image__img" src={coverImage} alt="" />
-          {/* infoCollection.collection.picture */}
+            {/* infoCollection.collection.picture */}
           </div>
           <div className="icon-profile">
-            <img className="icon-profile-img" src={infoCollection.collection.picture} alt="" />
+            <img
+              className="icon-profile-img"
+              src={infoCollection.collection.picture}
+              alt=""
+            />
           </div>
           <div className="collection-info-prof">
-            <div className="collection-info-prof__name">{infoCollection.collection.name}</div>
+            <div className="collection-info-prof__name">
+              {infoCollection.collection.name} <span className="collection-info-prof__by">by</span>   <span className="collection-info-prof__owner"> {infoCollection.collection.walletId.substring(0, 6)}...
+                      {infoCollection.collection.walletId.substring(60, 66)}</span>
+            </div>
             <div className="collection-info-prof__statistics">
               <div className="collection-info-prof__statistics_block border_block">
                 <div className="collection-info-prof__statistics__name">
                   Items
                 </div>
                 <div className="collection-info-prof__statistics__value">
-                 {infoCollection.collectionTokens}
+                  {infoCollection.collectionTokens}
                 </div>
               </div>
               {/* <div className="collection-info-prof__statistics_block border_block">
@@ -88,10 +102,10 @@ const Collection = () => {
               </div> */}
               <div className="collection-info-prof__statistics_block right_block">
                 <div className="collection-info-prof__statistics__name">
-                  Items
+                  Block
                 </div>
                 <div className="collection-info-prof__statistics__value">
-                  8k
+                  0
                 </div>
               </div>
             </div>
