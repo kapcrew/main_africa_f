@@ -27,8 +27,10 @@
   font-weight: 700;
   font-size: 48px;
   line-height: 58px;
-  display: flex;
+  text-align: center;
+  /* display: flex;
   align-items: center;
+  justify-content: center; */
 
   color: rgba(242, 125, 12, 0.1);
 }

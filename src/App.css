@@ -83,7 +83,13 @@ a {
 button {
   cursor: pointer;
 }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
+/* 
 @-webkit-keyframes scale-up-center {
   0% {
     -webkit-transform: scale(0.5);
@@ -103,9 +109,9 @@ button {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
-}
+} */
 
-@media screen and (max-width: 700px) {
+/* @media screen and (max-width: 700px) {
   .section__padding {
     padding: 4rem 6rem;
   }
@@ -120,4 +126,4 @@ button {
   .section__margin {
     margin: 4rem 2rem;
   }
-}
+} */

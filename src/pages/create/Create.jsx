@@ -12,6 +12,7 @@ import { starInput } from "../../assets/icon";
 import DropzoneLoaderFile from "../../components/dropzoneLoaderFile/DropzoneLoaderFile";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
+
 const Create = () => {
   // FILE TO BASE64 -------------------------------------------------
 
@@ -70,15 +71,22 @@ const Create = () => {
       return false;
     }
   };
-  const creactCollection = async () => {
-    const req = await apiRequest.post("/collections/create_collection", {
-      name: nameCollection,
-      description: description,
-      picture: iconCollectionBase64,
-    });
-    console.log(req);
-    await getListCollection();
-    setmodalCreactCollection(false);
+  const creactCollection = async () => {  
+    if(nameCollection&&description&&iconCollectionBase64){
+      await apiRequest
+      .post("/collections/create_collection", {
+        name: nameCollection,
+        description: description,
+        picture: iconCollectionBase64,
+      }).then( async()=>{
+        await getListCollection()
+        setmodalCreactCollection(false)})
+      .catch(({ response: { data } }) => toast.error(data.error));
+    } else{
+      toast.error("Fill in all the fields")
+    }
+      
+
   };
 
   const [listCollectionChoiceInti, setlistCollectionChoiceInti] = useState([]);
@@ -185,7 +193,7 @@ const Create = () => {
         <div className="create-container__submain-name">
           Upload File <div className="starInput">{starInput}</div>
         </div>
-
+        {/* <ImageLoader /> */}
         <DropzoneLoaderFile
           className="dropzone"
           file={mainFileBase64}
@@ -199,7 +207,7 @@ const Create = () => {
             </>
           }
         />
-
+        {}
         <div className="create-container__submain-name">
           Name <div className="starInput">{starInput}</div>
         </div>
@@ -257,12 +265,9 @@ const Create = () => {
               <div className="btn-create-collection__text">Create</div>
             </button>
             {listCollection?.map((colliction, index) => {
-              // if (index === 0) {
-              //
-              // }
-
               return (
                 <button
+                  key={Math.random()}
                   className={`btn-collection ${
                     listCollectionChoice[colliction.name]
                       ? "activ_collection"
@@ -286,6 +291,7 @@ const Create = () => {
           </Carousel>
         </div>
         {modalCreactCollection && (
+          <div className="for-modal-creact-collection">
           <div className="modal-creact-collection">
             <div className="modal-creact-collection__content">
               <div className="modal-creact-collection__block_name">
@@ -345,6 +351,7 @@ const Create = () => {
                 Cancel{" "}
               </button>
             </div>
+          </div>
           </div>
         )}
         <div className="block-collection"></div>

@@ -1,0 +1,113 @@
+.modal-cropper-wrapper {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  
+  
+}
+.modal-cropper {
+  padding-bottom: 10px;
+  display: block;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #a0a1a3;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 16px rgba(120, 121, 124, 0.34);
+  border-radius: 10px;
+  min-width: 500px;
+  max-width: 90%;
+  width: 100%;
+  min-height: 400px;
+  max-height: 90%;
+  height: 100%;
+}
+.modal-cropper___content {
+  display: flex;
+  justify-content: center;
+}
+.modal-cropper___content {
+  width: 100%;
+  height: 50%;
+  /* border: 1px solid black; */
+  display: flex;
+  /* justify-content: center;
+    align-items: center; */
+}
+.modal-cropper___cropper {
+  width: 100%;
+  height: 100%;
+  /* border: 2px solid black; */
+
+  position: relative;
+  /* height: 50vh; */
+}
+
+.viewer {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-show-result {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+.btn-show-result__btn {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 32px;
+  border: none;
+  /* градиент */
+
+  background: linear-gradient(89.7deg, #f27b0c6b 1.02%, #caac1966 99.74%);
+  border-radius: 46px;
+
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+
+  color: rgb(72, 43, 8);
+}
+.croppedImage-img {
+  border-radius: 10px;
+  width: 250px;
+  height: 250px;
+}
+.block-img-cropped {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.btn-show-result__btn-save {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 32px;
+  border: none;
+
+  background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
+  border-radius: 46px;
+
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(255, 255, 255, 0.9);
+}

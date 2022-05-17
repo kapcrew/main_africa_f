@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import { ImageCropper } from "../ImageCropper/ImageCropper";
 import "./DropzoneLoaderFile.css";
 const DropzoneLoaderFile = ({
   className,
@@ -53,15 +54,23 @@ const DropzoneLoaderFile = ({
     borderColor: "#ff7f50",
     backgroundColor: "#ffe4e1",
   };
+  const [fileImage, setfileImage] = useState();
+  const [isOpenCropper, setisOpenCropper] = useState(false);
   const onDrop = useCallback((acceptedFiles) => {
-    readFileDataAsBase64(acceptedFiles[0]).then((file) => {
-      console.log(String(file)); //.split(",")[1]
-      setfile(String(file));
-    });
+    
+    setfileImage(acceptedFiles[0]);
+    // readFileDataAsBase64(acceptedFiles[0]).then((file) => {
+   
+    //   setfile(String(file));
+    // });
 
     setnameFile(acceptedFiles[0].name);
     console.log(acceptedFiles);
   }, []);
+  useEffect(() => {
+    setisOpenCropper(true);
+  }, [fileImage])
+  
 
   const {
     acceptedFiles,
@@ -81,23 +90,39 @@ const DropzoneLoaderFile = ({
   );
 
   return (
-    <div {...getRootProps({ className: className, style })}>
-      <input {...getInputProps()} />
-      {!file ? (
-          <div className={`${className === "dropzone-modal" ? "dropzone__before-modal":"dropzone__before" }`}>
+    <div>
+      {isOpenCropper && fileImage && <ImageCropper image={fileImage} setfile={setfile} setisOpenCropper={setisOpenCropper}/>}
+
+      <div {...getRootProps({ className: className, style })}>
+        <input {...getInputProps()} />
+        {!file ? (
+          <div
+            className={`${
+              className === "dropzone-modal"
+                ? "dropzone__before-modal"
+                : "dropzone__before"
+            }`}
+          >
             {textBefore}
           </div>
-      ) : (
-        <div className={`${className === "dropzone-modal" ? "dropzone__after-modal":"dropzone__after" }`}>
-          <div className="main-image">
-            {/* <div className="main-image-block"> */}
+        ) : (
+          <div
+            className={`${
+              className === "dropzone-modal"
+                ? "dropzone__after-modal"
+                : "dropzone__after"
+            }`}
+          >
+            <div className="main-image">
+              {/* <div className="main-image-block"> */}
               <img className="main-image-img" src={file} alt="" />
-            {/* </div> */}
+              {/* </div> */}
 
-            <div className={""}>{namefile}</div>
+              <div className={""}>{namefile}</div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -24,14 +24,14 @@ import PagePreloader from "../../components/page-preloader/PagePreloader";
 const Item = () => {
   const [isLoading, setisLoading] = useState(false);
   const paramsURL = useParams();
+
   const navigate = useNavigate();
   const [infoToken, setinfoToken] = useState([]);
   const [imgCreator, setimgCreator] = useState()
   const [imgOwner, setimgOwner] = useState()
   const [imgCollection, setimgCollection] = useState()
-  const gitInfoItem = async () => {
-    
 
+  const gitInfoItem = async () => {
     setisLoading(false);
     let info_token = 0
     const address = paramsURL.addressItem;
@@ -78,6 +78,14 @@ const Item = () => {
     setendAuctionTime(timeConverter(token.endAuctionTimestamp));
     setisAuctionTime(new Date() > new Date(token.endAuctionTimestamp * 1000));
   };
+
+  useEffect(() => {
+    if (paramsURL.addressItem) {
+      gitInfoItem()
+    }
+    
+  }, [paramsURL.addressItem])
+  
   const [endAuctionTime, setendAuctionTime] = useState();
   const [isAuctionTime, setisAuctionTime] = useState(true);
   function timeConverter(UNIX_timestamp) {

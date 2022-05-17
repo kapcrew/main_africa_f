@@ -51,10 +51,13 @@ const Collection = () => {
     await getItems();
   };
   useEffect(() => {
-    
     gitInfoItem();
   }, []);
-
+  useEffect(() => {
+    if (paramsURL.collectionId) {
+      gitInfoItem();
+    }
+  }, [paramsURL.collectionId]);
   return (
     <div>
       {isLoading ? (
@@ -72,8 +75,13 @@ const Collection = () => {
           </div>
           <div className="collection-info-prof">
             <div className="collection-info-prof__name">
-              {infoCollection.collection.name} <span className="collection-info-prof__by">by</span>   <span className="collection-info-prof__owner"> {infoCollection.collection.walletId.substring(0, 6)}...
-                      {infoCollection.collection.walletId.substring(60, 66)}</span>
+              {infoCollection.collection.name}{" "}
+              <span className="collection-info-prof__by">by</span>{" "}
+              <span className="collection-info-prof__owner">
+                {" "}
+                {"0:" + infoCollection.collection.walletId.substring(0, 4)}...
+                {infoCollection.collection.walletId.substring(60, 66)}
+              </span>
             </div>
             <div className="collection-info-prof__statistics">
               <div className="collection-info-prof__statistics_block border_block">
@@ -104,9 +112,7 @@ const Collection = () => {
                 <div className="collection-info-prof__statistics__name">
                   Block
                 </div>
-                <div className="collection-info-prof__statistics__value">
-                  0
-                </div>
+                <div className="collection-info-prof__statistics__value">0</div>
               </div>
             </div>
             <div className="collection-info-prof__description">

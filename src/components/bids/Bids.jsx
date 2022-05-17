@@ -108,7 +108,7 @@ const Bids = ({ title }) => {
         {isLoading ? (
           <Carousel className="carousel-home" itemsToShow={itemToShow}>
             {items.map((infoToken) => {
-              return <CardHomePage infoToken={infoToken} />;
+              return <CardHomePage key={Math.random()} infoToken={infoToken} />;
             })}
           </Carousel>
         ) : (
@@ -123,7 +123,7 @@ const Bids = ({ title }) => {
         {isLoadingCollection ? (
           <Carousel className="carousel-home" itemsToShow={collectionToShow}>
             {listCollection.map((collection) => {
-              return <CardCollection infoCollection={collection} />;
+              return <CardCollection key={Math.random()} infoCollection={collection} />;
             })}
           </Carousel>
         ) : (

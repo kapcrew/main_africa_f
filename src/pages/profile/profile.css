@@ -135,11 +135,9 @@
   padding: 15px;
 }
 .modalUpdateData {
-  right: 50%;
-  transform: translate(50%, 0);
+
   background-color: #fff;
   border: 3px solid rgba(243, 169, 99, 0.2);
-  position: absolute;
   z-index: 1000;
   max-width: 590px;
   min-height: 310px;

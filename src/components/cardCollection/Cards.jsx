@@ -14,7 +14,7 @@ const Cards = ({ items }) => {
               {items.map((infoToken) => {
                 return (
                 
-                    <Card infoToken={infoToken} />
+                    <Card key={Math.random()} infoToken={infoToken} />
                 
                 );
               })}

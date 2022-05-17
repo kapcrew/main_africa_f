@@ -305,7 +305,7 @@ const Explorer = () => {
                     // console.log(category);
                     // console.log(categories[category]);
                     return (
-                      <>
+                      <div key={Math.random()}>
                         <button
                           className="modal_category__btn modal-btn"
                           id={category}
@@ -320,7 +320,7 @@ const Explorer = () => {
                             </div>
                           )}
                         </button>
-                      </>
+                      </div>
                     );
                   })}
                 </div>
@@ -345,7 +345,7 @@ const Explorer = () => {
                     // console.log(category);
                     // console.log(categories[category]);
                     return (
-                      <>
+                      <div key={Math.random()}>
                         <button
                           className="modal_collection__btn modal-btn"
                           id={collection}
@@ -360,7 +360,7 @@ const Explorer = () => {
                             </div>
                           )}
                         </button>
-                      </>
+                      </div>
                     );
                   })}
                 </div>
