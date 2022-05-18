@@ -6,6 +6,7 @@ import Carousel from "react-elastic-carousel";
 import CardHomePage from "../cardHomePage/CardHomePage";
 import apiRequest from "../../api/apiRequest";
 import CardCollection from "../cardCollection/CardCollection";
+import { outlineArrow } from "../../assets/icon";
 const Bids = ({ title }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setisLoading] = useState(false);
@@ -26,21 +27,21 @@ const Bids = ({ title }) => {
     getListCollection();
     getItems();
     getWindowDimensions().width > 1300
-    ? setcollectionToShow(4)
-    : getWindowDimensions().width > 1200
-    ? setcollectionToShow(3)
-    : getWindowDimensions().width > 800
-    ? setcollectionToShow(2)
-    : setcollectionToShow(1);
+      ? setcollectionToShow(4)
+      : getWindowDimensions().width > 1200
+      ? setcollectionToShow(3)
+      : getWindowDimensions().width > 800
+      ? setcollectionToShow(2)
+      : setcollectionToShow(1);
 
     getWindowDimensions().width > 1300
-    ? setItemsToshow(4)
-    : getWindowDimensions().width > 1200
-    ? setItemsToshow(3)
-    : getWindowDimensions().width > 800
-    ? setItemsToshow(2)
-    : setItemsToshow(1);
-    console.log(getWindowDimensions().width,collectionToShow)
+      ? setItemsToshow(4)
+      : getWindowDimensions().width > 1200
+      ? setItemsToshow(3)
+      : getWindowDimensions().width > 800
+      ? setItemsToshow(2)
+      : setItemsToshow(1);
+    console.log(getWindowDimensions().width, collectionToShow);
   }, []);
   const [itemToShow, setItemsToshow] = useState(4);
 
@@ -105,6 +106,10 @@ const Bids = ({ title }) => {
       <div className="bids-container">
         <div className="bids-container-text">Top token</div>
         <div className="bids-container-text_rear">Top token</div>
+        <div className="outlineArrow-tokens">
+          <div>{outlineArrow}</div>
+          <div>{outlineArrow}</div>
+        </div>
         {isLoading ? (
           <Carousel className="carousel-home" itemsToShow={itemToShow}>
             {items.map((infoToken) => {
@@ -119,11 +124,19 @@ const Bids = ({ title }) => {
       <div className="collection-container">
         <div className="bids-container-text">Top collection</div>
         <div className="bids-container-text_rear">Top collection</div>
-
+        <div className="outlineArrow-tokens">
+          <div>{outlineArrow}</div>
+          <div>{outlineArrow}</div>
+        </div>
         {isLoadingCollection ? (
           <Carousel className="carousel-home" itemsToShow={collectionToShow}>
             {listCollection.map((collection) => {
-              return <CardCollection key={Math.random()} infoCollection={collection} />;
+              return (
+                <CardCollection
+                  key={Math.random()}
+                  infoCollection={collection}
+                />
+              );
             })}
           </Carousel>
         ) : (

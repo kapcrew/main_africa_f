@@ -6,6 +6,7 @@
   align-items: center;
 }
 .carousel-home {
+  width: 98% !important;
 }
 .bids-container-text {
   display: flex;
@@ -112,7 +113,14 @@
   position: relative;
   padding-bottom: 100px;
 }
-
+.outlineArrow-tokens{
+  pointer-events: none;
+  margin-top: 123px;
+  position: absolute;
+  width: 99.3%;
+  display: flex;
+  justify-content: space-between;
+}
 @media screen and (max-width: 1440px) {
   .card-column {
     width: 25%;
@@ -131,6 +139,9 @@
   }
 }
 @media screen and (max-width: 550px) {
+  .outlineArrow-tokens{
+    display: none;
+  }
   .section__padding {
     padding: 2rem 14px !important;
   }
