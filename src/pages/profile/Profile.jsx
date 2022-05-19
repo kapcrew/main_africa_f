@@ -169,65 +169,70 @@ const Profile = () => {
           </div>
         </div>
         {modalUpdateData && (
-          <div className="modalUpdateData">
-            <div className="modalUpdateData__content">
-              <div className="modalUpdateData__block_name">
-                <div className="modalUpdateData__block_data">
-                  <div className="modalUpdateData__title">Name</div>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setname(e.target.value)}
-                    className="modalUpdateData__input_name"
-                  />
+          <div className="for-modal-creact-collection">
+            <div className="modalUpdateData">
+              <div className="modalUpdateData__content">
+                <div className="modalUpdateData__block_name">
+                  <div className="modalUpdateData__block_data">
+                    <div className="modalUpdateData__title">Name</div>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setname(e.target.value)}
+                      className="modalUpdateData__input_name"
+                    />
+                  </div>
+                  <div className="modalUpdateData__block_data">
+                    <div className="modalUpdateData__title">Surname</div>
+                    <input
+                      type="text"
+                      value={surname}
+                      onChange={(e) => setsurname(e.target.value)}
+                      className="modalUpdateData__input_name"
+                    />
+                  </div>
                 </div>
-                <div className="modalUpdateData__block_data">
-                  <div className="modalUpdateData__title">Surname</div>
-                  <input
-                    type="text"
-                    value={surname}
-                    onChange={(e) => setsurname(e.target.value)}
-                    className="modalUpdateData__input_name"
-                  />
-                </div>
-              </div>
 
-              <div className="modalUpdateData__block_data">
-                <div className="modalUpdateData__title">Description</div>
-                <textarea
-                  onChange={(e) => setdescription(e.target.value)}
-                  value={description}
-                  type="text"
-                  className="modalUpdateData__input_description"
-                />
-              </div>
-              <div className="modalUpdateData__block_data">
-                <div className="modal-creact-collection__loader-image">
-                  <DropzoneLoaderFile
-                    className="dropzone-modal"
-                    file={imageFile}
-                    setfile={setimageFile}
-                    namefile={imageFileName}
-                    setnameFile={setimageFileName}
-                    textBefore={
-                      <>Click, select or drag a file to the current area</>
-                    }
+                <div className="modalUpdateData__block_data">
+                  <div className="modalUpdateData__title">Description</div>
+                  <textarea
+                    onChange={(e) => setdescription(e.target.value)}
+                    value={description}
+                    type="text"
+                    className="modalUpdateData__input_description"
                   />
                 </div>
+                <div className="modalUpdateData__block_data">
+                  <div className="modal-creact-collection__loader-image">
+                    <DropzoneLoaderFile
+                      className="dropzone-modal"
+                      file={imageFile}
+                      setfile={setimageFile}
+                      namefile={imageFileName}
+                      setnameFile={setimageFileName}
+                      textBefore={
+                        <>Click, select or drag a file to the current area</>
+                      }
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="modalUpdateData__btns">
-              <button className="modalUpdateData__btn" onClick={updateProfile}>
-                Save{" "}
-              </button>
-              <button
-                onClick={() => {
-                  setmodalUpdateData(false);
-                }}
-                className="modalUpdateData__btn-cancel"
-              >
-                Cancel{" "}
-              </button>
+              <div className="modalUpdateData__btns">
+                <button
+                  className="modalUpdateData__btn"
+                  onClick={updateProfile}
+                >
+                  Save{" "}
+                </button>
+                <button
+                  onClick={() => {
+                    setmodalUpdateData(false);
+                  }}
+                  className="modalUpdateData__btn-cancel"
+                >
+                  Cancel{" "}
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -265,7 +270,12 @@ const Profile = () => {
           (selectingTab === 2 && (
             <div className="collection-list-profile">
               {listCollection.map((collection) => {
-                return <CardCollection infoCollection={collection} />;
+                return (
+                  <CardCollection
+                    key={Math.random()}
+                    infoCollection={collection}
+                  />
+                );
               })}
             </div>
           ))

@@ -49,6 +49,7 @@ apiRequest.interceptors.response.use(
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userAddress");
         localStorage.removeItem("refreshToken");
+      
       }
     }
     // When error code !== 401

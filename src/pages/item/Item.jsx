@@ -24,27 +24,68 @@ import PagePreloader from "../../components/page-preloader/PagePreloader";
 const Item = () => {
   const [isLoading, setisLoading] = useState(false);
   const paramsURL = useParams();
+
+  const navigate = useNavigate();
   const [infoToken, setinfoToken] = useState([]);
+  const [imgCreator, setimgCreator] = useState()
+  const [imgOwner, setimgOwner] = useState()
+  const [imgCollection, setimgCollection] = useState()
+
   const gitInfoItem = async () => {
     setisLoading(false);
+    let info_token = 0
     const address = paramsURL.addressItem;
-    const res = await apiRequest.get(
-      `/items/get_item_by_address?address=${address}`
-    );
-    console.log(res.data);
-    setinfoToken(res.data);
-    setisLoading(true);
+    try {
+      const res = await apiRequest.get(
+        `/items/get_item_by_address?address=${address}`
+      );
+      console.log(res.data);
+      setinfoToken(res.data);
+      info_token = res.data
+     
 
+
+      setisLoading(true);
+    } catch (error){
+      console.log(error)
+      navigate("/error404");
+    }
+
+    const imgO = await apiRequest.get(
+      `/profile/get_image?walletId=${info_token.owner.substring(2)}`
+    );
+    setimgOwner(imgO.data.profilePicture)
+
+    const imgС = await apiRequest.get(
+      `/profile/get_image?walletId=${info_token.creator.substring(2)}`
+    );
+    
+    setimgCreator(imgС.data.profilePicture)
+    console.log(info_token.collection,"res.data.owner")
+    const imgCo = await apiRequest.get(
+      `/collections/get_collection_image?name=${info_token.collection}`
+    );
+    
+    setimgCollection(imgCo.data.picture)
+   
+
+
+    
     setchoiceDetails(1);
 
     const token = await getInfoToken(address);
 
     setendAuctionTime(timeConverter(token.endAuctionTimestamp));
     setisAuctionTime(new Date() > new Date(token.endAuctionTimestamp * 1000));
-
-    console.log(new Date(), new Date(token.endAuctionTimestamp * 1000));
-    console.log(new Date() > new Date(token.endAuctionTimestamp * 1000));
   };
+
+  useEffect(() => {
+    if (paramsURL.addressItem) {
+      gitInfoItem()
+    }
+    
+  }, [paramsURL.addressItem])
+  
   const [endAuctionTime, setendAuctionTime] = useState();
   const [isAuctionTime, setisAuctionTime] = useState(true);
   function timeConverter(UNIX_timestamp) {
@@ -84,6 +125,9 @@ const Item = () => {
   const [priceAuction, setpriceAuction] = useState();
   const [durationAuction, setdurationAuction] = useState();
   const [bidAuctionPrice, setbidAuctionPrice] = useState();
+
+
+ 
 
   const checkStatus = async (field, value) => {
     toast.loading("There is a process in the blockchain...");
@@ -262,6 +306,7 @@ const Item = () => {
       {isLoading ? (
         <div className="item section__padding">
           <div className="item-image">
+          
             <img
               src={"https://" + infoToken.media}
               className="item-image__img"
@@ -274,7 +319,9 @@ const Item = () => {
               {infoToken.onSale && "On sale"}
               {infoToken.onAuction && "At the auction before:"}
               {infoToken.onAuction && (
-                <span className="time-auction">{endAuctionTime ? endAuctionTime : "the auction is over"}</span>
+                <span className="time-auction">
+                  {endAuctionTime ? endAuctionTime : "the auction is over"}
+                </span>
               )}
               {!infoToken.onSale && !infoToken.onAuction && "Not for sale"}
             </div>
@@ -287,7 +334,7 @@ const Item = () => {
             <div className="item-content__block-details">
               <div className="item-content__choice-details">
                 <div
-                  className={`main-name-details ${
+                  className={`main-name-details__Details ${
                     choiceDetails == 1 && "activ-tab-prof"
                   }`}
                   onClick={() => {
@@ -315,6 +362,25 @@ const Item = () => {
                     <div className="item-content__block-details-item">
                       <div className="name-details">Creator</div>
                       <div className="res-details">
+                        <div className="res-details-images">
+                      
+                          {
+                            imgCreator?
+                            <img
+                          className="res-details-img"
+                          src={imgCreator}
+                          alt=""
+                        />
+                           
+                          :
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                          <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                          <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                          <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                        </svg>
+                          }
+                          
+                        </div>
                         {infoToken.creator?.substring(0, 4)}...
                         {infoToken.creator?.substring(62)}
                         <div className="link-blockchain">
@@ -326,6 +392,24 @@ const Item = () => {
                     <div className="item-content__block-details-item">
                       <div className="name-details">Owner</div>
                       <div className="res-details">
+                        <div className="res-details-images">
+                        {
+                            imgOwner?
+                            <img
+                            className="res-details-img"
+                            src={imgOwner}
+                            alt=""
+                          />
+                           
+                          :
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                          <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                          <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                          <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                        </svg>
+                          }
+                          
+                        </div>
                         {infoToken.owner?.substring(0, 4)}...
                         {infoToken.owner?.substring(62)}
                         <div className="link-blockchain">
@@ -338,11 +422,33 @@ const Item = () => {
                   <div className="item-content__item">
                     <div className="item-content__block-details-item">
                       <div className="name-details">Collection</div>
-                      <div className="res-details">{infoToken.collection}</div>
+                      <div className="res-details">
+                        {" "}
+                        <div className="res-details-images">
+                        {
+                            imgCollection?
+                            <img
+                            className="res-details-img"
+                            src={imgCollection}
+                            alt=""
+                          />
+                           
+                          :
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                          <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                          <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                          <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                        </svg>
+                          }
+                          
+                        </div>
+                        {infoToken.collection}
+                      </div>
                     </div>
                     <div className="item-content__block-details-item">
                       <div className="name-details">Address</div>
                       <div className="res-details">
+                        
                         {infoToken.address?.substring(0, 4)}...
                         {infoToken.address?.substring(62)}
                         <div className="link-blockchain">
@@ -457,7 +563,7 @@ const Item = () => {
                     Stop auction
                   </button>
                 )}
-                
+
                 {visibleBtnEndAuction && (
                   <button
                     className="item-content__btn-buy"
@@ -469,15 +575,26 @@ const Item = () => {
                   </button>
                 )}
               </div>
+
               {visibleBtnParticipateInAuction && (
-                <button
-                  className="item-content__btn-buy"
-                  onClick={() => {
-                    setisParticipateInAuction(true);
-                  }}
-                >
-                  Place a bet
-                </button>
+                <div className="item-content__block-buy">
+                  <button
+                    className="item-content__btn-buy"
+                    onClick={() => {
+                      setisParticipateInAuction(true);
+                    }}
+                  >
+                    Place a bet
+                  </button>
+                  <div className="item-content__block-price">
+                    <div className="item-content__name-price">
+                      Minimum bid from
+                    </div>
+                    <div className="item-content__price">
+                      {infoToken.auctionPrice} Ē
+                    </div>
+                  </div>
+                </div>
               )}
 
               {/* <button
@@ -515,7 +632,7 @@ const Item = () => {
                       </div>
                     </div>
                     <div className="modal-tokens-action__price">
-                      {infoToken.price} Ē
+                      {/* {infoToken.price} Ē */}
                     </div>
                   </div>
 
@@ -703,7 +820,7 @@ const Item = () => {
                       </div>
                     </div>
                     <div className="modal-tokens-action__price">
-                      {infoToken.price} Ē
+                      {/* {infoToken.price} Ē */}
                     </div>
                   </div>
                   <div className="modal-tokens-action__submaintext text-name-price">
@@ -716,11 +833,12 @@ const Item = () => {
                     }}
                     value={durationAuction}
                     className="input-date__datetime"
-                    inputProps={{placeholder:"Specify the end date of the auction"}}
-                   
+                    inputProps={{
+                      placeholder: "Specify the end date of the auction",
+                    }}
                   />
                   <div className="modal-tokens-action__submaintext text-name-price">
-                  The first bid
+                    Start price
                   </div>
                   <input
                     type="number"
@@ -827,7 +945,7 @@ const Item = () => {
                       </div>
                     </div>
                     <div className="modal-tokens-action__price">
-                      {infoToken.price} Ē
+                      {infoToken.auctionPrice} Ē
                     </div>
                   </div>
                   <div className="modal-tokens-action__submaintext text-name-price">
@@ -881,7 +999,7 @@ const Item = () => {
                       </div>
                     </div>
                     <div className="modal-tokens-action__price">
-                      {infoToken.price} Ē
+                      {infoToken.auctionPrice} Ē
                     </div>
                   </div>
 
@@ -921,7 +1039,7 @@ const Item = () => {
                       </div>
                     </div>
                     <div className="modal-tokens-action__price">
-                      {infoToken.price} Ē
+                      {infoToken.auctionPrice} Ē
                     </div>
                   </div>
 

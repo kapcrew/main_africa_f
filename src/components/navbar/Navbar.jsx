@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./navbar.css";
+import { useNavigate } from "react-router-dom";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
-import { FaWallet } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
 import { login, login_out } from "../../scripts/index.js";
 import { Toaster } from "react-hot-toast";
+import Loader from "../../components/loader/loader";
+import apiRequest from "../../api/apiRequest";
 import {
   iconProfile,
   iconMyCollections,
@@ -15,6 +16,7 @@ import {
   iconWalletModal,
   iconUserModal,
 } from "../../assets/icon";
+import { changeSlide } from "react-slick/lib/utils/innerSliderUtils";
 const Menu = () => (
   <div className="menu_">
     <Link to="/explorer">
@@ -33,6 +35,7 @@ const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [user, setUser] = useState(false);
   const [address, setAddress] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const address = localStorage.getItem("userAddress");
@@ -52,6 +55,93 @@ const Navbar = () => {
     e.preventDefault();
     login();
   }
+
+  const [isOpenModalSearchToken, setisOpenModalSearchToken] = useState(false);
+  const [nameOrNameCollection, setnameOrNameCollection] = useState("");
+  const changeInputSearchToken = (e) => {
+    setnameOrNameCollection(e.target.value);
+  };
+  const [items, setItems] = useState([]);
+  const [itemsInitially, setitemsInitially] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const [isLoadingCollection, setisLoadingCollection] = useState(false);
+
+  const getItems = async () => {
+    setisLoading(false);
+    const res = await apiRequest.get("/items/get_items");
+    console.log("$$$");
+    setItems(res.data);
+    setitemsInitially(res.data);
+    console.log(res);
+
+    setisLoading(true);
+    searchToken();
+  };
+
+  const [listCollection, setlistCollection] = useState([]);
+  const [listCollectionInitially, setlistCollectionInitially] = useState([]);
+
+  const getListCollection = async () => {
+    setisLoadingCollection(false);
+    const req = await apiRequest.get("/collections/get_collections");
+    console.log(req.data);
+    setlistCollection(req.data);
+    setlistCollectionInitially(req.data);
+
+    setisLoadingCollection(true);
+    searchToken();
+    // setisLoading(true);
+  };
+  useEffect(() => {
+    getItems();
+    getListCollection();
+  }, []);
+  
+
+  const searchToken = () => {
+    if (itemsInitially.length !== 0) {
+      const newItems = itemsInitially.filter((newVal) => {
+        if (
+          newVal.title
+            ?.toLowerCase()
+            .indexOf(nameOrNameCollection.toLowerCase()) !== -1
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      setItems(newItems);
+    }
+
+    if (listCollectionInitially.length !== 0) {
+      const newCollection = listCollectionInitially.filter((newVal) => {
+        if (
+          newVal.name
+            ?.toLowerCase()
+            .indexOf(nameOrNameCollection.toLowerCase()) !== -1
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      setlistCollection(newCollection);
+    }
+  };
+
+  useEffect(() => {
+    if (nameOrNameCollection.length !== 0) {
+      setisOpenModalSearchToken(true);
+    } else {
+      setisOpenModalSearchToken(false);
+    }
+    searchToken();
+  }, [nameOrNameCollection]);
+
+  useEffect(() => {
+    searchToken();
+  }, [itemsInitially, listCollectionInitially]);
 
   return (
     <div className="navbar">
@@ -78,14 +168,70 @@ const Navbar = () => {
       <div className="navbar-sign">
         <div className="navbar-links_container">
           <input
+            className="navbar-links_container__search-input"
             type="text"
             placeholder="Search items and collections"
             autoFocus={true}
+            value={nameOrNameCollection}
+            onChange={changeInputSearchToken}
           />
         </div>
+        <div
+          className={`modal-search-token ${
+            isOpenModalSearchToken ? "modal-search-active" : ""
+          }`}
+        >
+          {isLoading && isLoadingCollection ? (
+            <div className="list-tokens-for-serach">
+              <div className="name-search-elements">Items</div>
+              {items.length === 0 && (
+                <div className="name-search-elements">Tokens not found ;(</div>
+              )}
+              {items.map((item) => {
+                return (
+                  <div className="block_item_search" onClick={()=>{navigate(`item/${item.address}`);setisOpenModalSearchToken(false)}}>
+                    <img
+                      src={"https://" + item.media}
+                      className="img-item-search"
+                    />
+                    {item.title}
+                  </div>
+                );
+              })}
+              <div className="block-search-group">
+                <div className="name-search-elements">Collections</div>
+                {listCollection.length === 0 && (
+                  <div className="name-search-elements">
+                    Tokens not found ;(
+                  </div>
+                )}
+                {listCollection.map((collection) => {
+                  return (
+                    <div className="block_item_search" onClick={()=>{navigate(`collection/${collection.id}`);setisOpenModalSearchToken(false)}}>
+                      <img
+                        src={collection.picture}
+                        className="img-item-search"
+                      />
+                      <div className="block_item_search__block-name">
+                        <div className="block_item_search__block-name">
+                          {collection.name}
+                        </div>
+                        <div className="block_item_search__totalSupply">
+                          {collection.totalSupply} items
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            <div className="loaderr">{<Loader />}</div>
+          )}
+        </div>
+        {/* listCollection */}
         {user ? (
           <>
-            {/* <Link to=""> */}
             <div class="dropdown">
               <div className="iconProfile main-tab">{iconUserModal}</div>
               <div class="dropdown-content">
@@ -165,7 +311,6 @@ const Navbar = () => {
             >
               {iconWalletModal}
             </div>
-            
 
             {1 && (
               <div className="modal">
@@ -191,7 +336,6 @@ const Navbar = () => {
                 </div>
               </div>
             )}
-            {/*<Link to="/register">*/}
           </>
         )}
       </div>

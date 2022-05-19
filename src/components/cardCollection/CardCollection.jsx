@@ -34,7 +34,7 @@ const CardCollection = ({ infoCollection }) => {
         <div className="card-collection__attributes">
           <div className="card-collection__attribute">
             <div className="card-collection__name-attribute">Items</div>
-            <div className="card-collection__value-attribute">64</div>
+            <div className="card-collection__value-attribute">{infoCollection.totalSupply}</div>
           </div>
         </div>{" "}
       </div>

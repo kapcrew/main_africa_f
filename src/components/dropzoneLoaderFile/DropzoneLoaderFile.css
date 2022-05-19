@@ -6,7 +6,7 @@
 /* background-color:transparent; */
   border-radius: 5px;
   cursor: pointer;
-
+  overflow: hidden;
   pointer-events: auto;
 
   width: 674px;
@@ -17,6 +17,7 @@
   border-radius: 27px;
 }
 .dropzone-modal {
+  overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;

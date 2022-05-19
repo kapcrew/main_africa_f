@@ -8,10 +8,11 @@ import { footer_waves } from "../../assets/icon";
 const Footer = () => {
   return (
     <div className="footer">
-      <div className="footer_waves">{footer_waves}</div>
+      {/* <div className="footer_waves">{footer_waves}</div> */}
       <div className="footer-links">
         <div className="footer-links_logo">
           <div>
+            
             <img src={nftlogo} alt="logo" />
             <p className=" footer-links_logo__name">Imara</p>
           </div>

@@ -172,6 +172,8 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 11px;
 }
 /* @media screen and (max-width: 1440px) {
   .card-column {
