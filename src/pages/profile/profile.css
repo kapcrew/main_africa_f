@@ -1,4 +1,4 @@
-.content{
+.content {
   min-height: 150vh;
 }
 .cover-image {
@@ -22,13 +22,56 @@
   overflow: hidden;
   border: 4px solid #c4c4c4;
 }
-.tokens{
+.tokens {
   padding-top: 30px;
+}
+.ref-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  right: 4.5%;
+  top: 20px;
+  position: absolute;
+}
+.ref-code__title {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(72, 43, 8, 0.6);
+}
+.ref-code__code {
+  width: 131px;
+  height: 28px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(72, 43, 8, 0.6);
+  border-radius: 22px;
+
+  background: linear-gradient(#fffcf9 0 0) padding-box,
+    /*this is your grey background*/ linear-gradient(to right, #f27d0c, #caad19)
+      border-box;
+  /* color: #1f1ff3; */
+  border: 2px solid transparent;
+  padding: 10px;
 }
 .icon-profile img {
   /* border-radius: 50%; */
 }
 .info-user {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +88,16 @@
 
   color: #482b08;
 }
-.icon-profile-img{
+.icons_media {
+  margin-left: 18px;
+  gap: 12px;
+  display: flex;
+}
+.info-user__icon_media:hover {
+  transition: 0.5s;
+  transform: scale(1.3);
+}
+.icon-profile-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -87,7 +139,21 @@
   color: rgba(72, 43, 8, 0.6);
   padding-bottom: 15px;
 }
+.info-user__email-website {
+  margin-top: 5px;
+  display: flex;
+  gap: 10px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  color: rgba(72, 43, 8, 0.6);
+}
 .info-user__btns {
   display: flex;
   gap: 20px;
@@ -109,15 +175,12 @@
   align-items: center;
 }
 .info-user__description {
-  background: linear-gradient(
-    89.7deg,
-    rgba(242, 125, 12, 0.2) 1.02%,
-    rgba(202, 173, 25, 0.2) 99.74%
-  );
-  border-radius: 25px;
+  background: #fffcf9;
+
   margin: 15px 0;
   /* padding: 15px 0; */
-  border: 1px solid rgba(243, 169, 99, 0.2);
+  border: 1px solid rgba(72, 43, 8, 0.6);
+  border-radius: 15px;
 }
 .info-user__description_text {
   text-align: center;
@@ -135,19 +198,36 @@
   padding: 15px;
 }
 .modalUpdateData {
-
+  /* height: 95vh; */
+  overflow-y: auto;
   background-color: #fff;
   border: 3px solid rgba(243, 169, 99, 0.2);
   z-index: 1000;
-  max-width: 590px;
+  width: 500px;
   min-height: 310px;
-  padding: 30px;
+  padding: 30px 15px 30px 30px;
   border-radius: 10px;
 }
-.modalUpdateData__content {
-  width: 100%;
+.modalUpdateData__content::-webkit-scrollbar-thumb {
+  border-radius: 11px;
+  background-color: #f27b0c63;
+}
+.modalUpdateData__content::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 20px;
+}
 
-  height: 100%;
+.modalUpdateData__content::-webkit-scrollbar {
+  width: 7px;
+  background-color: #f9f9fd;
+}
+
+.modalUpdateData__content {
+  padding-right: 15px;
+  width: 100%;
+  height: 75vh;
+  overflow-y: auto;
+  /* height: 100%; */
   /* border: 2px solid rgba(243, 169, 99, 0.2); */
 }
 .modalUpdateData__title {
@@ -161,6 +241,8 @@
   color: rgba(72, 43, 8, 0.6);
 }
 .modalUpdateData__block_name {
+  width: 100%;
+  /* border: 3px solid rgba(203, 142, 84, 0.2); */
   gap: 7px;
   /* justify-content: space-between; */
   display: flex;
@@ -169,7 +251,7 @@
 .modalUpdateData__input_name {
   border-radius: 10px;
   padding-left: 15px;
-  width: 185px;
+  width: 210px;
   border: 3px solid rgba(203, 142, 84, 0.2);
   height: 40px;
 
@@ -180,6 +262,26 @@
   line-height: 17px;
   color: rgba(72, 43, 8, 0.6);
   display: flex;
+}
+.modalUpdateData__input {
+  border-radius: 10px;
+  padding-left: 15px;
+  width: 100%;
+  border: 3px solid rgba(203, 142, 84, 0.2);
+  height: 40px;
+
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(72, 43, 8, 0.6);
+  display: flex;
+}
+.modalUpdateData__input:disabled {
+  /* border: 1px solid #999999; */
+  background-color: rgba(72, 43, 8, 0.116);
+  /* color: #666666; */
 }
 .modalUpdateData__block_data {
   padding-bottom: 15px;
@@ -231,7 +333,7 @@
 
   color: rgba(255, 255, 255, 0.9);
 }
-.modalUpdateData__btn-cancel{
+.modalUpdateData__btn-cancel {
   display: flex;
   justify-content: center;
   width: 120px;
@@ -282,21 +384,19 @@
   color: rgba(72, 43, 8, 0.9);
 }
 .tab-btn:hover {
-
-  border-bottom: 2px solid #F27D0C  ;
-  
+  border-bottom: 2px solid #f27d0c;
 }
-.activ-tab-prof{
-  border-bottom: 2px solid #F27D0C  ;
+.activ-tab-prof {
+  border-bottom: 2px solid #f27d0c;
 }
 
-.collection-list-profile{
+.collection-list-profile {
   display: flex;
   justify-content: center;
-  gap:20px;
+  gap: 20px;
   flex-wrap: wrap;
 }
-.modal-creact-collection__loader-image{
+.modal-creact-collection__loader-image {
   width: 100%;
   display: flex;
   justify-content: center;

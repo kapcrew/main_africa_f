@@ -69,11 +69,8 @@ const Navbar = () => {
   const getItems = async () => {
     setisLoading(false);
     const res = await apiRequest.get("/items/get_items");
-    console.log("$$$");
     setItems(res.data);
     setitemsInitially(res.data);
-    console.log(res);
-
     setisLoading(true);
     searchToken();
   };
@@ -84,7 +81,6 @@ const Navbar = () => {
   const getListCollection = async () => {
     setisLoadingCollection(false);
     const req = await apiRequest.get("/collections/get_collections");
-    console.log(req.data);
     setlistCollection(req.data);
     setlistCollectionInitially(req.data);
 
@@ -96,7 +92,6 @@ const Navbar = () => {
     getItems();
     getListCollection();
   }, []);
-  
 
   const searchToken = () => {
     if (itemsInitially.length !== 0) {
@@ -175,71 +170,90 @@ const Navbar = () => {
             value={nameOrNameCollection}
             onChange={changeInputSearchToken}
           />
-        </div>
-        <div
-          className={`modal-search-token ${
-            isOpenModalSearchToken ? "modal-search-active" : ""
-          }`}
-        >
-          {isLoading && isLoadingCollection ? (
-            <div className="list-tokens-for-serach">
-              <div className="name-search-elements">Items</div>
-              {items.length === 0 && (
-                <div className="name-search-elements">Tokens not found ;(</div>
-              )}
-              {items.map((item) => {
-                return (
-                  <div className="block_item_search" onClick={()=>{navigate(`item/${item.address}`);setisOpenModalSearchToken(false)}}>
-                    <img
-                      src={"https://" + item.media}
-                      className="img-item-search"
-                    />
-                    {item.title}
-                  </div>
-                );
-              })}
-              <div className="block-search-group">
-                <div className="name-search-elements">Collections</div>
-                {listCollection.length === 0 && (
-                  <div className="name-search-elements">
-                    Tokens not found ;(
-                  </div>
-                )}
-                {listCollection.map((collection) => {
-                  return (
-                    <div className="block_item_search" onClick={()=>{navigate(`collection/${collection.id}`);setisOpenModalSearchToken(false)}}>
-                      <img
-                        src={collection.picture}
-                        className="img-item-search"
-                      />
-                      <div className="block_item_search__block-name">
-                        <div className="block_item_search__block-name">
-                          {collection.name}
-                        </div>
-                        <div className="block_item_search__totalSupply">
-                          {collection.totalSupply} items
-                        </div>
-                      </div>
+          <div className="for_modal">
+            <div
+              className={`modal-search-token ${
+                isOpenModalSearchToken ? "modal-search-active" : ""
+              }`}
+            >
+              {isLoading && isLoadingCollection ? (
+                <div className="list-tokens-for-serach">
+                  <div className="name-search-elements">Items</div>
+                  {items.length === 0 && (
+                    <div className="name-search-elements">
+                      Tokens not found ;(
                     </div>
-                  );
-                })}
-              </div>
+                  )}
+                  {items.map((item) => {
+                    return (
+                      <div
+                        key={Math.random()}
+                        className="block_item_search"
+                        onClick={() => {
+                          navigate(`item/${item.address}`);
+                          setisOpenModalSearchToken(false);
+                        }}
+                      >
+                        <img
+                          src={"https://" + item.media}
+                          className="img-item-search"
+                        />
+                        {item.title}
+                      </div>
+                    );
+                  })}
+                  <div className="block-search-group">
+                    <div className="name-search-elements">Collections</div>
+                    {listCollection.length === 0 && (
+                      <div className="name-search-elements">
+                        Tokens not found ;(
+                      </div>
+                    )}
+                    {listCollection.map((collection) => {
+                      return (
+                        <div
+                          key={Math.random()}
+                          className="block_item_search"
+                          onClick={() => {
+                            navigate(`collection/${collection.id}`);
+                            setisOpenModalSearchToken(false);
+                          }}
+                        >
+                          <img
+                            src={collection.picture}
+                            className="img-item-search"
+                          />
+                          <div className="block_item_search__block-name">
+                            <div className="block_item_search__block-name">
+                              {collection.name}
+                            </div>
+                            <div className="block_item_search__totalSupply">
+                              {collection.totalSupply} items
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div className="loaderr">{<Loader />}</div>
+              )}
             </div>
-          ) : (
-            <div className="loaderr">{<Loader />}</div>
-          )}
+          </div>
         </div>
+
         {/* listCollection */}
         {user ? (
           <>
-            <div class="dropdown">
+            <div className="dropdown">
               <div className="iconProfile main-tab">{iconUserModal}</div>
-              <div class="dropdown-content">
+              <div className="dropdown-content">
                 <div>
                   <Link to={`/create`}>
                     <div className="menu_item__block">
                       <div className="menu_item__icon">{iconProfile}</div>
-                      <div class="menu_item">Create</div>
+                      <div className="menu_item">Create</div>
                     </div>
                   </Link>
                 </div>
@@ -248,14 +262,14 @@ const Navbar = () => {
                   <div className="menu_item__block">
                     <div className="menu_item__icon">{iconProfile}</div>
 
-                    <div class="menu_item">Profile</div>
+                    <div className="menu_item">Profile</div>
                   </div>
                 </Link>
                 <Link to={`/profile/${address}`}>
                   <div className="menu_item__block">
                     <div className="menu_item__icon"> {iconMyCollections}</div>
 
-                    <div class="menu_item">My Collections</div>
+                    <div className="menu_item">My Collections</div>
                   </div>
                 </Link>
               </div>
@@ -277,7 +291,7 @@ const Navbar = () => {
                 </div>
                 <div className="model__content-auth">
                   <a>
-                    <div class="address_text">
+                    <div className="address_text">
                       Your address: {address.substring(0, 6)}...
                       {address.substring(60, 66)}
                     </div>

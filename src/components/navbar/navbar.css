@@ -261,7 +261,7 @@
 }
 .navbar-links_container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   align-items: center;
 }
@@ -512,13 +512,14 @@
 .modal-search-token {
   overflow: auto;
   background: #fffcf9;
-  top: 90px;
-  right: 238px;
+  top: 10px;
+  right: -135px;
   display: none;
   z-index: 100000;
   position: absolute;
   width: 267px;
-  max-height: 80%;
+  max-height: 400px;
+
   border: 1.5px solid #f27b0c51;
   border-radius: 11px;
   padding: 19px 0px;

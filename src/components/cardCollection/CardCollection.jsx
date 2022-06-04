@@ -11,7 +11,7 @@ const CardCollection = ({ infoCollection }) => {
     <div className="card-collection__block">
       <div className="card-collection" onClick={toCollection}>
         <div className="collection-cover">
-          <div class="blur"></div>
+          <div className="blur"></div>
           <img
             className="collection-cover-img"
             src={infoCollection.picture}
