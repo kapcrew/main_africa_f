@@ -1,6 +1,6 @@
 import "./App.css";
 import { Navbar, Footer } from "./components";
-import { Home, Profile, Item, Create, Login, Explorer } from "./pages";
+import { Home, Profile, Item, Create, Login, Explorer,Admin } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import Collection from "./pages/collection/Collection";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -13,6 +13,7 @@ function App() {
       <div className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/item/:addressItem" element={<Item />} />
           <Route
             path="/create"

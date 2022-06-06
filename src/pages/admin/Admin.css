@@ -1,0 +1,200 @@
+.admin_content {
+  display: flex;
+  justify-content: center;
+}
+.window_auth {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+  /* text-align: center; */
+  background-color: #fff;
+  border: 3px solid rgba(243, 169, 99, 0.2);
+  z-index: 1000;
+  width: 500px;
+  min-height: 310px;
+  padding: 30px 15px;
+  border-radius: 10px;
+}
+.window_auth__title {
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  color: rgba(72, 43, 8, 0.839);
+}
+.window_auth__subtitle {
+  color: rgba(72, 43, 8, 0.6);
+  margin-top: 10px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+}
+.window_auth__input-title {
+  margin-bottom: 5px;
+  color: rgba(72, 43, 8, 0.652);
+  margin-top: 10px;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+}
+.window_auth__input,
+.window_auth__block_input,
+.window_auth__block_inputs {
+  width: 100%;
+  max-width: 300px;
+}
+.window_auth__block_inputs {
+  margin-top: 20px;
+}
+.window_auth__input {
+  border-radius: 10px;
+  padding-left: 15px;
+  border: 3px solid rgba(203, 142, 84, 0.2);
+  height: 40px;
+
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(72, 43, 8, 0.6);
+  display: flex;
+}
+.window_auth__btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 32px;
+  border: none;
+  /* градиент */
+
+  background: linear-gradient(89.7deg, #f27d0c 1.02%, #caad19 99.74%);
+  border-radius: 46px;
+
+  font-family: "Neometric";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+.admin_func {
+  margin: 5px 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+}
+.admin_func__block_info {
+  width: 100%;
+}
+.all_collection,
+.all_profiles {
+  max-height: 70vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  background-color: #fff;
+  border: 3px solid rgba(243, 169, 99, 0.2);
+  z-index: 1000;
+  /* width: 95% !important; */
+  width: 95vw;
+  padding: 30px 15px;
+  border-radius: 10px;
+}
+.admin_func__block_info_title {
+  margin: 30px 0 15px 0;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  color: rgba(72, 43, 8, 0.839);
+}
+.table_admin {
+  /* margin: ; */
+  /* width: auto; */
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+th {
+  /* margin: 0 10px; */
+  text-align: left;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(72, 43, 8, 0.839);
+  line-height: 17px;
+  
+}
+td {
+  border-bottom: 1px solid transparent;
+  /* overflow:hidden; */
+
+  padding: 22px 20px 22px 0;
+  margin: 0 10px;
+
+  text-align: left;
+  font-family: "NeometricBold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(72, 43, 8, 0.6);
+  line-height: 17px;
+  /* border: 1px solid rgba(206, 112, 23, 0.15); */
+}
+tr {
+  border-bottom: 1px solid rgba(206, 112, 23, 0.585) !important;
+  /* border: 1px solid rgb(206, 112, 23); */
+}
+.title_table{
+  
+  /* border-bottom: 1px solid rgba(206, 112, 23, 0.585) !important; */
+}
+
+
+.all_profiles::-webkit-scrollbar-thumb {
+  border-radius: 11px;
+  background-color: #f27b0c63;
+}
+.all_profiles::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 20px;
+}
+.all_profiles::-webkit-scrollbar {
+  width: 7px;
+  background-color: #f9f9fd;
+} 
+.all_collection::-webkit-scrollbar-thumb {
+  border-radius: 11px;
+  background-color: #f27b0c63;
+}
+.all_collection::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 20px;
+}
+.all_collection::-webkit-scrollbar {
+  width: 7px;
+  background-color: #f9f9fd;
+} 
