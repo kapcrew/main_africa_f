@@ -1,5 +1,5 @@
 import { ReactComponent as Preloader } from "./preloader.svg";
-
+import React from 'react'
 import "./page-preloader.css";
 
 const PagePreloader = () => {

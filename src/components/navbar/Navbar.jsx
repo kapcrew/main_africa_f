@@ -16,7 +16,6 @@ import {
   iconWalletModal,
   iconUserModal,
 } from "../../assets/icon";
-import { changeSlide } from "react-slick/lib/utils/innerSliderUtils";
 const Menu = () => (
   <div className="menu_">
     <Link to="/explorer">
