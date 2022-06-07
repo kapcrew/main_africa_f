@@ -1,5 +1,5 @@
 import "./cardHomePage.css";
-import { menuCard } from "../../assets/icon";
+import React from 'react'
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import apiRequest from "../../api/apiRequest";
 import { useState } from "react";

@@ -1,3 +1,4 @@
+import React from 'react'
 import "./LinkBlockchain.css";
 import { EVERLIVE } from "../../config/config";
 const LinkBlockchain = ({ address }) => {
