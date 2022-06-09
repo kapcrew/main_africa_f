@@ -1,6 +1,7 @@
 import "./App.css";
 import { Navbar, Footer } from "./components";
-import { Home, Profile, Item, Create, Login, Explorer,Admin } from "./pages";
+import React from "react";
+import { Home, Profile, Item, Create, Login, Explorer, Admin } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import Collection from "./pages/collection/Collection";
 import PrivateRoute from "./components/private-route/PrivateRoute";
